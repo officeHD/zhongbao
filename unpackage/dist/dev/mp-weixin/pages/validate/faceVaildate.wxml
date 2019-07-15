@@ -1,0 +1,1 @@
+<view class="wrapper data-v-7fe0c2f6"><view class="tips data-v-7fe0c2f6">拍摄你本人人脸请确保光线充足，请确保正对手机</view><image class="faceImg data-v-7fe0c2f6" src="../../static/img/face.png" mode="widthFix"></image><button class="primaryBtn data-v-7fe0c2f6">开始刷脸</button><view class="tips c9999 data-v-7fe0c2f6">信息已加密，仅限于身份认证</view></view>

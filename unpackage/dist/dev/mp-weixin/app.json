@@ -1,5 +1,9 @@
 {
   "pages": [
+    "pages/validate/success",
+    "pages/validate/faceVideo",
+    "pages/validate/faceVaildate",
+    "pages/validate/validate",
     "pages/company/detail",
     "pages/company/company",
     "pages/bankcard/bankcard",

@@ -1,0 +1,1 @@
+<view class="wrapper"><image class="pageIcon" src="../../static/img/success.png" mode="widthFix"></image><view class="result">人脸扫描验证通过，恭喜你已经完成人脸识别验证</view><button class="primaryBtn">完成</button></view>

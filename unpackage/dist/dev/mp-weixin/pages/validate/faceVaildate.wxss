@@ -1,0 +1,28 @@
+
+.tips.data-v-7fe0c2f6 {
+	text-align: center;
+	font-size: 24rpx;
+	margin: 30rpx 0;
+	color: #666666;
+}
+.wrapper.data-v-7fe0c2f6 {
+	width: 100%;
+}
+.faceImg.data-v-7fe0c2f6 {
+	width: 300rpx;
+	margin: 50rpx auto;
+	display: block;
+}
+.primaryBtn.data-v-7fe0c2f6 {
+	background-color: #1666F3;
+	color: #FFFFFF;
+	height: 100rpx;
+	line-height: 100rpx;
+	margin-left: 100rpx;
+	margin-right: 100rpx;
+	margin-top: 130rpx;
+}
+.c9999.data-v-7fe0c2f6 {
+	color: #999;
+}
+

@@ -8467,6 +8467,74 @@ createPage(_user.default);
 
 /***/ }),
 
+/***/ "F:\\Workspace\\jianzhi\\zhongbao\\main.js?{\"page\":\"pages%2Fvalidate%2FfaceVaildate\"}":
+/*!****************************************************************************************!*\
+  !*** F:/Workspace/jianzhi/zhongbao/main.js?{"page":"pages%2Fvalidate%2FfaceVaildate"} ***!
+  \****************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(createPage) {__webpack_require__(/*! uni-pages */ "F:\\Workspace\\jianzhi\\zhongbao\\pages.json");
+
+var _vue = _interopRequireDefault(__webpack_require__(/*! vue */ "./node_modules/@dcloudio/vue-cli-plugin-uni/packages/mp-vue/dist/mp.runtime.esm.js"));
+var _faceVaildate = _interopRequireDefault(__webpack_require__(/*! ./pages/validate/faceVaildate.vue */ "F:\\Workspace\\jianzhi\\zhongbao\\pages\\validate\\faceVaildate.vue"));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+createPage(_faceVaildate.default);
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ "./node_modules/@dcloudio/uni-mp-weixin/dist/index.js")["createPage"]))
+
+/***/ }),
+
+/***/ "F:\\Workspace\\jianzhi\\zhongbao\\main.js?{\"page\":\"pages%2Fvalidate%2FfaceVideo\"}":
+/*!*************************************************************************************!*\
+  !*** F:/Workspace/jianzhi/zhongbao/main.js?{"page":"pages%2Fvalidate%2FfaceVideo"} ***!
+  \*************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(createPage) {__webpack_require__(/*! uni-pages */ "F:\\Workspace\\jianzhi\\zhongbao\\pages.json");
+
+var _vue = _interopRequireDefault(__webpack_require__(/*! vue */ "./node_modules/@dcloudio/vue-cli-plugin-uni/packages/mp-vue/dist/mp.runtime.esm.js"));
+var _faceVideo = _interopRequireDefault(__webpack_require__(/*! ./pages/validate/faceVideo.vue */ "F:\\Workspace\\jianzhi\\zhongbao\\pages\\validate\\faceVideo.vue"));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+createPage(_faceVideo.default);
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ "./node_modules/@dcloudio/uni-mp-weixin/dist/index.js")["createPage"]))
+
+/***/ }),
+
+/***/ "F:\\Workspace\\jianzhi\\zhongbao\\main.js?{\"page\":\"pages%2Fvalidate%2Fsuccess\"}":
+/*!***********************************************************************************!*\
+  !*** F:/Workspace/jianzhi/zhongbao/main.js?{"page":"pages%2Fvalidate%2Fsuccess"} ***!
+  \***********************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(createPage) {__webpack_require__(/*! uni-pages */ "F:\\Workspace\\jianzhi\\zhongbao\\pages.json");
+
+var _vue = _interopRequireDefault(__webpack_require__(/*! vue */ "./node_modules/@dcloudio/vue-cli-plugin-uni/packages/mp-vue/dist/mp.runtime.esm.js"));
+var _success = _interopRequireDefault(__webpack_require__(/*! ./pages/validate/success.vue */ "F:\\Workspace\\jianzhi\\zhongbao\\pages\\validate\\success.vue"));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+createPage(_success.default);
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ "./node_modules/@dcloudio/uni-mp-weixin/dist/index.js")["createPage"]))
+
+/***/ }),
+
+/***/ "F:\\Workspace\\jianzhi\\zhongbao\\main.js?{\"page\":\"pages%2Fvalidate%2Fvalidate\"}":
+/*!************************************************************************************!*\
+  !*** F:/Workspace/jianzhi/zhongbao/main.js?{"page":"pages%2Fvalidate%2Fvalidate"} ***!
+  \************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(createPage) {__webpack_require__(/*! uni-pages */ "F:\\Workspace\\jianzhi\\zhongbao\\pages.json");
+
+var _vue = _interopRequireDefault(__webpack_require__(/*! vue */ "./node_modules/@dcloudio/vue-cli-plugin-uni/packages/mp-vue/dist/mp.runtime.esm.js"));
+var _validate = _interopRequireDefault(__webpack_require__(/*! ./pages/validate/validate.vue */ "F:\\Workspace\\jianzhi\\zhongbao\\pages\\validate\\validate.vue"));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+createPage(_validate.default);
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ "./node_modules/@dcloudio/uni-mp-weixin/dist/index.js")["createPage"]))
+
+/***/ }),
+
 /***/ "F:\\Workspace\\jianzhi\\zhongbao\\pages.json":
 /*!************************************************!*\
   !*** F:/Workspace/jianzhi/zhongbao/pages.json ***!
