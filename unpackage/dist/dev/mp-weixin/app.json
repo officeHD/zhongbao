@@ -1,0 +1,19 @@
+{
+  "pages": [
+    "pages/company/detail",
+    "pages/company/company",
+    "pages/bankcard/bankcard",
+    "pages/user/user",
+    "pages/main/main",
+    "pages/login/login",
+    "pages/reg/reg",
+    "pages/pwd/pwd"
+  ],
+  "subPackages": [],
+  "window": {
+    "navigationBarTextStyle": "white",
+    "navigationBarBackgroundColor": "#0faeff",
+    "backgroundColor": "#fbf9fe"
+  },
+  "usingComponents": {}
+}

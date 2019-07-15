@@ -1,0 +1,53 @@
+{
+	"pages": [ //pages数组中第一项表示应用启动页,
+		{
+			"path": "pages/company/detail",
+			"style": {
+				"navigationBarTitleText": "浏览信息"
+			}
+		}, {
+			"path": "pages/company/company",
+			"style": {
+				"navigationBarTitleText": "我服务过的企业"
+			}
+		}, {
+			"path": "pages/bankcard/bankcard",
+			"style": {
+				"navigationBarTitleText": "银行卡信息"
+			}
+		},
+		{
+			"path": "pages/user/user",
+			"style": {
+				"navigationBarTitleText": "我的基本信息"
+			}
+		}, {
+			"path": "pages/main/main",
+			"style": {
+				"navigationBarTitleText": "登录模板"
+			}
+		}, {
+			"path": "pages/login/login",
+			"style": {
+				"navigationBarTitleText": "登录",
+				"navigationStyle": "custom"
+			}
+		}, {
+			"path": "pages/reg/reg",
+			"style": {
+				"navigationBarTitleText": "注册"
+			}
+		}, {
+			"path": "pages/pwd/pwd",
+			"style": {
+				"navigationBarTitleText": "找回密码"
+			}
+		}
+	],
+
+	"globalStyle": {
+		"navigationBarTextStyle": "white",
+		"navigationBarBackgroundColor": "#0faeff",
+		"backgroundColor": "#fbf9fe"
+	}
+}

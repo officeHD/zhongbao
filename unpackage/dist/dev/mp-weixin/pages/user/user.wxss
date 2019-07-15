@@ -1,0 +1,43 @@
+
+.wrapper.data-v-bc4e5efc {
+	width: 100%;
+	min-height: 100vh;
+	background-color: #F2F2F2;
+	padding-bottom: 20px;
+}
+.celBox.data-v-bc4e5efc {
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-pack: justify;
+	-webkit-justify-content: space-between;
+	    -ms-flex-pack: justify;
+	        justify-content: space-between;
+	-webkit-box-align: center;
+	-webkit-align-items: center;
+	    -ms-flex-align: center;
+	        align-items: center;
+	font-size: 28rpx;
+	background-color: #FFFFFF;
+	min-height: 100rpx;
+	padding: 20rpx 30rpx;
+	color: #1E1E1E;
+}
+.bb.data-v-bc4e5efc {
+	border-bottom: 1px solid #E4E4E4;
+}
+.mt20.data-v-bc4e5efc {
+	margin-top: 20rpx;
+}
+.c666.data-v-bc4e5efc {
+	color: #666;
+}
+.cblue.data-v-bc4e5efc {
+	color: #1666F3;
+}
+.avator.data-v-bc4e5efc {
+	width: 100rpx;
+	height: 100rpx;
+}
+
