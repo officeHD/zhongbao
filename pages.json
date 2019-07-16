@@ -1,29 +1,41 @@
 {
 	"pages": [ //pages数组中第一项表示应用启动页,
-	
-	{
-	    "path" : "pages/validate/success",
-	    "style" : {
-			"navigationBarTitleText": "认证成功"
-		}
-	},
-	{
-	    "path" : "pages/validate/faceVideo",
-	    "style" : {
-			"navigationBarTitleText": "人脸识别"
-		}
-	},
+
 		{
-		    "path" : "pages/validate/faceVaildate",
-		    "style" : {
+			"path": "pages/user/uploadIdcard",
+			"style": {
+				"navigationBarTitleText": "个人身份信息"
+			}
+		},
+			{
+			"path": "pages/user/uploadImg",
+			"style": {
+				"navigationBarTitleText": "上传"
+			}
+		},
+		{
+			"path": "pages/validate/success",
+			"style": {
+				"navigationBarTitleText": "认证成功"
+			}
+		},
+		{
+			"path": "pages/validate/faceVideo",
+			"style": {
 				"navigationBarTitleText": "人脸识别"
 			}
-		},{
-		    "path" : "pages/validate/validate",
-		    "style" : {
+		},
+		{
+			"path": "pages/validate/faceVaildate",
+			"style": {
+				"navigationBarTitleText": "人脸识别"
+			}
+		}, {
+			"path": "pages/validate/validate",
+			"style": {
 				"navigationBarTitleText": "二郎神验证"
 			}
-		},{
+		}, {
 			"path": "pages/company/detail",
 			"style": {
 				"navigationBarTitleText": "浏览信息"
@@ -66,8 +78,12 @@
 				"navigationBarTitleText": "找回密码"
 			}
 		}
-	    
-    ],
+
+		, {
+			"path": "pages/businessPlace/businessPlace",
+			"style": {}
+		}
+	],
 
 	"globalStyle": {
 		"navigationBarTextStyle": "white",
