@@ -18,10 +18,10 @@
 				</view>
 			</view>
 			<view class="sectionTab">
-				<view class="sectionItem">
+				<navigator url="/pages/user/user" class="sectionItem" >
 					<image class="itemIcon" src="../../static/img/sec1.png" mode="widthFix"></image>
 					<text class="itemtitle">我的基本信息</text>
-				</view>
+				</navigator >
 				<view class="sectionItem">
 					<image class="itemIcon" src="../../static/img/sec2.png" mode="widthFix"></image>
 					<text class="itemtitle">二郎神验证</text>
@@ -59,12 +59,10 @@
 	import {
 		mapState
 	} from 'vuex'
-
 	export default {
-		computed: mapState(['forcedLogin', 'hasLogin', 'userName']),
-		onLoad() {
-
-
+		computed: mapState(['token']),
+		onLoad() { 
+			console.log(this.token)
 		}
 	}
 </script>

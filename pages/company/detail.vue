@@ -1,6 +1,5 @@
 <template>
 	<view class="wrapper">
-
 		<view class="celBox bb">
 			<text class="c666">客户名称</text>
 			<text>张三</text>
@@ -45,8 +44,6 @@
 			<text class="c666">联系人2邮箱</text>
 			<text>张三</text>
 		</view>
-
-		 
 	</view>
 </template>
 
@@ -61,8 +58,7 @@
 			...mapState(['hasLogin', 'forcedLogin'])
 		},
 		methods: {
-			...mapMutations(['logout']),
-
+			...mapMutations(['logout'])
 		}
 	}
 </script>
@@ -94,7 +90,7 @@
 	.mt20 {
 		margin-top: 20rpx;
 	}
- 
+
 	.c666 {
 		color: #666;
 		width: 260rpx;

@@ -1,13 +1,29 @@
 {
 	"pages": [ //pages数组中第一项表示应用启动页,
-
+		 {
+		 	"path": "pages/user/user",
+		 	"style": {
+		 		"navigationBarTitleText": "我的基本信息"
+		 	}
+		 },{
+			"path": "pages/main/main",
+			"style": {
+				"navigationBarTitleText": "首页"
+			}
+		}, {
+			"path": "pages/login/login",
+			"style": {
+				"navigationBarTitleText": "登录",
+				"navigationStyle": "custom"
+			}
+		},
 		{
 			"path": "pages/user/uploadIdcard",
 			"style": {
 				"navigationBarTitleText": "个人身份信息"
 			}
 		},
-			{
+		{
 			"path": "pages/user/uploadImg",
 			"style": {
 				"navigationBarTitleText": "上传"
@@ -52,22 +68,6 @@
 			}
 		},
 		{
-			"path": "pages/user/user",
-			"style": {
-				"navigationBarTitleText": "我的基本信息"
-			}
-		}, {
-			"path": "pages/main/main",
-			"style": {
-				"navigationBarTitleText": "登录模板"
-			}
-		}, {
-			"path": "pages/login/login",
-			"style": {
-				"navigationBarTitleText": "登录",
-				"navigationStyle": "custom"
-			}
-		}, {
 			"path": "pages/reg/reg",
 			"style": {
 				"navigationBarTitleText": "注册"

@@ -6,7 +6,6 @@
 			<text class="leftLine"></text>
 			<text>科技&数据赋能创客(自由职业者)轻松做老板</text>
 			<text class="rightLine"></text>
-
 		</view>
 		<view class="sectionBar">
 			<text class="loginTab " :class="{'active': pageType=='login'}" @click="pageType='login'">登录</text>
@@ -14,40 +13,39 @@
 		</view>
 		<view class="loginWm" v-if="loginType!=='account'">
 			<view class="inputBox">
-				<input class="inputItem" type="text" value="" placeholder="请输入手机号" placeholder-style="color:#D6D6FF" />
+				<input class="inputItem" type="text" maxlength="11" :value="mobile" data-key="mobile" @input="inputChange"
+				 placeholder="请输入手机号" placeholder-style="color:#D6D6FF" />
 			</view>
 			<view class="inputBox">
-				<input class="inputItem" type="text" value="" placeholder="请输入验证码" placeholder-style="color:#D6D6FF" />
-				<text class="cendMsm">发送验证码</text>
+				<input class="inputItem" type="text" maxlength="6" :value="vaild" data-key="vaild" @input="inputChange" placeholder="请输入验证码"
+				 placeholder-style="color:#D6D6FF" />
+				<text class="cendMsm" @click="checking" v-if="state===false">发送验证码</text>
+				<text class="cendMsm zai-time" v-if="state===true">倒计时{{ currentTime }}s</text>
 			</view>
 			<view class="inputBox" v-if="pageType=='register'">
-				<input class="inputItem" type="text" value="" placeholder="密码至少为6位长度的数字或字母组合" placeholder-style="color:#D6D6FF" />
+				<input class="inputItem" type="text" :value="password" data-key="password" @input="inputChange" placeholder="密码至少为6位长度的数字或字母组合"
+				 placeholder-style="color:#D6D6FF" />
 			</view>
-
 		</view>
 		<view class="loginWm" v-if="pageType=='login'&&loginType=='account'">
 			<view class="inputBox">
 				<image class="yonghuIcon" src="../../static/img/yonghu.png"></image>
 				<text class="lineBorder"></text>
-				<input class="inputItem" type="text" value="" placeholder="请输入账号" placeholder-style="color:#D6D6FF" />
+				<input class="inputItem" type="text" :value="account" data-key="account" @input="inputChange" placeholder="请输入账号"
+				 placeholder-style="color:#D6D6FF" />
 			</view>
 			<view class="inputBox">
 				<image class="passwordIcon" src="../../static/img/password.png"></image>
-
 				<text class="lineBorder"></text>
-
-				<input class="inputItem" type="text" value="" placeholder="请输入密码" placeholder-style="color:#D6D6FF" />
+				<input class="inputItem" type="text" :value="password" data-key="password" @input="inputChange" placeholder="请输入密码"
+				 placeholder-style="color:#D6D6FF" />
 			</view>
-
-
 		</view>
 		<text v-if="pageType=='login'&&loginType=='account'" class="loginType" @click="loginType='phone'">验证码登录</text>
 		<text v-if="pageType=='login'&&loginType=='phone'" class="loginType" @click="loginType='account'">账号密码登录</text>
-
 		<view class="btn-row">
-			<button class="primaryBtn" @tap="bindLogin">快速登录</button>
+			<button class="primaryBtn" @tap="toLogin">快速登录</button>
 		</view>
-
 	</view>
 </template>
 
@@ -67,124 +65,150 @@
 			return {
 				loginType: 'phone',
 				pageType: "login",
-				providerList: [],
-				hasProvider: false,
-				account: '',
+				state: false, //是否开启倒计时
+				totalTime: 60, //总时间，单位秒
+				recordingTime: 0, //记录时间变量
+				currentTime: 0, //显示时间变量
+				vaild: "",
+				mobile: '',
 				password: '',
+				account: '',
 				positionTop: 0
 			}
 		},
+		onLoad() {
+			uni.login({
+				provider: 'weixin',
+				success: function(loginRes) {
+					that.getOpenId(loginRes.code);
+				}
+			});
+		},
 		computed: mapState(['forcedLogin']),
 		methods: {
-			...mapMutations(['login']),
-			initProvider() {
-				const filters = ['weixin', 'qq', 'sinaweibo'];
-				uni.getProvider({
-					service: 'oauth',
-					success: (res) => {
-						if (res.provider && res.provider.length) {
-							for (let i = 0; i < res.provider.length; i++) {
-								if (~filters.indexOf(res.provider[i])) {
-									this.providerList.push({
-										value: res.provider[i],
-										image: '../../static/img/' + res.provider[i] + '.png'
-									});
-								}
-							}
-							this.hasProvider = true;
-						}
-					},
-					fail: (err) => {
-						console.error('获取服务供应商失败：' + JSON.stringify(err));
+			...mapMutations(['login', 'setOpenId']),
+			inputChange(e) {
+				const key = e.currentTarget.dataset.key;
+				this[key] = e.detail.value;
+			},
+			async loginWithWe(code) {
+				var res = await this.$req.ajax({
+					path: '/wxapi/login/WeChat',
+					title: '正在加载',
+					data: {
+						WeChatID: code,
+						verify: "zhongbao"
+
 					}
 				});
-			},
-			initPosition() {
-				/**
-				 * 使用 absolute 定位，并且设置 bottom 值进行定位。软键盘弹出时，底部会因为窗口变化而被顶上来。
-				 * 反向使用 top 进行定位，可以避免此问题。
-				 */
-				this.positionTop = uni.getSystemInfoSync().windowHeight - 100;
-			},
-			bindLogin() {
-				/**
-				 * 客户端对账号信息进行一些必要的校验。
-				 * 实际开发中，根据业务需要进行处理，这里仅做示例。
-				 */
-				if (this.account.length < 5) {
-					uni.showToast({
-						icon: 'none',
-						title: '账号最短为 5 个字符'
-					});
-					return;
-				}
-				if (this.password.length < 6) {
-					uni.showToast({
-						icon: 'none',
-						title: '密码最短为 6 个字符'
-					});
-					return;
-				}
-				/**
-				 * 下面简单模拟下服务端的处理
-				 * 检测用户账号密码是否在已注册的用户列表中
-				 * 实际开发中，使用 uni.request 将账号信息发送至服务端，客户端在回调函数中获取结果信息。
-				 */
-				const data = {
-					account: this.account,
-					password: this.password
-				};
-				const validUser = service.getUsers().some(function(user) {
-					return data.account === user.account && data.password === user.password;
-				});
-				if (validUser) {
-					this.toMain(this.account);
+				if (res.data.code == 200) {
+					console.log(res.data.data)
 				} else {
-					uni.showToast({
-						icon: 'none',
-						title: '用户账号或密码不正确',
-					});
+					this.$api.msg(res.data.message);
 				}
 			},
-			oauth(value) {
-				uni.login({
-					provider: value,
-					success: (res) => {
-						uni.getUserInfo({
-							provider: value,
-							success: (infoRes) => {
-								/**
-								 * 实际开发中，获取用户信息后，需要将信息上报至服务端。
-								 * 服务端可以用 userInfo.openId 作为用户的唯一标识新增或绑定用户信息。
-								 */
-								this.toMain(infoRes.userInfo.nickName);
-							}
-						});
-					},
-					fail: (err) => {
-						console.error('授权登录失败：' + JSON.stringify(err));
+			async getOpenId(code) {
+				var res = await this.$req.ajax({
+					path: '/wxapi/login/getOpenid',
+					title: '正在加载',
+					data: {
+						code: code,
+						appid: "wx7aa0d26e5ca6597c",
+						secret: "a43098ef40806ae89c1711ab3b9a6e15"
 					}
 				});
+				if (res.data.code == 200) {
+					let resdata = JSON.parse(res.data.data.code);
+					this.loginWithWe(resdata.openid)
+					this.setOpenId(resdata.openid)
+
+				}
 			},
-			toMain(userName) {
-				this.login(userName);
-				/**
-				 * 强制登录时使用reLaunch方式跳转过来
-				 * 返回首页也使用reLaunch方式
-				 */
-				if (this.forcedLogin) {
-					uni.reLaunch({
-						url: '../main/main',
-					});
+			async checking() {
+				if (!/(^1[3|4|5|6|7|8|9][0-9]{9}$)/.test(this.mobile)) {
+					this.$api.msg('请输入正确的手机号码');
+					return;
+				}
+				// 
+				let res = await this.$req.ajax({
+					path: 'wxapi/sms/ChuanglanSmsApi',
+					title: '正在加载',
+					data: {
+						account: this.mobile,
+
+					}
+				});
+				if (res.data.code == 200) {
+					//把显示时间设为总时间
+					this.currentTime = this.totalTime;
+					//开始倒计时
+					this.state = true;
+					//执行倒计时
+					this.checkingTime();
 				} else {
-					uni.navigateBack();
+					this.$api.msg(res.data.message)
+
 				}
 
+			},
+			checkingTime() {
+				let that = this;
+				//判断是否开启
+				if (this.state) {
+					//判断显示时间是否已到0，判断记录时间是否已到总时间
+					if (this.currentTime > 0 && this.recordingTime <= this.totalTime) {
+						//记录时间增加 1
+						this.recordingTime = this.recordingTime + 1;
+						//显示时间，用总时间 - 记录时间
+						this.currentTime = this.totalTime - this.recordingTime;
+						//1秒钟后，再次执行本方法
+						setTimeout(() => {
+							//定时器内，this指向外部，找不到vue的方法，所以，需要用that变量。
+							that.checkingTime();
+						}, 1000)
+					} else {
+						//时间已完成，还原相关变量
+						this.state = false; //关闭倒计时
+						this.recordingTime = 0; //记录时间为0
+						this.currentTime = this.totalTime; //显示时间为总时间
+					}
+				} else {
+					//倒计时未开启，初始化默认变量
+					this.state = false;
+					this.recordingTime = 0;
+					this.currentTime = this.totalTime;
+				}
+			},
+			async toLogin() {
+				this.logining = true;
+				const {
+					mobile,
+					vaild
+				} = this;
+				if (!/(^1[3|4|5|6|7|8|9][0-9]{9}$)/.test(mobile)) {
+					this.$api.msg('请输入正确的手机号码');
+					return;
+				}
+				const sendData = {
+					mobile,
+					vaild
+				};
+
+				const result = await this.$req.ajax({
+					path: 'wxapi/login/makerLogin',
+					title: '正在加载',
+					data: sendData
+				});
+				if (result.data.code === 200) {
+					this.login(result.data.data.token);
+					uni.navigateTo({
+						url: "/pages/main/main"
+					});
+				} else {
+					this.$api.msg(result.data.message);
+					this.logining = false;
+				}
 			}
-		},
-		onReady() {
-			this.initPosition();
-			this.initProvider();
 		}
 	}
 </script>

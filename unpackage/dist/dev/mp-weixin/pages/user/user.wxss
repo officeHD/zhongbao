@@ -5,6 +5,42 @@
 	background-color: #F2F2F2;
 	padding-bottom: 20px;
 }
+.rightRow.data-v-bc4e5efc {
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-align: center;
+	-webkit-align-items: center;
+	    -ms-flex-align: center;
+	        align-items: center;
+	height: 100%;
+}
+.cammer.data-v-bc4e5efc {
+	width: 48rpx;
+	height: 48rpx;
+}
+.tips.data-v-bc4e5efc {
+	margin-top: 15rpx;
+}
+.f24.data-v-bc4e5efc {
+	font-size: 24rpx;
+}
+.c999.data-v-bc4e5efc {
+	color: #999999;
+}
+.arrowImg.data-v-bc4e5efc {
+	width: 40rpx;
+	height: 40rpx;
+	margin-left: 20rpx;
+}
+.changePhone.data-v-bc4e5efc {
+	color: #007AFF;
+	margin-left: 50rpx;
+	margin-right: -10rpx;
+	font-size: 30rpx;
+	font-weight: bold;
+}
 .celBox.data-v-bc4e5efc {
 	display: -webkit-box;
 	display: -webkit-flex;

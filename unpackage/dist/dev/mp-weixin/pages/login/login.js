@@ -8,9 +8,7 @@
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
-
-
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _regenerator = _interopRequireDefault(__webpack_require__(/*! ./node_modules/@babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js"));
 
 
 
@@ -63,7 +61,7 @@
 
 
 var _service = _interopRequireDefault(__webpack_require__(/*! ../../service.js */ "F:\\Workspace\\jianzhi\\zhongbao\\service.js"));
-var _vuex = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};var ownKeys = Object.keys(source);if (typeof Object.getOwnPropertySymbols === 'function') {ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) {return Object.getOwnPropertyDescriptor(source, sym).enumerable;}));}ownKeys.forEach(function (key) {_defineProperty(target, key, source[key]);});}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}var mInput = function mInput() {return __webpack_require__.e(/*! import() | components/m-input */ "components/m-input").then(__webpack_require__.bind(null, /*! ../../components/m-input.vue */ "F:\\Workspace\\jianzhi\\zhongbao\\components\\m-input.vue"));};var _default =
+var _vuex = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};var ownKeys = Object.keys(source);if (typeof Object.getOwnPropertySymbols === 'function') {ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) {return Object.getOwnPropertyDescriptor(source, sym).enumerable;}));}ownKeys.forEach(function (key) {_defineProperty(target, key, source[key]);});}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}var mInput = function mInput() {return __webpack_require__.e(/*! import() | components/m-input */ "components/m-input").then(__webpack_require__.bind(null, /*! ../../components/m-input.vue */ "F:\\Workspace\\jianzhi\\zhongbao\\components\\m-input.vue"));};var _default =
 
 
 
@@ -77,125 +75,149 @@ var _vuex = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.j
     return {
       loginType: 'phone',
       pageType: "login",
-      providerList: [],
-      hasProvider: false,
-      account: '',
+      state: false, //是否开启倒计时
+      totalTime: 60, //总时间，单位秒
+      recordingTime: 0, //记录时间变量
+      currentTime: 0, //显示时间变量
+      vaild: "",
+      mobile: '',
       password: '',
+      account: '',
       positionTop: 0 };
+
+  },
+  onLoad: function onLoad() {
+    uni.login({
+      provider: 'weixin',
+      success: function success(loginRes) {
+        that.getOpenId(loginRes.code);
+      } });
 
   },
   computed: (0, _vuex.mapState)(['forcedLogin']),
   methods: _objectSpread({},
-  (0, _vuex.mapMutations)(['login']), {
-    initProvider: function initProvider() {var _this = this;
-      var filters = ['weixin', 'qq', 'sinaweibo'];
-      uni.getProvider({
-        service: 'oauth',
-        success: function success(res) {
-          if (res.provider && res.provider.length) {
-            for (var i = 0; i < res.provider.length; i++) {
-              if (~filters.indexOf(res.provider[i])) {
-                _this.providerList.push({
-                  value: res.provider[i],
-                  image: '../../static/img/' + res.provider[i] + '.png' });
-
-              }
-            }
-            _this.hasProvider = true;
-          }
-        },
-        fail: function fail(err) {
-          console.error('获取服务供应商失败：' + JSON.stringify(err));
-        } });
-
+  (0, _vuex.mapMutations)(['login', 'setOpenId']), {
+    inputChange: function inputChange(e) {
+      var key = e.currentTarget.dataset.key;
+      this[key] = e.detail.value;
     },
-    initPosition: function initPosition() {
-      /**
-                                            * 使用 absolute 定位，并且设置 bottom 值进行定位。软键盘弹出时，底部会因为窗口变化而被顶上来。
-                                            * 反向使用 top 进行定位，可以避免此问题。
-                                            */
-      this.positionTop = uni.getSystemInfoSync().windowHeight - 100;
-    },
-    bindLogin: function bindLogin() {
-      /**
-                                      * 客户端对账号信息进行一些必要的校验。
-                                      * 实际开发中，根据业务需要进行处理，这里仅做示例。
-                                      */
-      if (this.account.length < 5) {
-        uni.showToast({
-          icon: 'none',
-          title: '账号最短为 5 个字符' });
+    loginWithWe: function () {var _loginWithWe = _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee(code) {var res;return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:_context.next = 2;return (
+                  this.$req.ajax({
+                    path: '/wxapi/login/WeChat',
+                    title: '正在加载',
+                    data: {
+                      WeChatID: code,
+                      verify: "zhongbao" } }));case 2:res = _context.sent;
 
-        return;
-      }
-      if (this.password.length < 6) {
-        uni.showToast({
-          icon: 'none',
-          title: '密码最短为 6 个字符' });
 
-        return;
-      }
-      /**
-         * 下面简单模拟下服务端的处理
-         * 检测用户账号密码是否在已注册的用户列表中
-         * 实际开发中，使用 uni.request 将账号信息发送至服务端，客户端在回调函数中获取结果信息。
-         */
-      var data = {
-        account: this.account,
-        password: this.password };
 
-      var validUser = _service.default.getUsers().some(function (user) {
-        return data.account === user.account && data.password === user.password;
-      });
-      if (validUser) {
-        this.toMain(this.account);
+                if (res.data.code == 200) {
+                  console.log(res.data.data);
+                } else {
+                  this.$api.msg(res.data.message);
+                }case 4:case "end":return _context.stop();}}}, _callee, this);}));function loginWithWe(_x) {return _loginWithWe.apply(this, arguments);}return loginWithWe;}(),
+
+    getOpenId: function () {var _getOpenId = _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee2(code) {var res, resdata;return _regenerator.default.wrap(function _callee2$(_context2) {while (1) {switch (_context2.prev = _context2.next) {case 0:_context2.next = 2;return (
+                  this.$req.ajax({
+                    path: '/wxapi/login/getOpenid',
+                    title: '正在加载',
+                    data: {
+                      code: code,
+                      appid: "wx7aa0d26e5ca6597c",
+                      secret: "a43098ef40806ae89c1711ab3b9a6e15" } }));case 2:res = _context2.sent;
+
+
+                if (res.data.code == 200) {
+                  resdata = JSON.parse(res.data.data.code);
+                  this.loginWithWe(resdata.openid);
+                  this.setOpenId(resdata.openid);
+
+                }case 4:case "end":return _context2.stop();}}}, _callee2, this);}));function getOpenId(_x2) {return _getOpenId.apply(this, arguments);}return getOpenId;}(),
+
+    checking: function () {var _checking = _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee3() {var res;return _regenerator.default.wrap(function _callee3$(_context3) {while (1) {switch (_context3.prev = _context3.next) {case 0:if (
+                /(^1[3|4|5|6|7|8|9][0-9]{9}$)/.test(this.mobile)) {_context3.next = 3;break;}
+                this.$api.msg('请输入正确的手机号码');return _context3.abrupt("return");case 3:_context3.next = 5;return (
+
+
+
+                  this.$req.ajax({
+                    path: 'wxapi/sms/ChuanglanSmsApi',
+                    title: '正在加载',
+                    data: {
+                      account: this.mobile } }));case 5:res = _context3.sent;
+
+
+
+                if (res.data.code == 200) {
+                  //把显示时间设为总时间
+                  this.currentTime = this.totalTime;
+                  //开始倒计时
+                  this.state = true;
+                  //执行倒计时
+                  this.checkingTime();
+                } else {
+                  this.$api.msg(res.data.message);
+
+                }case 7:case "end":return _context3.stop();}}}, _callee3, this);}));function checking() {return _checking.apply(this, arguments);}return checking;}(),
+
+
+    checkingTime: function checkingTime() {
+      var that = this;
+      //判断是否开启
+      if (this.state) {
+        //判断显示时间是否已到0，判断记录时间是否已到总时间
+        if (this.currentTime > 0 && this.recordingTime <= this.totalTime) {
+          //记录时间增加 1
+          this.recordingTime = this.recordingTime + 1;
+          //显示时间，用总时间 - 记录时间
+          this.currentTime = this.totalTime - this.recordingTime;
+          //1秒钟后，再次执行本方法
+          setTimeout(function () {
+            //定时器内，this指向外部，找不到vue的方法，所以，需要用that变量。
+            that.checkingTime();
+          }, 1000);
+        } else {
+          //时间已完成，还原相关变量
+          this.state = false; //关闭倒计时
+          this.recordingTime = 0; //记录时间为0
+          this.currentTime = this.totalTime; //显示时间为总时间
+        }
       } else {
-        uni.showToast({
-          icon: 'none',
-          title: '用户账号或密码不正确' });
-
+        //倒计时未开启，初始化默认变量
+        this.state = false;
+        this.recordingTime = 0;
+        this.currentTime = this.totalTime;
       }
     },
-    oauth: function oauth(value) {var _this2 = this;
-      uni.login({
-        provider: value,
-        success: function success(res) {
-          uni.getUserInfo({
-            provider: value,
-            success: function success(infoRes) {
-              /**
-                                                 * 实际开发中，获取用户信息后，需要将信息上报至服务端。
-                                                 * 服务端可以用 userInfo.openId 作为用户的唯一标识新增或绑定用户信息。
-                                                 */
-              _this2.toMain(infoRes.userInfo.nickName);
-            } });
+    toLogin: function () {var _toLogin = _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee4() {var mobile, vaild, sendData, result;return _regenerator.default.wrap(function _callee4$(_context4) {while (1) {switch (_context4.prev = _context4.next) {case 0:
+                this.logining = true;
 
-        },
-        fail: function fail(err) {
-          console.error('授权登录失败：' + JSON.stringify(err));
-        } });
+                mobile =
 
-    },
-    toMain: function toMain(userName) {
-      this.login(userName);
-      /**
-                             * 强制登录时使用reLaunch方式跳转过来
-                             * 返回首页也使用reLaunch方式
-                             */
-      if (this.forcedLogin) {
-        uni.reLaunch({
-          url: '../main/main' });
+                this.mobile, vaild = this.vaild;if (
+                /(^1[3|4|5|6|7|8|9][0-9]{9}$)/.test(mobile)) {_context4.next = 5;break;}
+                this.$api.msg('请输入正确的手机号码');return _context4.abrupt("return");case 5:
 
-      } else {
-        uni.navigateBack();
-      }
 
-    } }),
+                sendData = {
+                  mobile: mobile,
+                  vaild: vaild };_context4.next = 8;return (
 
-  onReady: function onReady() {
-    this.initPosition();
-    this.initProvider();
-  } };exports.default = _default;
+
+                  this.$req.ajax({
+                    path: 'wxapi/login/makerLogin',
+                    title: '正在加载',
+                    data: sendData }));case 8:result = _context4.sent;
+
+                if (result.data.code === 200) {
+                  this.login(result.data.data.token);
+                  uni.navigateTo({
+                    url: "/pages/main/main" });
+
+                } else {
+                  this.$api.msg(result.data.message);
+                  this.logining = false;
+                }case 10:case "end":return _context4.stop();}}}, _callee4, this);}));function toLogin() {return _toLogin.apply(this, arguments);}return toLogin;}() }) };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ "./node_modules/@dcloudio/uni-mp-weixin/dist/index.js")["default"]))
 
 /***/ }),

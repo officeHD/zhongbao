@@ -1,5 +1,10 @@
 {
   "pages": [
+    "pages/user/user",
+    "pages/main/main",
+    "pages/login/login",
+    "pages/user/uploadIdcard",
+    "pages/user/uploadImg",
     "pages/validate/success",
     "pages/validate/faceVideo",
     "pages/validate/faceVaildate",
@@ -7,11 +12,9 @@
     "pages/company/detail",
     "pages/company/company",
     "pages/bankcard/bankcard",
-    "pages/user/user",
-    "pages/main/main",
-    "pages/login/login",
     "pages/reg/reg",
-    "pages/pwd/pwd"
+    "pages/pwd/pwd",
+    "pages/businessPlace/businessPlace"
   ],
   "subPackages": [],
   "window": {

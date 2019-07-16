@@ -8,10 +8,31 @@
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default =
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
+var _vuex = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};var ownKeys = Object.keys(source);if (typeof Object.getOwnPropertySymbols === 'function') {ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) {return Object.getOwnPropertyDescriptor(source, sym).enumerable;}));}ownKeys.forEach(function (key) {_defineProperty(target, key, source[key]);});}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}var _default =
+
+
 {
-  onLaunch: function onLaunch() {
-    console.log('App Launch');
+  methods: _objectSpread({},
+  (0, _vuex.mapMutations)(['setOpenId', 'login'])),
+
+
+
+  onLaunch: function onLaunch() {var _this = this;
+    var that = this;
+    uni.getStorage({
+      key: 'token',
+      success: function success(res) {
+        _this.login(res.data);
+      },
+      fail: function fail(err) {
+        uni.navigateTo({
+          url: "/pages/login/login" });
+
+      } });
+
+
+
   },
   onShow: function onShow() {
     console.log('App Show');
@@ -19,6 +40,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
   onHide: function onHide() {
     console.log('App Hide');
   } };exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ "./node_modules/@dcloudio/uni-mp-weixin/dist/index.js")["default"]))
 
 /***/ }),
 

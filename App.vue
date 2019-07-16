@@ -1,7 +1,28 @@
 <script>
+	import {
+		mapMutations
+	} from 'vuex';
 	export default {
+		methods: {
+			...mapMutations(['setOpenId', 'login']),
+
+
+		},
 		onLaunch: function() {
-			console.log('App Launch');
+			let that = this;
+			uni.getStorage({
+				key: 'token',
+				success: res => {
+					this.login(res.data); 
+				},
+				fail: err => {
+					uni.navigateTo({
+						url: "/pages/login/login"
+					});
+				}
+			});
+
+
 		},
 		onShow: function() {
 			console.log('App Show');
@@ -18,7 +39,8 @@
 		min-height: 100%;
 		display: flex;
 	}
-	view{
+
+	view {
 		box-sizing: border-box;
 	}
 

@@ -13,6 +13,27 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /*每个页面公共css */
 page {
 	min-height: 100%;
@@ -21,7 +42,7 @@ page {
 	display: -ms-flexbox;
 	display: flex;
 }
-view{
+view {
 	-webkit-box-sizing: border-box;
 	        box-sizing: border-box;
 }

@@ -123,7 +123,7 @@ var _vuex = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.j
 //
 //
 //
-var _default = { computed: (0, _vuex.mapState)(['forcedLogin', 'hasLogin', 'userName']), onLoad: function onLoad() {} };exports.default = _default;
+var _default = { computed: (0, _vuex.mapState)(['token']), onLoad: function onLoad() {console.log(this.token);} };exports.default = _default;
 
 /***/ }),
 

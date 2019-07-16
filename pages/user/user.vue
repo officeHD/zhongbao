@@ -2,53 +2,75 @@
 	<view class="wrapper">
 		<view class="celBox bb">
 			<text>本人正面免冠照片</text>
-			<image class="avator" src="../../static/img/人脸识别.png" mode="aspectFill"></image>
+			<image class="avator" :src="userData.SelfPic" mode="aspectFill"></image>
 		</view>
-		<view class="celBox bb">
+		<view class="celBox bb ">
 			<text>姓名</text>
-			<text class="c666">张三</text>  
+			<view class="rightRow">
+				<text class="c666" v-if="userData.Name">{{userData.Name}}</text>
+				<image v-if="!userData.Name" class="cammer" src="../../static/img/cammer.png" mode="widthFix"></image>
+				<image class="arrowImg" src="../../static/img/arrow.png" mode="widthFix"></image>
+			</view>
 		</view>
 		<view class="celBox bb">
 			<text>身份证号码</text>
-			<text class="c666">张三</text>  
+			<text class="c666">{{userData.IDCardNo}}</text>
 		</view>
 		<view class="celBox bb">
 			<text>身份证有效期</text>
-			<text class="c666">张三</text>  
+			<text class="c666">{{userData.Name}}</text>
 		</view>
 		<view class="celBox bb">
 			<text>手机号码</text>
-			<text class="c666">张三</text>  
+			<view class="rightRow">
+				<text class="c666">{{userData.PhoneNumber}}</text>
+				<text class="changePhone">更换</text>
+				<image class="arrowImg" src="../../static/img/arrow.png" mode="widthFix"></image>
+
+			</view>
 		</view>
 		<view class="celBox bb">
 			<text>验证状态</text>
-			<text class="c666">张三</text>  
+			<text class="c666">{{userData.StatusVerify}}</text>
 		</view>
 		<view class="celBox ">
 			<text>验证时间</text>
-			<text class="c666">张三</text>  
+			<text class="c666">{{userData.DateVerify}}</text>
 		</view>
 		<view class="celBox mt20 bb">
 			<text>银行卡号</text>
-			<text class="c666">张三</text>  
+			<view class="rightRow">
+				<text class="c666">{{userData.BankCardNo}}</text>
+				<image class="arrowImg" src="../../static/img/arrow.png" mode="widthFix"></image>
+
+			</view>
 		</view>
 		<view class="celBox bb">
 			<text>开户银行</text>
-			<text class="c666">张三</text>  
+			<text class="c666">{{userData.BankName}}</text>
 		</view>
 		<view class="celBox ">
 			<text>开户支行</text>
-			<text class="c666">张三</text>  
+			<text class="c666">{{userData.SubBankName}}</text>
 		</view>
 		<view class="celBox mt20 bb">
 			<text>本人身份证正反面</text>
-			<text class="c666">张三</text>  
+			<text class="c666">{{userData.Name}}</text>
 		</view>
 		<view class="celBox mb20 bb">
-			<text>身份证正面+反面合一复印件</text>
-			<text class="c666">张三</text>  
+			<view class="">
+				<text>身份证正面+反面合一复印件</text>
+				<view class="f24 c999 tips">
+					办理个体户时需要，身份证正反面都复印到一张A4纸的一面
+				</view>
+			</view>
+
+			<view class="rightRow">
+				<text class="c666">{{userData.Name}}</text>
+				<image class="arrowImg" src="../../static/img/arrow.png" mode="widthFix"></image>
+			</view>
 		</view>
-		 
+
 	</view>
 </template>
 
@@ -59,12 +81,61 @@
 	} from 'vuex'
 
 	export default {
-		computed: {
-			...mapState(['hasLogin', 'forcedLogin'])
+		data() {
+			return {
+				userData: {
+					Age: "",
+					BankCardNo: "",
+					BankName: "",
+					CreateDate: "",
+					DateVerify: "",
+					DescVerify: "",
+					DueDate: "",
+					FlagVerify: "",
+					IDCardNo: "",
+					IDCardPic: "",
+					IDCardPicBack: "",
+					MakerID: "",
+					Name: "",
+					NameVerifyManual: "",
+					PhoneNumber: "",
+					PicVerify: "",
+					RelaDate: "",
+					RunAddress: "",
+					SelfDesc: "",
+					SelfPic: "",
+					Sex: "",
+					ShopID: "",
+					ShopURL: "",
+					ShopUserName: "",
+					ShopUserPWD: "",
+					StatusVerify: "",
+					SubBankName: "",
+					WeChatID: "",
+				}
+			}
+		},
+		computed: mapState(['token']),
+		onLoad() {
+			// console.log(this.token)
+			this.getUserData();
 		},
 		methods: {
-			...mapMutations(['logout']),
+			async getUserData() {
+				var res = await this.$req.ajax({
+					path: '/wxapi/member/Maker',
+					title: '正在加载',
+					data: {
+						token: this.token
 
+					}
+				});
+				if (res.data.code == 200) {
+					this.userData = res.data.data;
+				} else {
+					this.$api.msg(res.data.message);
+				}
+			}
 		}
 	}
 </script>
@@ -74,7 +145,46 @@
 		width: 100%;
 		min-height: 100vh;
 		background-color: #F2F2F2;
-		padding-bottom: 20px;;
+		padding-bottom: 20px;
+		;
+	}
+
+	.rightRow {
+		display: flex;
+		align-items: center;
+		height: 100%;
+	}
+
+	.cammer {
+		width: 48rpx;
+		height: 48rpx;
+
+	}
+
+	.tips {
+		margin-top: 15rpx;
+	}
+
+	.f24 {
+		font-size: 24rpx;
+	}
+
+	.c999 {
+		color: #999999;
+	}
+
+	.arrowImg {
+		width: 40rpx;
+		height: 40rpx;
+		margin-left: 20rpx;
+	}
+
+	.changePhone {
+		color: #007AFF;
+		margin-left: 50rpx;
+		margin-right: -10rpx;
+		font-size: 30rpx;
+		font-weight: bold;
 	}
 
 	.celBox {
@@ -88,7 +198,7 @@
 		color: #1E1E1E;
 
 	}
-	 
+
 	.bb {
 		border-bottom: 1px solid #E4E4E4;
 	}
@@ -97,7 +207,7 @@
 		margin-top: 20rpx;
 	}
 
-	 
+
 
 	.c666 {
 		color: #666;

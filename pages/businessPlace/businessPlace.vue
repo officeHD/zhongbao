@@ -1,6 +1,5 @@
 <template>
-	<view class="wrapper">
-
+	<view class="wrapper"> 
 		<view class="celBox bb">
 			<text class="c666">我的线下经营场所</text>
 			<text>张三</text>
@@ -10,12 +9,8 @@
 			<text>张三</text>
 		</view>
 		<view class="celBox bb">
-			<text>自我介绍（采用企业介绍的方式撰写自我介绍），不少于150字哦：</text>
-		 
-		</view>
-	 
-
-		 
+			<text>自我介绍（采用企业介绍的方式撰写自我介绍），不少于150字哦：</text> 
+		</view>  
 	</view>
 </template>
 
