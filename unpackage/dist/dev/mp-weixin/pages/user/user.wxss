@@ -30,16 +30,19 @@
 	color: #999999;
 }
 .arrowImg.data-v-bc4e5efc {
-	width: 40rpx;
+	width: 22rpx;
 	height: 40rpx;
-	margin-left: 20rpx;
+	margin-left: 22rpx;
 }
 .changePhone.data-v-bc4e5efc {
 	color: #007AFF;
 	margin-left: 50rpx;
-	margin-right: -10rpx;
+	margin-right: -5rpx;
 	font-size: 30rpx;
 	font-weight: bold;
+}
+.cblue.data-v-bc4e5efc {
+	color: #007AFF;
 }
 .celBox.data-v-bc4e5efc {
 	display: -webkit-box;

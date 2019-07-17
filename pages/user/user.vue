@@ -2,7 +2,11 @@
 	<view class="wrapper">
 		<view class="celBox bb">
 			<text>本人正面免冠照片</text>
-			<image class="avator" :src="userData.SelfPic" mode="aspectFill"></image>
+			<view class="rightRow">
+				<image v-if="userData.SelfPic" class="avator" :src="userData.SelfPic" mode="aspectFill"></image>
+				<text v-if="!userData.SelfPic">暂无</text>
+				<image class="arrowImg" src="../../static/img/arrow.png" mode="widthFix"></image>
+			</view>
 		</view>
 		<view class="celBox bb ">
 			<text>姓名</text>
@@ -14,11 +18,11 @@
 		</view>
 		<view class="celBox bb">
 			<text>身份证号码</text>
-			<text class="c666">{{userData.IDCardNo}}</text>
+			<text class="c666">{{userData.IDCardNo||'暂无'}}</text>
 		</view>
 		<view class="celBox bb">
 			<text>身份证有效期</text>
-			<text class="c666">{{userData.Name}}</text>
+			<text class="c666">{{userData.Name||'暂无'}}</text>
 		</view>
 		<view class="celBox bb">
 			<text>手机号码</text>
@@ -31,31 +35,35 @@
 		</view>
 		<view class="celBox bb">
 			<text>验证状态</text>
-			<text class="c666">{{userData.StatusVerify}}</text>
+			<view class="rightRow">
+				<text class=" changePhone">{{userData.StatusVerify||'未验证'}}</text>
+				<image class="arrowImg" src="../../static/img/arrow.png" mode="widthFix"></image>
+
+			</view>
 		</view>
 		<view class="celBox ">
 			<text>验证时间</text>
-			<text class="c666">{{userData.DateVerify}}</text>
+			<text class="c666">{{userData.DateVerify||'无'}}</text>
 		</view>
 		<view class="celBox mt20 bb">
 			<text>银行卡号</text>
 			<view class="rightRow">
-				<text class="c666">{{userData.BankCardNo}}</text>
+				<text class="c666">{{userData.BankCardNo||'无'}}</text>
 				<image class="arrowImg" src="../../static/img/arrow.png" mode="widthFix"></image>
 
 			</view>
 		</view>
 		<view class="celBox bb">
 			<text>开户银行</text>
-			<text class="c666">{{userData.BankName}}</text>
+			<text class="c666">{{userData.BankName||'无'}}</text>
 		</view>
 		<view class="celBox ">
 			<text>开户支行</text>
-			<text class="c666">{{userData.SubBankName}}</text>
+			<text class="c666">{{userData.SubBankName||'无'}}</text>
 		</view>
 		<view class="celBox mt20 bb">
 			<text>本人身份证正反面</text>
-			<text class="c666">{{userData.Name}}</text>
+			<text class="c666">{{userData.Name||'无'}}</text>
 		</view>
 		<view class="celBox mb20 bb">
 			<view class="">
@@ -174,17 +182,21 @@
 	}
 
 	.arrowImg {
-		width: 40rpx;
+		width: 22rpx;
 		height: 40rpx;
-		margin-left: 20rpx;
+		margin-left: 22rpx;
 	}
 
 	.changePhone {
 		color: #007AFF;
 		margin-left: 50rpx;
-		margin-right: -10rpx;
+		margin-right: -5rpx;
 		font-size: 30rpx;
 		font-weight: bold;
+	}
+
+	.cblue {
+		color: #007AFF;
 	}
 
 	.celBox {
