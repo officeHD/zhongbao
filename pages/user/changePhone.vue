@@ -1,54 +1,30 @@
 <template>
 	<view class="content">
-		<image class="logoImg" src="../../static/img/LOGO.png"></image>
-		<text class="welcome">欢迎您!</text>
-		<view class="target">
-			<text class="leftLine"></text>
-			<text>科技&数据赋能创客(自由职业者)轻松做老板</text>
-			<text class="rightLine"></text>
-		</view>
-		<view class="sectionBar">
-			<text class="loginTab " :class="{'active': pageType=='login'}" @click="pageType='login'">登录</text>
-			<text class="registerTab" :class="{'active': pageType!=='login'}" @click="pageType='register',loginType='phone'">注册</text>
-		</view>
-		<view class="loginWm" v-if="loginType!=='account'">
+
+
+		<view class="loginWm">
 			<view class="inputBox">
+				<view class="title">原手机号码</view>
 				<input class="inputItem" type="text" maxlength="11" :value="mobile" data-key="mobile" @input="inputChange"
 				 placeholder="请输入手机号" placeholder-style="color:#D6D6FF" />
 			</view>
 			<view class="inputBox">
-				<input class="inputItem" type="text" maxlength="6" :value="vaild" data-key="vaild" @input="inputChange" placeholder="请输入验证码"
-				 placeholder-style="color:#D6D6FF" />
+				<view class="title">新手机号码</view>
+				<input class="inputItem" type="text" maxlength="6" :value="account" data-key="account" @input="inputChange"
+				 placeholder="请输入验证码" placeholder-style="color:#D6D6FF" />
 				<text class="cendMsm" @click="checking" v-if="state===false">发送验证码</text>
 				<text class="cendMsm zai-time" v-if="state===true">倒计时{{ currentTime }}s</text>
 			</view>
-			<view class="inputBox" v-if="pageType=='register'">
-				<input class="inputItem" type="text" :value="password" data-key="password" @input="inputChange" placeholder="密码至少为6位长度的数字或字母组合"
-				 placeholder-style="color:#D6D6FF" />
-			</view>
-		</view>
-		<view class="loginWm" v-if="pageType=='login'&&loginType=='account'">
 			<view class="inputBox">
-				<image class="yonghuIcon" src="../../static/img/yonghu.png"></image>
-				<text class="lineBorder"></text>
-				<input class="inputItem" type="text" :value="account" data-key="account" @input="inputChange" placeholder="请输入账号"
-				 placeholder-style="color:#D6D6FF" />
-			</view>
-			<view class="inputBox">
-				<image class="passwordIcon" src="../../static/img/password.png"></image>
-				<text class="lineBorder"></text>
-				<input class="inputItem" type="text" :value="password" data-key="password" @input="inputChange" placeholder="请输入密码"
+				<view class="title">验证码</view>
+				<input class="inputItem" type="text" :value="vaild" data-key="vaild" @input="inputChange" placeholder="请输入验证码"
 				 placeholder-style="color:#D6D6FF" />
 			</view>
 		</view>
-		<text v-if="pageType=='login'&&loginType=='account'" class="loginType" @click="loginType='phone'">验证码登录</text>
-		<text v-if="pageType=='login'&&loginType=='phone'" class="loginType" @click="loginType='account'">账号密码登录</text>
-		<view class="btn-row" v-if="pageType=='login'">
-			<button v-if="loginType=='phone'" class="primaryBtn" @tap="toLogin">快速登录</button>
-			<button v-if="loginType=='account'" class="primaryBtn" @tap="toLoginPw">快速登录</button>
-		</view>
-		<view class="btn-row" v-if="pageType=='register'">
-			<button class="primaryBtn" @tap="toRegister">立即注册</button>
+
+
+		<view class="btn-row">
+			<button class="primaryBtn" @tap="toRegister">保存</button>
 		</view>
 	</view>
 </template>
@@ -82,12 +58,7 @@
 		},
 		onLoad() {
 			let that = this;
-			uni.login({
-				provider: 'weixin',
-				success: function(loginRes) {
-					that.getOpenId(loginRes.code);
-				}
-			});
+
 		},
 		computed: mapState(['forcedLogin']),
 		methods: {
@@ -115,23 +86,7 @@
 					this.$api.msg(res.data.message);
 				}
 			},
-			async getOpenId(code) {
-				var res = await this.$req.ajax({
-					path: '/wxapi/login/getOpenid',
-					title: '正在加载',
-					data: {
-						code: code,
-						appid: "wx7aa0d26e5ca6597c",
-						secret: "a43098ef40806ae89c1711ab3b9a6e15"
-					}
-				});
-				if (res.data.code == 200) {
-					let resdata = JSON.parse(res.data.data.code);
-					this.loginWithWe(resdata.openid)
-					this.setOpenId(resdata.openid)
 
-				}
-			},
 			async toRegister() {
 				if (!/(^1[3|4|5|6|7|8|9][0-9]{9}$)/.test(this.mobile)) {
 					this.$api.msg('请输入正确的手机号码');
@@ -212,15 +167,15 @@
 					this.currentTime = this.totalTime;
 				}
 			},
-			async toLoginPw(){
-				 
+			async toLoginPw() {
+
 				let res = await this.$req.ajax({
 					path: '/wxapi/login/Loginpwd',
 					title: '正在加载',
 					data: {
 						account: this.account,
 						LoginPWD: this.password,
-				
+
 					}
 				});
 				if (res.data.code == 200) {
@@ -230,7 +185,7 @@
 					})
 				} else {
 					this.$api.msg(res.data.message)
-				
+
 				}
 			},
 			async toLogin() {
@@ -268,11 +223,6 @@
 </script>
 
 <style>
-	.content {
-		background: linear-gradient(to bottom, #1666F3, #7F7AFF);
-		padding-top: 100upx;
-	}
-
 	.logoImg {
 		width: 409upx;
 		height: 120upx;
@@ -280,26 +230,14 @@
 		margin: 30upx auto;
 	}
 
-	.welcome {
-		font-size: 50rpx;
-		color: #FFFFFF;
-		font-family: PingFangSC-Medium;
-		text-align: center;
-		letter-spacing: 5rpx;
-		margin-top: 20rpx;
+	 
+	.title{
+		color: #000000;
+		width: 180rpx;
+		text-align: left;
+		padding-left: 20rpx;
+		
 	}
-
-	.target {
-		display: flex;
-		;
-		justify-content: center;
-		font-size: 24upx;
-		margin: 30rpx 0;
-		color: #FFFFFF;
-		align-items: center;
-
-	}
-
 	.leftLine {
 		display: block;
 		width: 80rpx;
@@ -345,14 +283,15 @@
 	}
 
 	.inputBox {
-		border-bottom: 1px solid #7D99FF;
+		background: #FFFFFF;
+		border-bottom: 1px solid #E6E6E6;
 		height: 90rpx;
 		display: flex;
 		align-items: center;
-		padding-top: 20rpx;
 		font-size: 26rpx;
 		color: #FFFFFF;
 		padding-right: 5rpx;
+		color: #333333;
 	}
 
 	.passwordIcon {

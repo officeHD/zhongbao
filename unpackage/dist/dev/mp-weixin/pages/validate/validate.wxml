@@ -1,1 +1,1 @@
-<view class="wrapper data-v-7b4c503c"><button class="btnBox c000 data-v-7b4c503c">人脸识别验证</button><button class="btnBox data-v-7b4c503c">人脸识别验证</button><button class="btnBox data-v-7b4c503c">人脸识别验证</button><button class="btnBox data-v-7b4c503c">人脸识别验证</button></view>
+<view class="wrapper data-v-7b4c503c"><navigator class="btnBox c000 data-v-7b4c503c" url="/pages/validate/faceVaildate">人脸识别验证</navigator><button class="btnBox data-v-7b4c503c">人脸识别验证</button><button class="btnBox data-v-7b4c503c">人脸识别验证</button><button class="btnBox data-v-7b4c503c">人脸识别验证</button></view>

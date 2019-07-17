@@ -24,6 +24,9 @@ var _vuex = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.j
       key: 'token',
       success: function success(res) {
         _this.login(res.data);
+        uni.redirectTo({
+          url: "/pages/main/main" });
+
       },
       fail: function fail(err) {
         uni.navigateTo({

@@ -60,6 +60,10 @@
 
 
 
+
+
+
+
 var _service = _interopRequireDefault(__webpack_require__(/*! ../../service.js */ "F:\\Workspace\\jianzhi\\zhongbao\\service.js"));
 var _vuex = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};var ownKeys = Object.keys(source);if (typeof Object.getOwnPropertySymbols === 'function') {ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) {return Object.getOwnPropertyDescriptor(source, sym).enumerable;}));}ownKeys.forEach(function (key) {_defineProperty(target, key, source[key]);});}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}var mInput = function mInput() {return __webpack_require__.e(/*! import() | components/m-input */ "components/m-input").then(__webpack_require__.bind(null, /*! ../../components/m-input.vue */ "F:\\Workspace\\jianzhi\\zhongbao\\components\\m-input.vue"));};var _default =
 
@@ -87,6 +91,7 @@ var _vuex = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.j
 
   },
   onLoad: function onLoad() {
+    var that = this;
     uni.login({
       provider: 'weixin',
       success: function success(loginRes) {
@@ -113,6 +118,9 @@ var _vuex = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.j
 
                 if (res.data.code == 200) {
                   console.log(res.data.data);
+                  uni.redirectTo({
+                    url: "/pages/main/main" });
+
                 } else {
                   this.$api.msg(res.data.message);
                 }case 4:case "end":return _context.stop();}}}, _callee, this);}));function loginWithWe(_x) {return _loginWithWe.apply(this, arguments);}return loginWithWe;}(),
@@ -134,9 +142,34 @@ var _vuex = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.j
 
                 }case 4:case "end":return _context2.stop();}}}, _callee2, this);}));function getOpenId(_x2) {return _getOpenId.apply(this, arguments);}return getOpenId;}(),
 
-    checking: function () {var _checking = _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee3() {var res;return _regenerator.default.wrap(function _callee3$(_context3) {while (1) {switch (_context3.prev = _context3.next) {case 0:if (
+    toRegister: function () {var _toRegister = _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee3() {var res;return _regenerator.default.wrap(function _callee3$(_context3) {while (1) {switch (_context3.prev = _context3.next) {case 0:if (
                 /(^1[3|4|5|6|7|8|9][0-9]{9}$)/.test(this.mobile)) {_context3.next = 3;break;}
                 this.$api.msg('请输入正确的手机号码');return _context3.abrupt("return");case 3:_context3.next = 5;return (
+
+
+                  this.$req.ajax({
+                    path: '/wxapi/Login/registered',
+                    title: '正在加载',
+                    data: {
+                      account: this.mobile,
+                      LoginPWD: this.password,
+                      code: this.vaild } }));case 5:res = _context3.sent;
+
+
+
+                if (res.data.code == 200) {
+                  this.login(res.data.data.token);
+                  uni.redirectTo({
+                    url: "/pages/main/main" });
+
+                } else {
+                  this.$api.msg(res.data.message);
+
+                }case 7:case "end":return _context3.stop();}}}, _callee3, this);}));function toRegister() {return _toRegister.apply(this, arguments);}return toRegister;}(),
+
+    checking: function () {var _checking = _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee4() {var res;return _regenerator.default.wrap(function _callee4$(_context4) {while (1) {switch (_context4.prev = _context4.next) {case 0:if (
+                /(^1[3|4|5|6|7|8|9][0-9]{9}$)/.test(this.mobile)) {_context4.next = 3;break;}
+                this.$api.msg('请输入正确的手机号码');return _context4.abrupt("return");case 3:_context4.next = 5;return (
 
 
 
@@ -144,7 +177,7 @@ var _vuex = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.j
                     path: 'wxapi/sms/ChuanglanSmsApi',
                     title: '正在加载',
                     data: {
-                      account: this.mobile } }));case 5:res = _context3.sent;
+                      account: this.mobile } }));case 5:res = _context4.sent;
 
 
 
@@ -158,7 +191,7 @@ var _vuex = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.j
                 } else {
                   this.$api.msg(res.data.message);
 
-                }case 7:case "end":return _context3.stop();}}}, _callee3, this);}));function checking() {return _checking.apply(this, arguments);}return checking;}(),
+                }case 7:case "end":return _context4.stop();}}}, _callee4, this);}));function checking() {return _checking.apply(this, arguments);}return checking;}(),
 
 
     checkingTime: function checkingTime() {
@@ -189,25 +222,46 @@ var _vuex = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.j
         this.currentTime = this.totalTime;
       }
     },
-    toLogin: function () {var _toLogin = _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee4() {var mobile, vaild, sendData, result;return _regenerator.default.wrap(function _callee4$(_context4) {while (1) {switch (_context4.prev = _context4.next) {case 0:
+    toLoginPw: function () {var _toLoginPw = _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee5() {var res;return _regenerator.default.wrap(function _callee5$(_context5) {while (1) {switch (_context5.prev = _context5.next) {case 0:_context5.next = 2;return (
+
+                  this.$req.ajax({
+                    path: '/wxapi/login/Loginpwd',
+                    title: '正在加载',
+                    data: {
+                      account: this.account,
+                      LoginPWD: this.password } }));case 2:res = _context5.sent;
+
+
+
+                if (res.data.code == 200) {
+                  this.login(res.data.data.token);
+                  uni.redirectTo({
+                    url: "/pages/main/main" });
+
+                } else {
+                  this.$api.msg(res.data.message);
+
+                }case 4:case "end":return _context5.stop();}}}, _callee5, this);}));function toLoginPw() {return _toLoginPw.apply(this, arguments);}return toLoginPw;}(),
+
+    toLogin: function () {var _toLogin = _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee6() {var mobile, vaild, sendData, result;return _regenerator.default.wrap(function _callee6$(_context6) {while (1) {switch (_context6.prev = _context6.next) {case 0:
                 this.logining = true;
 
                 mobile =
 
                 this.mobile, vaild = this.vaild;if (
-                /(^1[3|4|5|6|7|8|9][0-9]{9}$)/.test(mobile)) {_context4.next = 5;break;}
-                this.$api.msg('请输入正确的手机号码');return _context4.abrupt("return");case 5:
+                /(^1[3|4|5|6|7|8|9][0-9]{9}$)/.test(mobile)) {_context6.next = 5;break;}
+                this.$api.msg('请输入正确的手机号码');return _context6.abrupt("return");case 5:
 
 
                 sendData = {
                   mobile: mobile,
-                  vaild: vaild };_context4.next = 8;return (
+                  vaild: vaild };_context6.next = 8;return (
 
 
                   this.$req.ajax({
                     path: 'wxapi/login/makerLogin',
                     title: '正在加载',
-                    data: sendData }));case 8:result = _context4.sent;
+                    data: sendData }));case 8:result = _context6.sent;
 
                 if (result.data.code === 200) {
                   this.login(result.data.data.token);
@@ -217,7 +271,7 @@ var _vuex = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.j
                 } else {
                   this.$api.msg(result.data.message);
                   this.logining = false;
-                }case 10:case "end":return _context4.stop();}}}, _callee4, this);}));function toLogin() {return _toLogin.apply(this, arguments);}return toLogin;}() }) };exports.default = _default;
+                }case 10:case "end":return _context6.stop();}}}, _callee6, this);}));function toLogin() {return _toLogin.apply(this, arguments);}return toLogin;}() }) };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ "./node_modules/@dcloudio/uni-mp-weixin/dist/index.js")["default"]))
 
 /***/ }),

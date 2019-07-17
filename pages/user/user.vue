@@ -10,11 +10,11 @@
 		</view>
 		<view class="celBox bb ">
 			<text>姓名</text>
-			<view class="rightRow">
+			<navigator class="rightRow" url="/pages/user/uploadIdcard">
 				<text class="c666" v-if="userData.Name">{{userData.Name}}</text>
 				<image v-if="!userData.Name" class="cammer" src="../../static/img/cammer.png" mode="widthFix"></image>
 				<image class="arrowImg" src="../../static/img/arrow.png" mode="widthFix"></image>
-			</view>
+			</navigator>
 		</view>
 		<view class="celBox bb">
 			<text>身份证号码</text>
@@ -26,12 +26,12 @@
 		</view>
 		<view class="celBox bb">
 			<text>手机号码</text>
-			<view class="rightRow">
+			<navigator class="rightRow" url="/pages/user/changePhone">
 				<text class="c666">{{userData.PhoneNumber}}</text>
 				<text class="changePhone">更换</text>
 				<image class="arrowImg" src="../../static/img/arrow.png" mode="widthFix"></image>
 
-			</view>
+			</navigator>
 		</view>
 		<view class="celBox bb">
 			<text>验证状态</text>

@@ -1,9 +1,10 @@
 {
   "pages": [
-    "pages/user/user",
     "pages/main/main",
     "pages/login/login",
+    "pages/user/user",
     "pages/user/uploadIdcard",
+    "pages/user/changePhone",
     "pages/user/uploadImg",
     "pages/validate/success",
     "pages/validate/faceVideo",

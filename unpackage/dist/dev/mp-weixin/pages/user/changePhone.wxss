@@ -1,0 +1,176 @@
+
+.logoImg {
+	width: 409rpx;
+	height: 120rpx;
+	display: block;
+	margin: 30rpx auto;
+}
+.title{
+	color: #000000;
+	width: 180rpx;
+	text-align: left;
+	padding-left: 20rpx;
+}
+.leftLine {
+	display: block;
+	width: 80rpx;
+	height: 1rpx;
+	background: -webkit-gradient(linear, right top, left top, from(#fff), to(rgba(255, 255, 255, 0)));
+	background: -o-linear-gradient(right, #fff, rgba(255, 255, 255, 0));
+	background: linear-gradient(to left, #fff, rgba(255, 255, 255, 0));
+	margin-right: 10rpx;
+}
+.rightLine {
+	display: block;
+	width: 80rpx;
+	height: 1rpx;
+	background: -webkit-gradient(linear, left top, right top, from(#fff), to(rgba(255, 255, 255, 0)));
+	background: -o-linear-gradient(left, #fff, rgba(255, 255, 255, 0));
+	background: linear-gradient(to right, #fff, rgba(255, 255, 255, 0));
+	margin-left: 10rpx;
+}
+.sectionBar {
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-orient: horizontal;
+	-webkit-box-direction: normal;
+	-webkit-flex-direction: row;
+	    -ms-flex-direction: row;
+	        flex-direction: row;
+	-webkit-justify-content: space-around;
+	    -ms-flex-pack: distribute;
+	        justify-content: space-around;
+	padding: 0 50px;
+	margin-bottom: 30px;
+}
+.loginTab,
+.registerTab {
+	padding: 15rpx;
+	color: #CED8FE;
+	font-size: 26rpx;
+}
+.loginTab.active,
+.registerTab.active {
+	border-bottom: 2px solid #fff;
+	color: #fff;
+}
+.loginWm {
+	padding: 10rpx 30rpx;
+}
+.inputBox {
+	background: #FFFFFF;
+	border-bottom: 1px solid #E6E6E6;
+	height: 90rpx;
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-align: center;
+	-webkit-align-items: center;
+	    -ms-flex-align: center;
+	        align-items: center;
+	font-size: 26rpx;
+	color: #FFFFFF;
+	padding-right: 5rpx;
+	color: #333333;
+}
+.passwordIcon {
+	width: 40rpx;
+	height: 19rpx;
+	padding-right: 20rpx;
+}
+.yonghuIcon {
+	width: 33rpx;
+	height: 35rpx;
+	margin-left: 7rpx;
+	padding-right: 20rpx;
+}
+.lineBorder {
+	display: block;
+	height: 35rpx;
+	border-right: 1px solid #FFFFFF;
+}
+.loginType {
+	text-align: right;
+	font-size: 26rpx;
+	color: #FFFFFF;
+	padding-right: 30rpx;
+	padding-top: 20rpx;
+}
+.inputItem {
+	-webkit-box-flex: 1;
+	-webkit-flex: 1;
+	    -ms-flex: 1;
+	        flex: 1;
+	padding-left: 20rpx;
+	
+	font-size: 26rpx;
+	height: 70rpx;
+	line-height: 70rpx;
+}
+.cendMsm {
+	font-size: 26rpx;
+}
+.primaryBtn {
+	border-radius: 100rpx;
+	background-color: #FFFFFF;
+	font-size: 30rpx;
+	color: #007AFF;
+	height: 100rpx;
+	
+	line-height: 100rpx;
+}
+.action-row {
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-orient: horizontal;
+	-webkit-box-direction: normal;
+	-webkit-flex-direction: row;
+	    -ms-flex-direction: row;
+	        flex-direction: row;
+	-webkit-box-pack: center;
+	-webkit-justify-content: center;
+	    -ms-flex-pack: center;
+	        justify-content: center;
+}
+.action-row navigator {
+	color: #007aff;
+	padding: 0 20rpx;
+}
+.oauth-row {
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-orient: horizontal;
+	-webkit-box-direction: normal;
+	-webkit-flex-direction: row;
+	    -ms-flex-direction: row;
+	        flex-direction: row;
+	-webkit-box-pack: center;
+	-webkit-justify-content: center;
+	    -ms-flex-pack: center;
+	        justify-content: center;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+}
+.oauth-image {
+	width: 100rpx;
+	height: 100rpx;
+	border: 1rpx solid #dddddd;
+	border-radius: 100rpx;
+	margin: 0 40rpx;
+	background-color: #ffffff;
+}
+.oauth-image image {
+	width: 60rpx;
+	height: 60rpx;
+	margin: 20rpx;
+}
+

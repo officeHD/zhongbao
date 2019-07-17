@@ -1,6 +1,6 @@
 <template>
 	<view class="wrapper">
-		<button class="btnBox c000">人脸识别验证</button>
+		<navigator url="/pages/validate/faceVaildate" class="btnBox c000">人脸识别验证</navigator>
 		<button  class="btnBox">人脸识别验证</button>
 		<button class="btnBox">人脸识别验证</button>
 		<button class="btnBox">人脸识别验证</button>
@@ -32,6 +32,7 @@
 		font-size: 30rpx;
 		background-color: #E3E8F0;
 		color: #888888;
+		text-align: center;
 	}
 	.c000{
 		color: #000000;

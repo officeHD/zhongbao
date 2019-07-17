@@ -10,6 +10,7 @@
 	font-size: 30rpx;
 	background-color: #E3E8F0;
 	color: #888888;
+	text-align: center;
 }
 .c000.data-v-7b4c503c{
 	color: #000000;

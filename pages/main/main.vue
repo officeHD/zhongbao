@@ -22,22 +22,23 @@
 					<image class="itemIcon" src="../../static/img/sec1.png" mode="widthFix"></image>
 					<text class="itemtitle">我的基本信息</text>
 				</navigator >
-				<view class="sectionItem">
+				<navigator url="/pages/validate/validate" class="sectionItem" >
 					<image class="itemIcon" src="../../static/img/sec2.png" mode="widthFix"></image>
 					<text class="itemtitle">二郎神验证</text>
-				</view>
-				<view class="sectionItem">
+				</navigator>
+				
+				<navigator url="/pages/businessPlace/businessPlace" class="sectionItem" >
 					<image class="itemIcon" src="../../static/img/sec3.png" mode="widthFix"></image>
 					<text class="itemtitle">我的经营场所</text>
-				</view>
+				</navigator>
 				<view class="sectionItem">
 					<image class="itemIcon" src="../../static/img/sec4.png" mode="widthFix"></image>
 					<text class="itemtitle">我的外包合同</text>
 				</view>
-				<view class="sectionItem">
+				<navigator url="/pages/company/company" class="sectionItem" >
 					<image class="itemIcon" src="../../static/img/sec5.png" mode="widthFix"></image>
 					<text class="itemtitle">我服务过的企业</text>
-				</view>
+				</navigator>
 				<view class="sectionItem">
 					<image class="itemIcon" src="../../static/img/sec6.png" mode="widthFix"></image>
 					<text class="itemtitle">我的业务交付支付确认函</text>
