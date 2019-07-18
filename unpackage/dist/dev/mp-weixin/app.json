@@ -1,12 +1,12 @@
 {
   "pages": [
+    "pages/user/uploadIdcard",
     "pages/user/uploadImg",
+    "pages/login/login",
     "pages/bankcard/bankcard",
     "pages/user/changePhone",
-    "pages/user/uploadIdcard",
     "pages/user/user",
     "pages/main/main",
-    "pages/login/login",
     "pages/validate/success",
     "pages/validate/faceVideo",
     "pages/validate/faceVaildate",

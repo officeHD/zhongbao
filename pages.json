@@ -1,9 +1,20 @@
 {
 	"pages": [ //pages数组中第一项表示应用启动页,
-		{
-			"path": "pages/user/uploadImg",
+		  {
+		 	"path": "pages/user/uploadIdcard",
+		 	"style": {
+		 		"navigationBarTitleText": "个人身份信息"
+		 	}
+		 }, {
+		 	"path": "pages/user/uploadImg",
+		 	"style": {
+		 		"navigationBarTitleText": "上传"
+		 	}
+		 }, {
+			"path": "pages/login/login",
 			"style": {
-				"navigationBarTitleText": "上传"
+				"navigationBarTitleText": "登录",
+				"navigationStyle": "custom"
 			}
 		},{
 			"path": "pages/bankcard/bankcard",
@@ -11,35 +22,24 @@
 				"navigationBarTitleText": "银行卡信息"
 			}
 		}, {
-		 	"path": "pages/user/changePhone",
-		 	"style": {
-		 		"navigationBarTitleText": "更换手机号"
-		 	}
-		 }, {
-		  	"path": "pages/user/uploadIdcard",
-		  	"style": {
-		  		"navigationBarTitleText": "个人身份信息"
-		  	}
-		  },{
-		  	"path": "pages/user/user",
-		  	"style": {
-		  		"navigationBarTitleText": "我的基本信息" 
-		  	}
-		  },{
-		  	"path": "pages/main/main",
-		  	"style": {
-		  		"navigationBarTitleText": "首页"
-		  	}
-		  },{
-			"path": "pages/login/login",
+			"path": "pages/user/changePhone",
 			"style": {
-				"navigationBarTitleText": "登录",
-				"navigationStyle": "custom"
+				"navigationBarTitleText": "更换手机号"
+			}
+		},{
+			"path": "pages/user/user",
+			"style": {
+				"navigationBarTitleText": "我的基本信息"
+			}
+		}, {
+			"path": "pages/main/main",
+			"style": {
+				"navigationBarTitleText": "首页"
 			}
 		},
-		
-		
-		
+
+
+
 		{
 			"path": "pages/validate/success",
 			"style": {
@@ -72,7 +72,7 @@
 			"style": {
 				"navigationBarTitleText": "我服务过的企业"
 			}
-		}, 
+		},
 		{
 			"path": "pages/reg/reg",
 			"style": {

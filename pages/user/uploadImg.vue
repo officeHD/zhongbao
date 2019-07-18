@@ -6,7 +6,8 @@
 				<view class="boxItem">
 					<view class="boxtitle">身份证正面+反面合一复印件 </view>
 					<view @click="testUp(index)">
-						<image class="boxImg" src="../../static/img/idcopy.png" mode="widthFix"></image>
+						<image v-if="idImg" class="boxImg" :src="'http://c_inventory.i2f2f.com'+idImg" mode="widthFix"></image>
+						<image v-else class="boxImg" src="../../static/img/idcopy.png" mode="widthFix"></image>
 					</view>
 				</view>
 
@@ -29,14 +30,37 @@
 
 	export default {
 		data() {
-			 
+
 			return {
+				idImg: ""
 			}
 		},
 		computed: {
 			...mapState(['token', 'forcedLogin'])
 		},
 		methods: {
+			async toRegister() {
+
+
+				var res = await this.$req.ajax({
+					path: '/wxapi/member/maker_CardCopy',
+					title: '保存中',
+					data: {
+						url: this.idImg,
+						token: this.token
+
+					}
+				});
+				if (res.data.code == 200) {
+					// console.log(res.data.data)
+					this.$api.msg("保存成功");
+					uni.navigateBack({
+
+					})
+				} else {
+					this.$api.msg(res.data.message);
+				}
+			},
 			async testUp(index) {
 				try {
 					const res = await rup.selectFiles({
@@ -47,7 +71,7 @@
 							files: ['file'],
 							title: '正在上传',
 							extra: {
-								token:this.token
+								token: this.token
 							}
 						}
 					})
@@ -56,16 +80,13 @@
 					if (res.upload && res.upload.length > 0) {
 						res.upload.forEach(item => {
 							let returnData = JSON.parse(item);
+							console.log(returnData)
 							if (returnData.code == 200) {
-								this.file.push({
-									file_url: returnData.data.file_url,
-									type: 1
-								})
+								this.idImg = returnData.data.url;
 							}
 
 						})
 					}
-					console.log(this.file)
 				} catch (e) {
 					console.log(e)
 				}

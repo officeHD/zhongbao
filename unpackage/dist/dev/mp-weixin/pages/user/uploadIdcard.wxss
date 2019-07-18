@@ -31,6 +31,7 @@
 .topgroup.data-v-019b0543 {
 	background-color: #FFFFFF;
 	padding-bottom: 20rpx;
+	margin-bottom: 20rpx;
 }
 .wrapper.data-v-019b0543 {
 	background-color: #F2F2F2;

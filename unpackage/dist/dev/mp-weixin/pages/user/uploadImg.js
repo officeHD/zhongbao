@@ -8,7 +8,8 @@
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _regenerator = _interopRequireDefault(__webpack_require__(/*! ./node_modules/@babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js"));
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _regenerator = _interopRequireDefault(__webpack_require__(/*! ./node_modules/@babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js"));
+
 
 
 
@@ -40,14 +41,37 @@ var _vuex = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.j
 {
   data: function data() {
 
-    return {};
+    return {
+      idImg: "" };
 
   },
   computed: _objectSpread({},
   (0, _vuex.mapState)(['token', 'forcedLogin'])),
 
   methods: {
-    testUp: function () {var _testUp = _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee(index) {var _this = this;var res;return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:_context.prev = 0;_context.next = 3;return (
+    toRegister: function () {var _toRegister = _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {var res;return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:_context.next = 2;return (
+
+
+                  this.$req.ajax({
+                    path: '/wxapi/member/maker_CardCopy',
+                    title: '保存中',
+                    data: {
+                      url: this.idImg,
+                      token: this.token } }));case 2:res = _context.sent;
+
+
+
+                if (res.data.code == 200) {
+                  // console.log(res.data.data)
+                  this.$api.msg("保存成功");
+                  uni.navigateBack({});
+
+
+                } else {
+                  this.$api.msg(res.data.message);
+                }case 4:case "end":return _context.stop();}}}, _callee, this);}));function toRegister() {return _toRegister.apply(this, arguments);}return toRegister;}(),
+
+    testUp: function () {var _testUp = _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee2(index) {var _this = this;var res;return _regenerator.default.wrap(function _callee2$(_context2) {while (1) {switch (_context2.prev = _context2.next) {case 0:_context2.prev = 0;_context2.next = 3;return (
 
                   _requestUpFiles.default.selectFiles({
                     type: 2,
@@ -57,7 +81,7 @@ var _vuex = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.j
                       files: ['file'],
                       title: '正在上传',
                       extra: {
-                        token: this.token } } }));case 3:res = _context.sent;
+                        token: this.token } } }));case 3:res = _context2.sent;
 
 
 
@@ -66,18 +90,16 @@ var _vuex = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.j
                 if (res.upload && res.upload.length > 0) {
                   res.upload.forEach(function (item) {
                     var returnData = JSON.parse(item);
+                    console.log(returnData);
                     if (returnData.code == 200) {
-                      _this.file.push({
-                        file_url: returnData.data.file_url,
-                        type: 1 });
-
+                      _this.idImg = returnData.data.url;
                     }
 
                   });
-                }
-                console.log(this.file);_context.next = 11;break;case 8:_context.prev = 8;_context.t0 = _context["catch"](0);
+                }_context2.next = 10;break;case 7:_context2.prev = 7;_context2.t0 = _context2["catch"](0);
 
-                console.log(_context.t0);case 11:case "end":return _context.stop();}}}, _callee, this, [[0, 8]]);}));function testUp(_x) {return _testUp.apply(this, arguments);}return testUp;}() } };exports.default = _default;
+                console.log(_context2.t0);case 10:case "end":return _context2.stop();}}}, _callee2, this, [[0, 7]]);}));function testUp(_x) {return _testUp.apply(this, arguments);}return testUp;}() } };exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ "./node_modules/@dcloudio/uni-mp-weixin/dist/index.js")["default"]))
 
 /***/ }),
 
