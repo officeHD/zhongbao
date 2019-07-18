@@ -1,18 +1,18 @@
 {
   "pages": [
+    "pages/user/uploadImg",
+    "pages/bankcard/bankcard",
+    "pages/user/changePhone",
+    "pages/user/uploadIdcard",
+    "pages/user/user",
     "pages/main/main",
     "pages/login/login",
-    "pages/user/user",
-    "pages/user/uploadIdcard",
-    "pages/user/changePhone",
-    "pages/user/uploadImg",
     "pages/validate/success",
     "pages/validate/faceVideo",
     "pages/validate/faceVaildate",
     "pages/validate/validate",
     "pages/company/detail",
     "pages/company/company",
-    "pages/bankcard/bankcard",
     "pages/reg/reg",
     "pages/pwd/pwd",
     "pages/businessPlace/businessPlace"

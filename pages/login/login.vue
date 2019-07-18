@@ -401,9 +401,7 @@
 		font-size: 30rpx;
 		color: #007AFF;
 		height: 100rpx;
-		;
 		line-height: 100rpx;
-		;
 	}
 
 	.action-row {

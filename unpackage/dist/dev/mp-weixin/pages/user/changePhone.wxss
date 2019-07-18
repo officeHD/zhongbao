@@ -1,11 +1,14 @@
 
+.wrapper {
+	width: 100%;
+}
 .logoImg {
 	width: 409rpx;
 	height: 120rpx;
 	display: block;
 	margin: 30rpx auto;
 }
-.title{
+.title {
 	color: #000000;
 	width: 180rpx;
 	text-align: left;
@@ -57,7 +60,8 @@
 	color: #fff;
 }
 .loginWm {
-	padding: 10rpx 30rpx;
+	padding: 10rpx 0;
+	width: 100%;
 }
 .inputBox {
 	background: #FFFFFF;
@@ -112,15 +116,28 @@
 }
 .cendMsm {
 	font-size: 26rpx;
+	background-color: #1666F3;
+	margin: 0 10rpx;
+	border-radius: 8rpx;
+	color: #FFFFFF;
+	padding: 15rpx 25rpx;
+}
+.defaultBtn {
+	font-size: 26rpx;
+	background-color: #666666;
+	margin: 0 10rpx;
+	border-radius: 8rpx;
+	color: #F2F2F2;
+	padding: 15rpx 25rpx;
 }
 .primaryBtn {
-	border-radius: 100rpx;
-	background-color: #FFFFFF;
+	border-radius: 8rpx;
+	background-color: #1666F3;
 	font-size: 30rpx;
-	color: #007AFF;
+	color: #FFFFFF;
 	height: 100rpx;
-	
 	line-height: 100rpx;
+	margin: 0 30rpx;
 }
 .action-row {
 	display: -webkit-box;

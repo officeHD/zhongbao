@@ -70,45 +70,31 @@ var _vuex = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.j
     var that = this;
 
   },
-  computed: (0, _vuex.mapState)(['forcedLogin']),
+  computed: (0, _vuex.mapState)(['token']),
   methods: _objectSpread({},
   (0, _vuex.mapMutations)(['login', 'setOpenId']), {
     inputChange: function inputChange(e) {
       var key = e.currentTarget.dataset.key;
       this[key] = e.detail.value;
     },
-    loginWithWe: function () {var _loginWithWe = _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee(code) {var res;return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:_context.next = 2;return (
-                  this.$req.ajax({
-                    path: '/wxapi/login/WeChat',
-                    title: '正在加载',
-                    data: {
-                      WeChatID: code,
-                      verify: "zhongbao" } }));case 2:res = _context.sent;
+
+    toRegister: function () {var _toRegister = _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {var res;return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:if (
+                /(^1[3|4|5|6|7|8|9][0-9]{9}$)/.test(this.account)) {_context.next = 3;break;}
+                this.$api.msg('请输入正确的原手机号');return _context.abrupt("return");case 3:if (
 
 
-
-                if (res.data.code == 200) {
-                  console.log(res.data.data);
-                  uni.redirectTo({
-                    url: "/pages/main/main" });
-
-                } else {
-                  this.$api.msg(res.data.message);
-                }case 4:case "end":return _context.stop();}}}, _callee, this);}));function loginWithWe(_x) {return _loginWithWe.apply(this, arguments);}return loginWithWe;}(),
-
-
-    toRegister: function () {var _toRegister = _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee2() {var res;return _regenerator.default.wrap(function _callee2$(_context2) {while (1) {switch (_context2.prev = _context2.next) {case 0:if (
-                /(^1[3|4|5|6|7|8|9][0-9]{9}$)/.test(this.mobile)) {_context2.next = 3;break;}
-                this.$api.msg('请输入正确的手机号码');return _context2.abrupt("return");case 3:_context2.next = 5;return (
+                /(^1[3|4|5|6|7|8|9][0-9]{9}$)/.test(this.mobile)) {_context.next = 6;break;}
+                this.$api.msg('请输入正确的手机号码');return _context.abrupt("return");case 6:_context.next = 8;return (
 
 
                   this.$req.ajax({
-                    path: '/wxapi/Login/registered',
+                    path: '/wxapi/member/maker_mobile',
                     title: '正在加载',
                     data: {
                       account: this.mobile,
-                      LoginPWD: this.password,
-                      code: this.vaild } }));case 5:res = _context2.sent;
+                      code: this.vaild,
+                      token: this.token } }));case 8:res = _context.sent;
+
 
 
 
@@ -120,11 +106,11 @@ var _vuex = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.j
                 } else {
                   this.$api.msg(res.data.message);
 
-                }case 7:case "end":return _context2.stop();}}}, _callee2, this);}));function toRegister() {return _toRegister.apply(this, arguments);}return toRegister;}(),
+                }case 10:case "end":return _context.stop();}}}, _callee, this);}));function toRegister() {return _toRegister.apply(this, arguments);}return toRegister;}(),
 
-    checking: function () {var _checking = _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee3() {var res;return _regenerator.default.wrap(function _callee3$(_context3) {while (1) {switch (_context3.prev = _context3.next) {case 0:if (
-                /(^1[3|4|5|6|7|8|9][0-9]{9}$)/.test(this.mobile)) {_context3.next = 3;break;}
-                this.$api.msg('请输入正确的手机号码');return _context3.abrupt("return");case 3:_context3.next = 5;return (
+    checking: function () {var _checking = _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee2() {var res;return _regenerator.default.wrap(function _callee2$(_context2) {while (1) {switch (_context2.prev = _context2.next) {case 0:if (
+                /(^1[3|4|5|6|7|8|9][0-9]{9}$)/.test(this.mobile)) {_context2.next = 3;break;}
+                this.$api.msg('请输入正确的手机号码');return _context2.abrupt("return");case 3:_context2.next = 5;return (
 
 
 
@@ -132,7 +118,7 @@ var _vuex = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.j
                     path: 'wxapi/sms/ChuanglanSmsApi',
                     title: '正在加载',
                     data: {
-                      account: this.mobile } }));case 5:res = _context3.sent;
+                      account: this.mobile } }));case 5:res = _context2.sent;
 
 
 
@@ -146,7 +132,7 @@ var _vuex = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.j
                 } else {
                   this.$api.msg(res.data.message);
 
-                }case 7:case "end":return _context3.stop();}}}, _callee3, this);}));function checking() {return _checking.apply(this, arguments);}return checking;}(),
+                }case 7:case "end":return _context2.stop();}}}, _callee2, this);}));function checking() {return _checking.apply(this, arguments);}return checking;}(),
 
 
     checkingTime: function checkingTime() {
@@ -176,57 +162,7 @@ var _vuex = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.j
         this.recordingTime = 0;
         this.currentTime = this.totalTime;
       }
-    },
-    toLoginPw: function () {var _toLoginPw = _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee4() {var res;return _regenerator.default.wrap(function _callee4$(_context4) {while (1) {switch (_context4.prev = _context4.next) {case 0:_context4.next = 2;return (
-
-                  this.$req.ajax({
-                    path: '/wxapi/login/Loginpwd',
-                    title: '正在加载',
-                    data: {
-                      account: this.account,
-                      LoginPWD: this.password } }));case 2:res = _context4.sent;
-
-
-
-                if (res.data.code == 200) {
-                  this.login(res.data.data.token);
-                  uni.redirectTo({
-                    url: "/pages/main/main" });
-
-                } else {
-                  this.$api.msg(res.data.message);
-
-                }case 4:case "end":return _context4.stop();}}}, _callee4, this);}));function toLoginPw() {return _toLoginPw.apply(this, arguments);}return toLoginPw;}(),
-
-    toLogin: function () {var _toLogin = _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee5() {var mobile, vaild, sendData, result;return _regenerator.default.wrap(function _callee5$(_context5) {while (1) {switch (_context5.prev = _context5.next) {case 0:
-                this.logining = true;
-
-                mobile =
-
-                this.mobile, vaild = this.vaild;if (
-                /(^1[3|4|5|6|7|8|9][0-9]{9}$)/.test(mobile)) {_context5.next = 5;break;}
-                this.$api.msg('请输入正确的手机号码');return _context5.abrupt("return");case 5:
-
-
-                sendData = {
-                  mobile: mobile,
-                  vaild: vaild };_context5.next = 8;return (
-
-
-                  this.$req.ajax({
-                    path: 'wxapi/login/makerLogin',
-                    title: '正在加载',
-                    data: sendData }));case 8:result = _context5.sent;
-
-                if (result.data.code === 200) {
-                  this.login(result.data.data.token);
-                  uni.navigateTo({
-                    url: "/pages/main/main" });
-
-                } else {
-                  this.$api.msg(result.data.message);
-                  this.logining = false;
-                }case 10:case "end":return _context5.stop();}}}, _callee5, this);}));function toLogin() {return _toLogin.apply(this, arguments);}return toLogin;}() }) };exports.default = _default;
+    } }) };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ "./node_modules/@dcloudio/uni-mp-weixin/dist/index.js")["default"]))
 
 /***/ }),

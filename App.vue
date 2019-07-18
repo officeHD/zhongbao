@@ -14,9 +14,9 @@
 				key: 'token',
 				success: res => {
 					this.login(res.data);
-					uni.redirectTo({
-						url: "/pages/main/main"
-					});
+					// uni.redirectTo({
+					// 	url: "/pages/main/main"
+					// });
 				},
 				fail: err => {
 					uni.navigateTo({

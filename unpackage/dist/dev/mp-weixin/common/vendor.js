@@ -541,7 +541,7 @@ function initData(vueOptions, context) {
     try {
       data = data.call(context); // 支持 Vue.prototype 上挂的数据
     } catch (e) {
-      if (Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
+      if (Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
         console.warn('根据 Vue 的 data 函数初始化小程序 data 失败，请尽量确保 data 函数中不访问 vm 对象，否则可能影响首次数据渲染速度。', data);
       }
     }
@@ -6744,7 +6744,7 @@ function type(obj) {
 
 function flushCallbacks$1(vm) {
     if (vm.__next_tick_callbacks && vm.__next_tick_callbacks.length) {
-        if (Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
+        if (Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
             var mpInstance = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + vm._uid +
                 ']:flushCallbacks[' + vm.__next_tick_callbacks.length + ']');
@@ -6765,14 +6765,14 @@ function nextTick$1(vm, cb) {
     //1.nextTick 之前 已 setData 且 setData 还未回调完成
     //2.nextTick 之前存在 render watcher
     if (!vm.__next_tick_pending && !hasRenderWatcher(vm)) {
-        if(Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG){
+        if(Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG){
             var mpInstance = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + vm._uid +
                 ']:nextVueTick');
         }
         return nextTick(cb, vm)
     }else{
-        if(Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG){
+        if(Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG){
             var mpInstance$1 = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance$1.is || mpInstance$1.route) + '][' + vm._uid +
                 ']:nextMPTick');
@@ -6848,7 +6848,7 @@ var patch = function(oldVnode, vnode) {
     });
     var diffData = diff(data, mpData);
     if (Object.keys(diffData).length) {
-      if (Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
+      if (Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
         console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + this._uid +
           ']差量更新',
           JSON.stringify(diffData));
@@ -9091,6 +9091,273 @@ try {
 
 module.exports = g;
 
+
+/***/ }),
+
+/***/ "F:\\Workspace\\jianzhi\\zhongbao\\common\\request\\request-downFiles.js":
+/*!*************************************************************************!*\
+  !*** F:/Workspace/jianzhi/zhongbao/common/request/request-downFiles.js ***!
+  \*************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.df = exports.DF = void 0;var _regenerator = _interopRequireDefault(__webpack_require__(/*! ./node_modules/@babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js"));
+
+
+var _request = __webpack_require__(/*! ./request.js */ "F:\\Workspace\\jianzhi\\zhongbao\\common\\request\\request.js");function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};var ownKeys = Object.keys(source);if (typeof Object.getOwnPropertySymbols === 'function') {ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) {return Object.getOwnPropertyDescriptor(source, sym).enumerable;}));}ownKeys.forEach(function (key) {_defineProperty(target, key, source[key]);});}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};}function _objectWithoutProperties(source, excluded) {if (source == null) return {};var target = _objectWithoutPropertiesLoose(source, excluded);var key, i;if (Object.getOwnPropertySymbols) {var sourceSymbolKeys = Object.getOwnPropertySymbols(source);for (i = 0; i < sourceSymbolKeys.length; i++) {key = sourceSymbolKeys[i];if (excluded.indexOf(key) >= 0) continue;if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue;target[key] = source[key];}}return target;}function _objectWithoutPropertiesLoose(source, excluded) {if (source == null) return {};var target = {};var sourceKeys = Object.keys(source);var key, i;for (i = 0; i < sourceKeys.length; i++) {key = sourceKeys[i];if (excluded.indexOf(key) >= 0) continue;target[key] = source[key];}return target;}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}function _defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}function _createClass(Constructor, protoProps, staticProps) {if (protoProps) _defineProperties(Constructor.prototype, protoProps);if (staticProps) _defineProperties(Constructor, staticProps);return Constructor;}function _possibleConstructorReturn(self, call) {if (call && (typeof call === "object" || typeof call === "function")) {return call;}return _assertThisInitialized(self);}function _assertThisInitialized(self) {if (self === void 0) {throw new ReferenceError("this hasn't been initialised - super() hasn't been called");}return self;}function _getPrototypeOf(o) {_getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) {return o.__proto__ || Object.getPrototypeOf(o);};return _getPrototypeOf(o);}function _inherits(subClass, superClass) {if (typeof superClass !== "function" && superClass !== null) {throw new TypeError("Super expression must either be null or a function");}subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } });if (superClass) _setPrototypeOf(subClass, superClass);}function _setPrototypeOf(o, p) {_setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) {o.__proto__ = p;return o;};return _setPrototypeOf(o, p);}var
+
+
+DonwFiles = /*#__PURE__*/function (_RQ) {_inherits(DonwFiles, _RQ);
+  function DonwFiles() {_classCallCheck(this, DonwFiles);for (var _len = arguments.length, arg = new Array(_len), _key = 0; _key < _len; _key++) {arg[_key] = arguments[_key];}return _possibleConstructorReturn(this, _getPrototypeOf(DonwFiles).call(this,
+    arg));
+  }
+  /**
+     * 下载文件
+     */_createClass(DonwFiles, [{ key: "startDownFiles", value: function startDownFiles()
+
+
+
+
+
+    {var _this = this;var _ref = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},_ref$path = _ref.path,path = _ref$path === void 0 ? '' : _ref$path,_ref$title = _ref.title,title = _ref$title === void 0 ? false : _ref$title,_ref$abort = _ref.abort,abort = _ref$abort === void 0 ? function (bt, finsh) {} : _ref$abort,extra = _objectWithoutProperties(_ref, ["path", "title", "abort"]);
+      return new Promise( /*#__PURE__*/function () {var _ref2 = _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee(resolve, reject) {var obj, i, url, res;return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:
+                  obj = {
+                    tempFileInfo: [],
+                    FilePath: [] };
+
+                  if (title) {
+                    uni.showLoading({
+                      title: title,
+                      mask: true });
+
+                  }
+                  path = path.toString().split(',');
+                  i = 0;case 4:if (!(i < path.length)) {_context.next = 19;break;}
+                  url = path[i];_context.prev = 6;_context.next = 9;return (
+
+                    _this.downFiles(_objectSpread({
+                      path: url,
+                      index: i,
+                      abort: abort },
+                    extra)));case 9:res = _context.sent;
+
+                  obj.FilePath.push(res.tempFilePath);
+                  obj.tempFileInfo.push({
+                    url: url,
+                    filePath: res.tempFilePath });_context.next = 16;break;case 14:_context.prev = 14;_context.t0 = _context["catch"](6);case 16:i++;_context.next = 4;break;case 19:
+
+
+
+
+
+                  resolve(obj);
+                  if (title) {
+                    uni.hideLoading();
+                  }case 21:case "end":return _context.stop();}}}, _callee, this, [[6, 14]]);}));return function (_x, _x2) {return _ref2.apply(this, arguments);};}());
+
+
+    } }]);return DonwFiles;}(_request.RQ);
+
+var DF = DonwFiles;exports.DF = DF;
+var df = new DonwFiles();exports.df = df;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ "./node_modules/@dcloudio/uni-mp-weixin/dist/index.js")["default"]))
+
+/***/ }),
+
+/***/ "F:\\Workspace\\jianzhi\\zhongbao\\common\\request\\request-upFiles.js":
+/*!***********************************************************************!*\
+  !*** F:/Workspace/jianzhi/zhongbao/common/request/request-upFiles.js ***!
+  \***********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _regenerator = _interopRequireDefault(__webpack_require__(/*! ./node_modules/@babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js"));
+
+
+
+
+
+
+
+
+
+
+
+
+var _request = __webpack_require__(/*! ./request.js */ "F:\\Workspace\\jianzhi\\zhongbao\\common\\request\\request.js");function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};var ownKeys = Object.keys(source);if (typeof Object.getOwnPropertySymbols === 'function') {ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) {return Object.getOwnPropertyDescriptor(source, sym).enumerable;}));}ownKeys.forEach(function (key) {_defineProperty(target, key, source[key]);});}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}function _objectWithoutProperties(source, excluded) {if (source == null) return {};var target = _objectWithoutPropertiesLoose(source, excluded);var key, i;if (Object.getOwnPropertySymbols) {var sourceSymbolKeys = Object.getOwnPropertySymbols(source);for (i = 0; i < sourceSymbolKeys.length; i++) {key = sourceSymbolKeys[i];if (excluded.indexOf(key) >= 0) continue;if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue;target[key] = source[key];}}return target;}function _objectWithoutPropertiesLoose(source, excluded) {if (source == null) return {};var target = {};var sourceKeys = Object.keys(source);var key, i;for (i = 0; i < sourceKeys.length; i++) {key = sourceKeys[i];if (excluded.indexOf(key) >= 0) continue;target[key] = source[key];}return target;}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}function _defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}function _createClass(Constructor, protoProps, staticProps) {if (protoProps) _defineProperties(Constructor.prototype, protoProps);if (staticProps) _defineProperties(Constructor, staticProps);return Constructor;}function _possibleConstructorReturn(self, call) {if (call && (typeof call === "object" || typeof call === "function")) {return call;}return _assertThisInitialized(self);}function _assertThisInitialized(self) {if (self === void 0) {throw new ReferenceError("this hasn't been initialised - super() hasn't been called");}return self;}function _getPrototypeOf(o) {_getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) {return o.__proto__ || Object.getPrototypeOf(o);};return _getPrototypeOf(o);}function _inherits(subClass, superClass) {if (typeof superClass !== "function" && superClass !== null) {throw new TypeError("Super expression must either be null or a function");}subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } });if (superClass) _setPrototypeOf(subClass, superClass);}function _setPrototypeOf(o, p) {_setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) {o.__proto__ = p;return o;};return _setPrototypeOf(o, p);} /**
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          * 2019年4月7日14:17:12
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          */var _defaultFile = { filesFilter: { 0: 'image', 1: 'video', 2: 'none' }, upOpenDown: false };var _down = null; //下载文件对象
+var UpFiles = /*#__PURE__*/function (_RQ) {_inherits(UpFiles, _RQ);
+  function UpFiles() {var _this;_classCallCheck(this, UpFiles);for (var _len = arguments.length, arg = new Array(_len), _key = 0; _key < _len; _key++) {arg[_key] = arguments[_key];}
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(UpFiles).call(this, arg));
+    _this.defaultFile = _defaultFile;
+    _this.FunChunk = {
+      0: _this.AppSelectFiles,
+      1: _this.otherSelectFiles };
+
+    _this.proxy(_this.defaultFile, function (key, value) {
+      if (key === 'upOpenDown' && value === true) {
+        _down = __webpack_require__(/*! ./request-downFiles.js */ "F:\\Workspace\\jianzhi\\zhongbao\\common\\request\\request-downFiles.js").df;
+      }
+    });return _this;
+  }
+  /**
+     * 开始上传文件
+     * 2019年4月7日14:55:15
+     */_createClass(UpFiles, [{ key: "startUpFiles", value: function startUpFiles()
+
+
+
+
+
+
+
+    {var _this2 = this;var _ref = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},_ref$path = _ref.path,path = _ref$path === void 0 ? '' : _ref$path,_ref$files = _ref.files,files = _ref$files === void 0 ? [] : _ref$files,_ref$isUp = _ref.isUp,isUp = _ref$isUp === void 0 ? true : _ref$isUp,_ref$title = _ref.title,title = _ref$title === void 0 ? false : _ref$title,_ref$showProgress = _ref.showProgress,showProgress = _ref$showProgress === void 0 ? false : _ref$showProgress,_ref$extra = _ref.extra,extra = _ref$extra === void 0 ? {} : _ref$extra;var res = arguments.length > 1 ? arguments[1] : undefined;
+      return new Promise( /*#__PURE__*/function () {var _ref2 = _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee(resolve, reject) {var upresAr, i, fileName, upres;return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:_context.prev = 0;if (!
+
+                  isUp) {_context.next = 17;break;} //需要上传到服务器，然后再返回
+                  if (title) {
+                    uni.showLoading({
+                      title: title,
+                      mask: true });
+
+                  }
+                  upresAr = [];
+                  i = 0;case 5:if (!(i < res.length)) {_context.next = 15;break;}
+                  if (showProgress) {
+                    title = "".concat(i + 1, "/").concat(res.length);
+                  }
+                  fileName = files[i] != undefined ? files[i] : files[files.length - 1];_context.next = 10;return (
+                    _this2.ajaxFile({
+                      path: path,
+                      title: false,
+                      filePath: res[i],
+                      fileName: fileName,
+                      extra: extra }));case 10:upres = _context.sent;
+
+                  upresAr[upresAr.length] = upres.data;case 12:i++;_context.next = 5;break;case 15:
+
+                  if (title) {
+                    uni.hideLoading();
+                  }
+                  resolve({
+                    upload: upresAr });case 17:return _context.abrupt("return",
+
+
+                  resolve(res));case 20:_context.prev = 20;_context.t0 = _context["catch"](0);
+
+                  uni.hideLoading();
+                  reject(_context.t0);case 24:case "end":return _context.stop();}}}, _callee, this, [[0, 20]]);}));return function (_x, _x2) {return _ref2.apply(this, arguments);};}());
+
+
+    }
+    /**
+       * 2019年4月7日15:07:54 
+       * 上传网络资源
+       */ }, { key: "upnNetRes", value: function upnNetRes()
+
+
+
+
+
+
+
+    {var _this3 = this;var _ref3 = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},_ref3$netPath = _ref3.netPath,netPath = _ref3$netPath === void 0 ? '' : _ref3$netPath,_ref3$upPath = _ref3.upPath,upPath = _ref3$upPath === void 0 ? '' : _ref3$upPath,_ref3$files = _ref3.files,files = _ref3$files === void 0 ? [] : _ref3$files,_ref3$abort = _ref3.abort,abort = _ref3$abort === void 0 ? function (bt, finsh) {} : _ref3$abort,_ref3$title = _ref3.title,title = _ref3$title === void 0 ? false : _ref3$title,extra = _objectWithoutProperties(_ref3, ["netPath", "upPath", "files", "abort", "title"]);
+      return new Promise( /*#__PURE__*/function () {var _ref4 = _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee2(resolve, reject) {var res, uploadRes;return _regenerator.default.wrap(function _callee2$(_context2) {while (1) {switch (_context2.prev = _context2.next) {case 0:_context2.next = 2;return (
+                    _down.startDownFiles(_objectSpread({
+                      path: netPath,
+                      abort: abort },
+                    extra)));case 2:res = _context2.sent;_context2.prev = 3;_context2.next = 6;return (
+
+
+                    _this3.startUpFiles({
+                      path: upPath,
+                      files: files,
+                      isUp: true,
+                      title: title,
+                      extra: extra },
+                    res.FilePath));case 6:uploadRes = _context2.sent;
+                  resolve(uploadRes);_context2.next = 13;break;case 10:_context2.prev = 10;_context2.t0 = _context2["catch"](3);
+
+                  reject(_context2.t0);case 13:case "end":return _context2.stop();}}}, _callee2, this, [[3, 10]]);}));return function (_x3, _x4) {return _ref4.apply(this, arguments);};}());
+
+
+    }
+    /**
+       * 2019年4月6日16:19:20
+       * 选择文件
+       */ }, { key: "selectFiles", value: function selectFiles()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    {var _this4 = this;var _ref5 = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},_ref5$type = _ref5.type,type = _ref5$type === void 0 ? 2 : _ref5$type,_ref5$maximum = _ref5.maximum,maximum = _ref5$maximum === void 0 ? 1 : _ref5$maximum,_ref5$multiple = _ref5.multiple,multiple = _ref5$multiple === void 0 ? true : _ref5$multiple,_ref5$sizeType = _ref5.sizeType,sizeType = _ref5$sizeType === void 0 ? ['original', 'compressed'] : _ref5$sizeType,_ref5$sourceType = _ref5.sourceType,sourceType = _ref5$sourceType === void 0 ? ['album'] : _ref5$sourceType,_ref5$upload = _ref5.upload,upload = _ref5$upload === void 0 ? { path: '', files: [], isUp: false, title: false, extra: {} } : _ref5$upload,extra = _objectWithoutProperties(_ref5, ["type", "maximum", "multiple", "sizeType", "sourceType", "upload"]);
+      return new Promise( /*#__PURE__*/function () {var _ref6 = _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee3(resolve, reject) {var merge, res, uploadRes;return _regenerator.default.wrap(function _callee3$(_context3) {while (1) {switch (_context3.prev = _context3.next) {case 0:
+                  merge = _objectSpread({
+                    type: type,
+                    maximum: maximum,
+                    sizeType: sizeType,
+                    sourceType: sourceType,
+                    multiple: multiple },
+                  extra);_context3.next = 3;return (
+
+                    _this4.FunChunk[_this4.platform](merge));case 3:res = _context3.sent;_context3.prev = 4;_context3.next = 7;return (
+
+                    _this4.startUpFiles(upload, res));case 7:uploadRes = _context3.sent;
+                  resolve(uploadRes);_context3.next = 14;break;case 11:_context3.prev = 11;_context3.t0 = _context3["catch"](4);
+
+                  reject(_context3.t0);case 14:case "end":return _context3.stop();}}}, _callee3, this, [[4, 11]]);}));return function (_x5, _x6) {return _ref6.apply(this, arguments);};}());
+
+
+    }
+    /**
+       * App选择文件
+       */ }, { key: "AppSelectFiles", value: function AppSelectFiles(
+    queryInfo) {
+      return new Promise( /*#__PURE__*/function () {var _ref7 = _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee4(resolve, reject) {return _regenerator.default.wrap(function _callee4$(_context4) {while (1) {switch (_context4.prev = _context4.next) {case 0:
+                  plus.gallery.pick(function (path) {
+                    resolve(path.files);
+                  }, function (err) {
+                    reject(err);
+                  }, _objectSpread({
+                    filter: _defaultFile.filesFilter[queryInfo.type],
+                    system: false },
+                  queryInfo));case 1:case "end":return _context4.stop();}}}, _callee4, this);}));return function (_x7, _x8) {return _ref7.apply(this, arguments);};}());
+
+
+    }
+    /**
+       * 其他小程序，h5
+       */ }, { key: "otherSelectFiles", value: function otherSelectFiles(
+    queryInfo) {
+      return new Promise( /*#__PURE__*/function () {var _ref8 = _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee5(resolve, reject) {return _regenerator.default.wrap(function _callee5$(_context5) {while (1) {switch (_context5.prev = _context5.next) {case 0:
+                  uni.chooseImage(_objectSpread({
+                    count: queryInfo.maximum,
+                    success: function success(res) {
+                      resolve(res.tempFilePaths);
+                    },
+                    fail: function fail(err) {
+                      reject(err);
+                    } },
+                  queryInfo));case 1:case "end":return _context5.stop();}}}, _callee5, this);}));return function (_x9, _x10) {return _ref8.apply(this, arguments);};}());
+
+
+    } }]);return UpFiles;}(_request.RQ);var _default =
+
+new UpFiles();exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ "./node_modules/@dcloudio/uni-mp-weixin/dist/index.js")["default"]))
 
 /***/ }),
 

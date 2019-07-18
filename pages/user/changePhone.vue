@@ -1,24 +1,24 @@
 <template>
-	<view class="content">
+	<view class="wrapper">
 
 
 		<view class="loginWm">
 			<view class="inputBox">
 				<view class="title">原手机号码</view>
-				<input class="inputItem" type="text" maxlength="11" :value="mobile" data-key="mobile" @input="inputChange"
-				 placeholder="请输入手机号" placeholder-style="color:#D6D6FF" />
+				<input class="inputItem" type="text" maxlength="11" :value="account" data-key="account" @input="inputChange"
+				 placeholder="请输入手机号" placeholder-style="color:#999" />
 			</view>
 			<view class="inputBox">
 				<view class="title">新手机号码</view>
-				<input class="inputItem" type="text" maxlength="6" :value="account" data-key="account" @input="inputChange"
-				 placeholder="请输入验证码" placeholder-style="color:#D6D6FF" />
+				<input class="inputItem" type="text" maxlength="6" :value="mobile" data-key="mobile" @input="inputChange"
+				 placeholder="请输入新手机号" placeholder-style="color:#999" />
 				<text class="cendMsm" @click="checking" v-if="state===false">发送验证码</text>
-				<text class="cendMsm zai-time" v-if="state===true">倒计时{{ currentTime }}s</text>
+				<text class="defaultBtn" v-if="state===true">倒计时{{ currentTime }}s</text>
 			</view>
 			<view class="inputBox">
 				<view class="title">验证码</view>
 				<input class="inputItem" type="text" :value="vaild" data-key="vaild" @input="inputChange" placeholder="请输入验证码"
-				 placeholder-style="color:#D6D6FF" />
+				 placeholder-style="color:#999" />
 			</view>
 		</view>
 
@@ -60,45 +60,31 @@
 			let that = this;
 
 		},
-		computed: mapState(['forcedLogin']),
+		computed: mapState(['token']),
 		methods: {
 			...mapMutations(['login', 'setOpenId']),
 			inputChange(e) {
 				const key = e.currentTarget.dataset.key;
 				this[key] = e.detail.value;
 			},
-			async loginWithWe(code) {
-				var res = await this.$req.ajax({
-					path: '/wxapi/login/WeChat',
-					title: '正在加载',
-					data: {
-						WeChatID: code,
-						verify: "zhongbao"
-
-					}
-				});
-				if (res.data.code == 200) {
-					console.log(res.data.data)
-					uni.redirectTo({
-						url: "/pages/main/main"
-					})
-				} else {
-					this.$api.msg(res.data.message);
-				}
-			},
 
 			async toRegister() {
+				if (!/(^1[3|4|5|6|7|8|9][0-9]{9}$)/.test(this.account)) {
+					this.$api.msg('请输入正确的原手机号');
+					return;
+				}
 				if (!/(^1[3|4|5|6|7|8|9][0-9]{9}$)/.test(this.mobile)) {
 					this.$api.msg('请输入正确的手机号码');
 					return;
 				}
 				let res = await this.$req.ajax({
-					path: '/wxapi/Login/registered',
+					path: '/wxapi/member/maker_mobile',
 					title: '正在加载',
 					data: {
 						account: this.mobile,
-						LoginPWD: this.password,
 						code: this.vaild,
+						token: this.token,
+
 
 					}
 				});
@@ -166,63 +152,18 @@
 					this.recordingTime = 0;
 					this.currentTime = this.totalTime;
 				}
-			},
-			async toLoginPw() {
-
-				let res = await this.$req.ajax({
-					path: '/wxapi/login/Loginpwd',
-					title: '正在加载',
-					data: {
-						account: this.account,
-						LoginPWD: this.password,
-
-					}
-				});
-				if (res.data.code == 200) {
-					this.login(res.data.data.token);
-					uni.redirectTo({
-						url: "/pages/main/main"
-					})
-				} else {
-					this.$api.msg(res.data.message)
-
-				}
-			},
-			async toLogin() {
-				this.logining = true;
-				const {
-					mobile,
-					vaild
-				} = this;
-				if (!/(^1[3|4|5|6|7|8|9][0-9]{9}$)/.test(mobile)) {
-					this.$api.msg('请输入正确的手机号码');
-					return;
-				}
-				const sendData = {
-					mobile,
-					vaild
-				};
-
-				const result = await this.$req.ajax({
-					path: 'wxapi/login/makerLogin',
-					title: '正在加载',
-					data: sendData
-				});
-				if (result.data.code === 200) {
-					this.login(result.data.data.token);
-					uni.navigateTo({
-						url: "/pages/main/main"
-					});
-				} else {
-					this.$api.msg(result.data.message);
-					this.logining = false;
-				}
 			}
+
+
 		}
 	}
 </script>
 
 <style>
+	.wrapper {
+		width: 100%;
+	}
+
 	.logoImg {
 		width: 409upx;
 		height: 120upx;
@@ -230,14 +171,15 @@
 		margin: 30upx auto;
 	}
 
-	 
-	.title{
+
+	.title {
 		color: #000000;
 		width: 180rpx;
 		text-align: left;
 		padding-left: 20rpx;
-		
+
 	}
+
 	.leftLine {
 		display: block;
 		width: 80rpx;
@@ -267,7 +209,6 @@
 		padding: 15rpx;
 		color: #CED8FE;
 		font-size: 26rpx;
-		;
 
 	}
 
@@ -279,7 +220,8 @@
 	}
 
 	.loginWm {
-		padding: 10rpx 30rpx;
+		padding: 10rpx 0;
+		width: 100%;
 	}
 
 	.inputBox {
@@ -332,17 +274,30 @@
 
 	.cendMsm {
 		font-size: 26rpx;
+		background-color: #1666F3;
+		margin: 0 10rpx;
+		border-radius: 8rpx;
+		color: #FFFFFF;
+		padding: 15rpx 25rpx;
+	}
+
+	.defaultBtn {
+		font-size: 26rpx;
+		background-color: #666666;
+		margin: 0 10rpx;
+		border-radius: 8rpx;
+		color: #F2F2F2;
+		padding: 15rpx 25rpx;
 	}
 
 	.primaryBtn {
-		border-radius: 100rpx;
-		background-color: #FFFFFF;
+		border-radius: 8rpx;
+		background-color: #1666F3;
 		font-size: 30rpx;
-		color: #007AFF;
+		color: #FFFFFF;
 		height: 100rpx;
-		;
 		line-height: 100rpx;
-		;
+		margin: 0 30rpx;
 	}
 
 	.action-row {

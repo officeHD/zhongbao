@@ -20,25 +20,27 @@
 	padding: 20rpx 30rpx;
 	color: #1E1E1E;
 }
+.leftcell.data-v-108294a2 {
+	width: 180rpx;
+}
 .bb.data-v-108294a2 {
 	border-bottom: 1px solid #E4E4E4;
 }
 .mt20.data-v-108294a2 {
 	margin-top: 20rpx;
 }
-.primaryBtn.data-v-108294a2{
-	 background-color: #007AFF;
-	 color: #FFFFFF;
-	 height: 100rpx;
-	 line-height: 100rpx;
-	 margin-left: 10rpx;
-	 margin-right: 10rpx;
+.primaryBtn.data-v-108294a2 {
+	background-color: #007AFF;
+	color: #FFFFFF;
+	height: 100rpx;
+	line-height: 100rpx;
+	margin-left: 10rpx;
+	margin-right: 10rpx;
 }
 .c666.data-v-108294a2 {
 	color: #666;
-	width: 180rpx;
 }
-.tips.data-v-108294a2{
+.tips.data-v-108294a2 {
 	display: block;
 	padding: 30rpx;
 	color: #666;
