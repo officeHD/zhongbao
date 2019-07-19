@@ -29,6 +29,10 @@ const store = new Vuex.Store({
 		},
 		setOpenId(state, id) {
 			state.openId = id;
+			uni.setStorage({ //缓存用户登陆状态
+				key: 'openId',
+				data: openId
+			})
 		}
 	}
 })

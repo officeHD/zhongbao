@@ -118,7 +118,7 @@
 			async getOpenId(code) {
 				var res = await this.$req.ajax({
 					path: '/wxapi/login/getOpenid',
-					title: '正在加载',
+					title: '',
 					data: {
 						code: code,
 						appid: "wx7aa0d26e5ca6597c",
