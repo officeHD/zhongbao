@@ -15,7 +15,6 @@
 					<view @click="testUp('frontUrl')">
 						<image v-if="frontUrl" :src="'http://c_inventory.i2f2f.com'+frontUrl" class="boxImg" mode="widthFix"></image>
 						<image v-else="" class="boxImg" src="../../static/img/idFront.png" mode="widthFix"></image>
-
 					</view>
 				</view>
 			</view>
