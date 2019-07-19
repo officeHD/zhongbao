@@ -1,8 +1,8 @@
 {
   "pages": [
+    "pages/login/login",
     "pages/user/uploadIdcard",
     "pages/user/uploadImg",
-    "pages/login/login",
     "pages/bankcard/bankcard",
     "pages/user/changePhone",
     "pages/user/user",

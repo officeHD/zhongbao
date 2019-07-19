@@ -145,8 +145,7 @@ import {
 		background-color: #FFFFFF;
 		min-height: 100rpx;
 		padding: 20rpx 30rpx;
-		color: #1E1E1E;
-
+		color: #1E1E1E; 
 	}
 
 	.primaryBtn {

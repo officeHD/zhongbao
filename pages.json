@@ -1,6 +1,12 @@
 {
 	"pages": [ //pages数组中第一项表示应用启动页,
 		  {
+		  	"path": "pages/login/login",
+		  	"style": {
+		  		"navigationBarTitleText": "登录",
+		  		"navigationStyle": "custom"
+		  	}
+		  },{
 		 	"path": "pages/user/uploadIdcard",
 		 	"style": {
 		 		"navigationBarTitleText": "个人身份信息"
@@ -11,12 +17,6 @@
 		 		"navigationBarTitleText": "上传"
 		 	}
 		 }, {
-			"path": "pages/login/login",
-			"style": {
-				"navigationBarTitleText": "登录",
-				"navigationStyle": "custom"
-			}
-		},{
 			"path": "pages/bankcard/bankcard",
 			"style": {
 				"navigationBarTitleText": "银行卡信息"
