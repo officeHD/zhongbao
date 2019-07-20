@@ -276,7 +276,7 @@
 				});
 				if (result.data.code === 200) {
 					this.login(result.data.data.token);
-					this.bondWechat()
+					this.bondWechat() 
 					// uni.navigateTo({
 					// 	url: "/pages/main/main"
 					// });
