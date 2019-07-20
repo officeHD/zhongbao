@@ -47,11 +47,12 @@
 		</view>
 		<view class="celBox mt20 bb">
 			<text>银行卡号</text>
-			<view class="rightRow">
+			<navigator class="rightRow" url="/pages/bankcard/bankcard">
+
 				<text class="c666">{{userData.BankCardNo||'无'}}</text>
 				<image class="arrowImg" src="../../static/img/arrow.png" mode="widthFix"></image>
 
-			</view>
+			</navigator>
 		</view>
 		<view class="celBox bb">
 			<text>开户银行</text>
@@ -73,10 +74,10 @@
 				</view>
 			</view>
 
-			<view class="rightRow">
-				<text class="c666">{{userData.Name}}</text>
+			<navigator class="rightRow" url="/pages/user/uploadImg">
+				<text class="c666">{{userData.Name||"暂无"}}</text>
 				<image class="arrowImg" src="../../static/img/arrow.png" mode="widthFix"></image>
-			</view>
+			</navigator>
 		</view>
 
 	</view>
