@@ -5,15 +5,15 @@
 			<view class="imgBox">
 				<view class="boxItem">
 					<view class="boxtitle">身份证或会面扫描 <text class="redt">(必填)</text></view>
-					<view @click="testUp('backUrl')">
-						<image v-if="backUrl" :src="'http://c_inventory.i2f2f.com'+backUrl" class="boxImg" mode="widthFix"></image>
+					<view @click="testUp('back')">
+						<image v-if="back" :src="'http://c_inventory.i2f2f.com'+back" class="boxImg" mode="widthFix"></image>
 						<image v-else="" class="boxImg" src="../../static/img/idBack.png" mode="widthFix"></image>
 					</view>
 				</view>
 				<view class="boxItem">
 					<view class="boxtitle">身份证或会面扫描<text class="redt">(必填)</text></view>
-					<view @click="testUp('frontUrl')">
-						<image v-if="frontUrl" :src="'http://c_inventory.i2f2f.com'+frontUrl" class="boxImg" mode="widthFix"></image>
+					<view @click="testUp('front')">
+						<image v-if="front" :src="'http://c_inventory.i2f2f.com'+front" class="boxImg" mode="widthFix"></image>
 						<image v-else="" class="boxImg" src="../../static/img/idFront.png" mode="widthFix"></image>
 					</view>
 				</view>
@@ -22,13 +22,13 @@
 		<view class="celBox bb">
 			<text class="leftcell"> 姓名</text>
 			<view class="rightRow">
-				<input placeholder="请输入" />
+				<input placeholder="请输入" :value="name" data-key="name" @input="inputChange" />
 			</view>
 		</view>
 		<view class="celBox bb">
 			<text class="leftcell"> 身份证号</text>
 			<view class="rightRow">
-				<input placeholder="请输入" />
+				<input placeholder="请输入" :value="idcard" data-key="idcard" @input="inputChange" />
 			</view>
 		</view>
 		<view class="celBox bb">
@@ -47,7 +47,7 @@
 
 <script>
 	import rup from '@/common/request/request-upFiles.js';
-import {
+	import {
 		mapState,
 		mapMutations
 	} from 'vuex'
@@ -63,8 +63,10 @@ import {
 				index: 0,
 				date: currentDate,
 				time: '12:01',
-				frontUrl: "",
-				backUrl: ""
+				front: "",
+				back: "",
+				idcard: "",
+				name: "",
 			}
 		},
 		computed: {
@@ -77,7 +79,47 @@ import {
 			}
 		},
 		methods: {
+			inputChange(e) {
+				const key = e.currentTarget.dataset.key;
+				this[key] = e.detail.value;
+			},
+			// 编辑创客姓名身份证
+			async toRegister() {
+				var res = await this.$req.ajax({
+					path: '/wxapi/member/edit_idcard',
+					title: '正在加载',
+					data: {
+						name: this.name,
+						idcard: this.idcard,
+						token: this.token,
+					}
+				});
+				if (res.data.code == 200) {
+					uni.navigateBack({})
+				} else {
+					this.$api.msg(res.data.message);
+				}
+			},
+			// 上传身份证
+			
+			
+			async maker_idcard(surl,side){
+				var res = await this.$req.ajax({
+					path: '/wxapi/member/maker_idcard',
+					title: '正在加载',
+					data: {
+						surl:surl,
+						side: side,
+						token: this.token,
+					}
+				});
+				if (res.data.code == 200) {
+				} else {
+					this.$api.msg(res.data.message);
+				}
+			},
 			async testUp(imgtype) {
+				let that=this;
 				try {
 					const res = await rup.selectFiles({
 						type: 2,
@@ -99,6 +141,7 @@ import {
 							console.log(returnData)
 							if (returnData.code == 200) {
 								this[imgtype] = returnData.data.url;
+								
 							}
 
 						})
@@ -144,7 +187,7 @@ import {
 		background-color: #FFFFFF;
 		min-height: 100rpx;
 		padding: 20rpx 30rpx;
-		color: #1E1E1E; 
+		color: #1E1E1E;
 	}
 
 	.primaryBtn {

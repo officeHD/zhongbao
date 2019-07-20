@@ -89,13 +89,16 @@
 				}
 			});
 		},
+
 		computed: mapState(['openId','token']),
+
 		methods: {
 			...mapMutations(['login', 'setOpenId']),
 			inputChange(e) {
 				const key = e.currentTarget.dataset.key;
 				this[key] = e.detail.value;
 			},
+			//绑定微信
 			async bondWechat(){
 				var res = await this.$req.ajax({
 					path: '/wxapi/member/maker_wechat',
@@ -115,6 +118,7 @@
 					this.$api.msg(res.data.message);
 				}
 			},
+			//微信openId登录
 			async loginWithWe(code) {
 				var res = await this.$req.ajax({
 					path: '/wxapi/login/WeChat',
@@ -126,7 +130,7 @@
 					}
 				});
 				if (res.data.code == 200) {
-					console.log(res.data.data)
+					this.login(res.data.data.token);
 					uni.redirectTo({
 						url: "/pages/main/main"
 					})
@@ -168,10 +172,12 @@
 				});
 				if (res.data.code == 200) {
 					this.login(res.data.data.token);
+
 					this.bondWechat()
 					// uni.redirectTo({
 					// 	url: "/pages/main/main"
 					// })
+
 				} else {
 					this.$api.msg(res.data.message)
 
@@ -245,10 +251,12 @@
 				});
 				if (res.data.code == 200) {
 					this.login(res.data.data.token);
+
 					this.bondWechat()
 					// uni.redirectTo({
 					// 	url: "/pages/main/main"
 					// })
+
 				} else {
 					this.$api.msg(res.data.message)
 				
@@ -276,10 +284,12 @@
 				});
 				if (result.data.code === 200) {
 					this.login(result.data.data.token);
+
 					this.bondWechat() 
 					// uni.navigateTo({
 					// 	url: "/pages/main/main"
 					// });
+
 				} else {
 					this.$api.msg(result.data.message);
 					this.logining = false;
