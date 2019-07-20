@@ -140,8 +140,7 @@
 							let returnData = JSON.parse(item);
 							console.log(returnData)
 							if (returnData.code == 200) {
-								this[imgtype] = returnData.data.url;
-								
+								this[imgtype] = returnData.data.url; 
 							}
 
 						})
