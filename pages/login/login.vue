@@ -89,12 +89,31 @@
 				}
 			});
 		},
-		computed: mapState(['forcedLogin']),
+		computed: mapState(['openId','token']),
 		methods: {
 			...mapMutations(['login', 'setOpenId']),
 			inputChange(e) {
 				const key = e.currentTarget.dataset.key;
 				this[key] = e.detail.value;
+			},
+			async bondWechat(){
+				var res = await this.$req.ajax({
+					path: '/wxapi/member/maker_wechat',
+					title: '正在加载',
+					data: {
+						WeChatID: this.openId,
+						WeChatNickname: "",
+						token:this.token
+				
+					}
+				});
+				if (res.data.code == 200) {
+					uni.redirectTo({
+						url: "/pages/main/main"
+					})
+				} else {
+					this.$api.msg(res.data.message);
+				}
 			},
 			async loginWithWe(code) {
 				var res = await this.$req.ajax({
@@ -149,9 +168,10 @@
 				});
 				if (res.data.code == 200) {
 					this.login(res.data.data.token);
-					uni.redirectTo({
-						url: "/pages/main/main"
-					})
+					this.bondWechat()
+					// uni.redirectTo({
+					// 	url: "/pages/main/main"
+					// })
 				} else {
 					this.$api.msg(res.data.message)
 
@@ -225,9 +245,10 @@
 				});
 				if (res.data.code == 200) {
 					this.login(res.data.data.token);
-					uni.redirectTo({
-						url: "/pages/main/main"
-					})
+					this.bondWechat()
+					// uni.redirectTo({
+					// 	url: "/pages/main/main"
+					// })
 				} else {
 					this.$api.msg(res.data.message)
 				
@@ -255,9 +276,10 @@
 				});
 				if (result.data.code === 200) {
 					this.login(result.data.data.token);
-					uni.navigateTo({
-						url: "/pages/main/main"
-					});
+					this.bondWechat()
+					// uni.navigateTo({
+					// 	url: "/pages/main/main"
+					// });
 				} else {
 					this.$api.msg(result.data.message);
 					this.logining = false;
