@@ -2,15 +2,20 @@
 	<view class="wrapper"> 
 		<view class="celBox bb">
 			<text class="c666">我的线下经营场所</text>
-			<text>张三</text>
+			<input class="inputBox" placeholder="请输入" />
+
 		</view>
 		<view class="celBox bb">
 			<text class="c666">我的线上经营场所</text>
-			<text>张三</text>
+			 <input  class="inputBox" placeholder="请输入" />
 		</view>
 		<view class="celBox bb">
 			<text>自我介绍（采用企业介绍的方式撰写自我介绍），不少于150字哦：</text> 
-		</view>  
+		</view> 
+		<textarea class="textarea" placeholder="请输入"></textarea>
+		 <view class="btn-row">
+		 	<button class="primaryBtn" @tap="bindLogin">保存</button>
+		 </view>
 	</view>
 </template>
 
@@ -39,7 +44,25 @@
 		padding-bottom: 20px;
 		;
 	}
-
+	.textarea{
+		background-color: #FFFFFF;
+		width: 100%;
+		height: 300rpx;
+		padding: 20rpx;
+		font-size: 28rpx;
+		box-sizing: border-box;
+	}
+.primaryBtn {
+		background-color: #007AFF;
+		color: #FFFFFF;
+		height: 100rpx;
+		line-height: 100rpx;
+		margin-left: 10rpx;
+		margin-right: 10rpx;
+	}
+.inputBox{
+	flex: 1;
+}
 	.celBox {
 		display: flex;
 		align-items: center;
@@ -60,7 +83,7 @@
 	}
  
 	.c666 {
-		color: #666;
+		color: #000;
 		width: 260rpx;
 	}
 

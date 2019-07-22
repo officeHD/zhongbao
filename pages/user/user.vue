@@ -64,7 +64,13 @@
 		</view>
 		<view class="celBox mt20 bb">
 			<text>本人身份证正反面</text>
-			<text class="c666">{{userData.Name||'无'}}</text>
+			<navigator class="rightRow" url="/pages/user/uploadIdcard">
+				<image v-if=" userData.IDCardPic||userData.IDCardPicBack" class="demoImg" src="../../static/img/frontDemo.png"
+				 mode="widthFix"></image>
+				<image v-if=" userData.IDCardPic ||userData.IDCardPicBack" class="demoImg" src="../../static/img/backDemo.png"
+				 mode="widthFix"></image>
+				<text v-if="!userData.IDCardPic&&!userData.IDCardPicBack" class="c666">暂无</text>
+			</navigator>
 		</view>
 		<view class="celBox mb20 bb">
 			<view class="">
@@ -75,7 +81,8 @@
 			</view>
 
 			<navigator class="rightRow" url="/pages/user/uploadImg">
-				<text class="c666">{{userData.Name||"暂无"}}</text>
+				<text class="c666" v-if="!userData.IDCardCopy">暂无</text>
+				<image class="demoImg" v-if="userData.IDCardCopy" src="../../static/img/copyde.png" mode="widthFix"></image>
 				<image class="arrowImg" src="../../static/img/arrow.png" mode="widthFix"></image>
 			</navigator>
 		</view>
@@ -92,44 +99,15 @@
 	export default {
 		data() {
 			return {
-				userData: {
-					Age: "",
-					BankCardNo: "",
-					BankName: "",
-					CreateDate: "",
-					DateVerify: "",
-					DescVerify: "",
-					DueDate: "",
-					FlagVerify: "",
-					IDCardNo: "",
-					IDCardPic: "",
-					IDCardPicBack: "",
-					MakerID: "",
-					Name: "",
-					NameVerifyManual: "",
-					PhoneNumber: "",
-					PicVerify: "",
-					RelaDate: "",
-					RunAddress: "",
-					SelfDesc: "",
-					SelfPic: "",
-					Sex: "",
-					ShopID: "",
-					ShopURL: "",
-					ShopUserName: "",
-					ShopUserPWD: "",
-					StatusVerify: "",
-					SubBankName: "",
-					WeChatID: "",
-				}
+
 			}
 		},
-		computed: mapState(['token']),
-		onLoad() {
-			// console.log(this.token)
+		computed: mapState(['token', 'userData']),
+		onShow() {
 			this.getUserData();
 		},
 		methods: {
+			...mapMutations(['setUserData']),
 			async getUserData() {
 				var res = await this.$req.ajax({
 					path: '/wxapi/member/Maker',
@@ -140,7 +118,8 @@
 					}
 				});
 				if (res.data.code == 200) {
-					this.userData = res.data.data;
+					this.setUserData(res.data.data)
+
 				} else {
 					this.$api.msg(res.data.message);
 				}
@@ -162,12 +141,18 @@
 		display: flex;
 		align-items: center;
 		height: 100%;
+		background-color: #FFFFFF;
 	}
 
 	.cammer {
 		width: 48rpx;
 		height: 48rpx;
 
+	}
+
+	.demoImg {
+		width: 60rpx;
+		margin-left: 10rpx;
 	}
 
 	.tips {

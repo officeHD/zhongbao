@@ -10,14 +10,14 @@
 			</view>
 			<view class="inputBox">
 				<view class="title">新手机号码</view>
-				<input class="inputItem" type="text" maxlength="6" :value="mobile" data-key="mobile" @input="inputChange"
+				<input class="inputItem" type="text" maxlength="11" :value="mobile" data-key="mobile" @input="inputChange"
 				 placeholder="请输入新手机号" placeholder-style="color:#999" />
 				<text class="cendMsm" @click="checking" v-if="state===false">发送验证码</text>
 				<text class="defaultBtn" v-if="state===true">倒计时{{ currentTime }}s</text>
 			</view>
 			<view class="inputBox">
 				<view class="title">验证码</view>
-				<input class="inputItem" type="text" :value="vaild" data-key="vaild" @input="inputChange" placeholder="请输入验证码"
+				<input class="inputItem" type="text" maxlength="6" :value="vaild" data-key="vaild" @input="inputChange" placeholder="请输入验证码"
 				 placeholder-style="color:#999" />
 			</view>
 		</view>
@@ -89,10 +89,9 @@
 					}
 				});
 				if (res.data.code == 200) {
-					this.login(res.data.data.token);
-					uni.redirectTo({
-						url: "/pages/main/main"
-					})
+					 uni.navigateBack({
+					 	
+					 })
 				} else {
 					this.$api.msg(res.data.message)
 

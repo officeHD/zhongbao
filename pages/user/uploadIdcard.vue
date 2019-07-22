@@ -5,15 +5,15 @@
 			<view class="imgBox">
 				<view class="boxItem">
 					<view class="boxtitle">身份证或会面扫描 <text class="redt">(必填)</text></view>
-					<view @click="testUp('back')">
-						<image v-if="back" :src="'http://c_inventory.i2f2f.com'+back" class="boxImg" mode="widthFix"></image>
+					<view @click="testUp('IDCardPic')">
+						<image v-if="userData.IDCardPic" :src="'http://c_inventory.i2f2f.com'+userData.IDCardPic" class="boxImg" mode="widthFix"></image>
 						<image v-else="" class="boxImg" src="../../static/img/idBack.png" mode="widthFix"></image>
 					</view>
 				</view>
 				<view class="boxItem">
 					<view class="boxtitle">身份证或会面扫描<text class="redt">(必填)</text></view>
-					<view @click="testUp('front')">
-						<image v-if="front" :src="'http://c_inventory.i2f2f.com'+front" class="boxImg" mode="widthFix"></image>
+					<view @click="testUp('IDCardPicBack')">
+						<image v-if="userData.IDCardPicBack" :src="'http://c_inventory.i2f2f.com'+userData.IDCardPicBack" class="boxImg" mode="widthFix"></image>
 						<image v-else="" class="boxImg" src="../../static/img/idFront.png" mode="widthFix"></image>
 					</view>
 				</view>
@@ -22,23 +22,23 @@
 		<view class="celBox bb">
 			<text class="leftcell"> 姓名</text>
 			<view class="rightRow">
-				<input placeholder="请输入" :value="name" data-key="name" @input="inputChange" />
+				<input placeholder="请输入" :value="userData.Name" data-key="Name" @input="inputChange" />
 			</view>
 		</view>
 		<view class="celBox bb">
 			<text class="leftcell"> 身份证号</text>
 			<view class="rightRow">
-				<input placeholder="请输入" :value="idcard" data-key="idcard" @input="inputChange" />
+				<input placeholder="请输入" :value="userData.IDCardNo" data-key="userData.IDCardNo" @input="inputChange" />
 			</view>
 		</view>
-		<view class="celBox bb">
+		<!-- <view class="celBox bb">
 			<text class="leftcell"> 身份证有效期</text>
 			<view class="rightRow">
 				<picker mode="date" :value="date" :start="startDate" :end="endDate" @change="bindDateChange">
 					<view class="uni-input">{{date}}</view>
 				</picker>
 			</view>
-		</view>
+		</view> -->
 		<view class="btn-row">
 			<button class="primaryBtn" @tap="toRegister">立即保存</button>
 		</view>
@@ -81,7 +81,7 @@
 		methods: {
 			inputChange(e) {
 				const key = e.currentTarget.dataset.key;
-				this[key] = e.detail.value;
+				this.userData[key] = e.detail.value;
 			},
 			// 编辑创客姓名身份证
 			async toRegister() {
@@ -89,19 +89,20 @@
 					path: '/wxapi/member/edit_idcard',
 					title: '正在加载',
 					data: {
-						name: this.name,
-						idcard: this.idcard,
+						name: this.userData.Name,
+						idcard: this.userData.IDCardNo,
 						token: this.token,
 					}
 				});
 				if (res.data.code == 200) {
-					uni.navigateBack({})
+					this.maker_idcard(this.userData.IDCardPic,'front');
+					this.maker_idcard(this.userData.IDCardPicBack,'back');
 				} else {
 					this.$api.msg(res.data.message);
 				}
 			},
 			// 上传身份证
-			
+			 
 			
 			async maker_idcard(surl,side){
 				var res = await this.$req.ajax({

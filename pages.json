@@ -72,7 +72,14 @@
 			"style": {
 				"navigationBarTitleText": "我服务过的企业"
 			}
+		}, {
+			"path": "pages/company/addcompany",
+			"style": {
+				"navigationBarTitleText": "添加关联企业"
+			}
 		},
+		
+		
 		{
 			"path": "pages/reg/reg",
 			"style": {

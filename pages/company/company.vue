@@ -1,41 +1,65 @@
 <template>
 	<view class="wrapper">
-		<view class="lstItem">
+		<view class="lstItem" v-for="(item,index) in comList" :key="index">
 			<view class="itemContent">
-				<view class="c000 item">外包企业：全购网络科技</view>
-				<view class="item">外包岗位：UI设计</view>
-				<view class="item">首次关联日期：2019-04-05</view>
-				<view class="item">总外包费：2000</view>
+				<view class="c000 item">外包企业：{{item.EnterpriseName}}</view>
+				<view class="item">外包岗位：{{item.Position.PositionName}}</view>
+				<view class="item">首次关联日期：{{item.RelaDate}}</view>
+				<view class="item">总外包费：{{item.money}}</view>
 			</view>
 			<view class="btnBox">
-				<button class="defaultBtn" @tap="bindLogin">浏览</button>
+				<button class="defaultBtn" @tap="liulan">浏览</button>
 			</view>
 		</view>
-		<view class="lstItem">
-			<view class="itemContent">
-				<view class="c000 item">外包企业：全购网络科技</view>
-				<view class="item">外包岗位：UI设计</view>
-				<view class="item">首次关联日期：2019-04-05</view>
-				<view class="item">总外包费：2000</view>
-			</view>
-			<view class="btnBox">
-				<button class="defaultBtn" @tap="bindLogin">浏览</button>
-			</view>
-		</view>
+			
 		<view class="fixBtn">
-			<button class="primaryBtn" @tap="bindLogin">添加新关联企业</button>
+			<navigator url="/pages/company/addcompany" class="primaryBtn" >添加新关联企业</navigator>
 		</view>
 	</view>
 </template>
 
 <script>
+	import {
+		mapState,
+		mapMutations
+	} from 'vuex'
 	export default {
 		data() {
 			return {
-
+				comList: []
 			}
 		},
+		computed: mapState(['token']),
+		onShow() {
+			this.getList()
+		},
 		methods: {
+			async getList() {
+				let res = await this.$req.ajax({
+					path: '/wxapi/Related/Select',
+					title: '正在加载',
+					data: {
+
+						token: this.token,
+
+
+					}
+				});
+				if (res.data.code == 200) {
+					console.log(res)
+					this.comList = res.data.data
+				} else {
+					this.$api.msg(res.data.message)
+
+				}
+			}
+			,
+			liulan(item){
+				let data=JSON.stringify(item);
+				uni.navigateTo({
+					url:`/pages/company/detail?data=${data}`
+				})
+			}
 
 		}
 	}
@@ -67,6 +91,8 @@
 		margin-top: 10rpx;
 		margin-left: 30rpx;
 		margin-right: 30rpx;
+		text-align: center;
+		border-radius: 10rpx;;
 	}
 
 	.lstItem {

@@ -6,7 +6,7 @@
 				<view class="boxItem">
 					<view class="boxtitle">身份证正面+反面合一复印件 </view>
 					<view @click="testUp(index)">
-						<image v-if="idImg" class="boxImg" :src="'http://c_inventory.i2f2f.com'+idImg" mode="widthFix"></image>
+						<image v-if="userData.IDCardCopy" class="boxImg" :src="'http://c_inventory.i2f2f.com'+userData.IDCardCopy" mode="widthFix"></image>
 						<image v-else class="boxImg" src="../../static/img/idcopy.png" mode="widthFix"></image>
 					</view>
 				</view>
@@ -36,7 +36,7 @@
 			}
 		},
 		computed: {
-			...mapState(['token', 'forcedLogin'])
+			...mapState(['token', 'userData'])
 		},
 		methods: {
 			async toRegister() {
@@ -82,7 +82,7 @@
 							let returnData = JSON.parse(item);
 							console.log(returnData)
 							if (returnData.code == 200) {
-								this.idImg = returnData.data.url;
+								this.userData.IDCardCopy = returnData.data.url;
 							}
 
 						})

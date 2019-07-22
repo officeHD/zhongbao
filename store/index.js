@@ -11,7 +11,37 @@ const store = new Vuex.Store({
 		openId: "",
 		forcedLogin: false,
 		hasLogin: false,
-		token: ""
+		token: "",
+		userData: {
+			Age: "",
+			BankCardNo: "",
+			BankName: "",
+			CreateDate: "",
+			DateVerify: "",
+			DescVerify: "",
+			DueDate: "",
+			FlagVerify: "",
+			IDCardNo: "",
+			IDCardPic: "",
+			IDCardPicBack: "",
+			MakerID: "",
+			Name: "",
+			NameVerifyManual: "",
+			PhoneNumber: "",
+			PicVerify: "",
+			RelaDate: "",
+			RunAddress: "",
+			SelfDesc: "",
+			SelfPic: "",
+			Sex: "",
+			ShopID: "",
+			ShopURL: "",
+			ShopUserName: "",
+			ShopUserPWD: "",
+			StatusVerify: "",
+			SubBankName: "",
+			WeChatID: "",
+		}
 	},
 	mutations: {
 		login(state, token) {
@@ -21,11 +51,15 @@ const store = new Vuex.Store({
 				key: 'token',
 				data: token
 			})
-			
+
 		},
 		logout(state) {
 			state.userName = "";
 			state.hasLogin = false;
+		},
+		setUserData(state, obj) {
+		 
+			Object.assign(state.userData, obj);
 		},
 		setOpenId(state, id) {
 			state.openId = id;

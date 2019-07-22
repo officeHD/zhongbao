@@ -3,21 +3,21 @@
 
 		<view class="celBox bb">
 			<text class="c666 leftcell">户名</text>
-			 <text>张三</text>
+			 <text>{{userData.Name}}</text>
 		</view>
 		<view class="celBox bb">
 			<text class="c666 leftcell">银行卡号</text>
-			<input class="inputItem" type="text" :value="bankno" data-key="bankno" @input="inputChange" placeholder="请输入银行卡号"
+			<input class="inputItem" type="text" :value="userData.BankCardNo" data-key="BankCardNo" @input="inputChange" placeholder="请输入银行卡号"
 			 placeholder-style="color:#999" />
 		</view>
 		<view class="celBox bb">
 			<text class="c666 leftcell">开户银行</text>
-			<input class="inputItem" type="text" :value="bankname" data-key="bankname" @input="inputChange" placeholder="请输入开户银行"
+			<input class="inputItem" type="text" :value="userData.BankName" data-key="BankName" @input="inputChange" placeholder="请输入开户银行"
 			 placeholder-style="color:#999" />
 		</view>
 		<view class="celBox bb">
 			<text class="c666 leftcell">开户支行</text>
-			<input class="inputItem" type="text" :value="subbanknam" data-key="subbanknam" @input="inputChange" placeholder="请输入开户支行"
+			<input class="inputItem" type="text" :value="userData.SubBankName" data-key="SubBankName" @input="inputChange" placeholder="请输入开户支行"
 			 placeholder-style="color:#999" />
 		</view>
 		<text class="tips">必须填写本人银行卡</text>
@@ -36,37 +36,34 @@
 
 	export default {
 		computed: {
-			...mapState(['token', 'forcedLogin'])
+			...mapState(['token', 'forcedLogin','userData'])
 		},
 		data() {
 			return {
-				bankno: "",
-				bankname: "",
-				subbanknam: "",
+				 
 			}
 		},
 		methods: {
 			...mapMutations(['logout']),
 			inputChange(e) {
 				const key = e.currentTarget.dataset.key;
-				this[key] = e.detail.value;
+				this.userData[key] = e.detail.value;
 			},
 			async bindLogin() {
 				const result = await this.$req.ajax({
 					path: 'wxapi/member/maker_bank',
 					title: '正在加载',
 					data: {
-						BankCardNo: this.bankno,
-						BankName: this.bankname,
-						SubBankName: this.subbanknam,
+						BankCardNo: this.userData.BankCardNo,
+						BankName: this.userData.BankName,
+						SubBankName: this.userData.SubBankName,
 						token: this.token,
 					}
 				});
 				if (result.data.code === 200) {
-					this.login(result.data.data.token);
-					uni.navigateTo({
-						url: "/pages/main/main"
-					});
+					 uni.navigateBack({
+					 	
+					 })
 				} else {
 					this.$api.msg(result.data.message);
 					this.logining = false;
