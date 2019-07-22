@@ -58,12 +58,38 @@
 
 <script>
 	import {
-		mapState
+		mapState,
+		mapMutations
 	} from 'vuex'
+	
 	export default {
-		computed: mapState(['token']),
-		onLoad() { 
-			console.log(this.token)
+		data() {
+			return {
+	
+			}
+		},
+		computed: mapState(['token', 'userData']),
+		onShow() {
+			this.getUserData();
+		},
+		methods: {
+			...mapMutations(['setUserData']),
+			async getUserData() {
+				var res = await this.$req.ajax({
+					path: '/wxapi/member/Maker',
+					title: '正在加载',
+					data: {
+						token: this.token
+	
+					}
+				});
+				if (res.data.code == 200) {
+					this.setUserData(res.data.data)
+	
+				} else {
+					this.$api.msg(res.data.message);
+				}
+			}
 		}
 	}
 </script>

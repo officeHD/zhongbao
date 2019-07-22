@@ -11,7 +11,15 @@
 		 	"style": {
 		 		"navigationBarTitleText": "个人身份信息"
 		 	}
-		 }, {
+		 },
+		 {
+		 	"path": "pages/user/userName",
+		 	"style": {
+		 		"navigationBarTitleText": "个人身份信息"
+		 	}
+		 },
+		 
+		 {
 		 	"path": "pages/user/uploadImg",
 		 	"style": {
 		 		"navigationBarTitleText": "上传"

@@ -1,24 +1,6 @@
 <template>
 	<view class="wrapper">
-		<view class="topgroup">
-			<view class="pageTitle">上传图片</view>
-			<view class="imgBox">
-				<view class="boxItem">
-					<view class="boxtitle">身份证国徽面扫描 <text class="redt">(必填)</text></view>
-					<view @click="testUp('IDCardPic')">
-						<image v-if="userData.IDCardPic" :src="'http://c_inventory.i2f2f.com'+userData.IDCardPic" class="boxImg" mode="widthFix"></image>
-						<image v-else="" class="boxImg" src="../../static/img/idBack.png" mode="widthFix"></image>
-					</view>
-				</view>
-				<view class="boxItem">
-					<view class="boxtitle">身份证人像面上传<text class="redt">(必填)</text></view>
-					<view @click="testUp('IDCardPicBack')">
-						<image v-if="userData.IDCardPicBack" :src="'http://c_inventory.i2f2f.com'+userData.IDCardPicBack" class="boxImg" mode="widthFix"></image>
-						<image v-else="" class="boxImg" src="../../static/img/idFront.png" mode="widthFix"></image>
-					</view>
-				</view>
-			</view>
-		</view>
+		 
 		<view class="celBox bb">
 			<text class="leftcell"> 姓名</text>
 			<view class="rightRow">
@@ -31,14 +13,14 @@
 				<input placeholder="请输入" :value="userData.IDCardNo" data-key="userData.IDCardNo" @input="inputChange" />
 			</view>
 		</view>
-		<!-- <view class="celBox bb">
+		<view class="celBox bb">
 			<text class="leftcell"> 身份证有效期</text>
 			<view class="rightRow">
-				<picker mode="date" :value="date" :start="startDate" :end="endDate" @change="bindDateChange">
+				<picker mode="userData.DueDate" :value="userData.DueDate" :start="startDate" :end="endDate" @change="bindDateChange">
 					<view class="uni-input">{{date}}</view>
 				</picker>
 			</view>
-		</view> -->
+		</view>
 		<view class="btn-row">
 			<button class="primaryBtn" @tap="toRegister">立即保存</button>
 		</view>
@@ -84,9 +66,23 @@
 				this.userData[key] = e.detail.value;
 			},
 			// 编辑创客姓名身份证
-			toRegister() {
-				this.maker_idcard(this.userData.IDCardPic,'front');
-				this.maker_idcard(this.userData.IDCardPicBack,'back');
+			async toRegister() {
+				var res = await this.$req.ajax({
+					path: '/wxapi/member/edit_idcard',
+					title: '正在加载',
+					data: {
+						name: this.userData.Name,
+						idcard: this.userData.IDCardNo,
+						token: this.token,
+					}
+				});
+				if (res.data.code == 200) {
+					 uni.navigateBack({
+					 	
+					 })
+				} else {
+					this.$api.msg(res.data.message);
+				}
 			},
 			// 上传身份证
 			 
@@ -142,7 +138,7 @@
 				this.index = e.target.value
 			},
 			bindDateChange: function(e) {
-				this.date = e.target.value
+				this.userData.DueDate = e.target.value
 			},
 			bindTimeChange: function(e) {
 				this.time = e.target.value
@@ -203,6 +199,7 @@
 	.wrapper {
 		background-color: #F2F2F2;
 		height: 100vh;
+		width: 100%;
 	}
 
 	.pageTitle {

@@ -2,17 +2,17 @@
 	<view class="wrapper"> 
 		<view class="celBox bb">
 			<text class="c666">我的线下经营场所</text>
-			<input class="inputBox" placeholder="请输入" />
+			<input class="inputBox" placeholder="请输入" :value="userData.RunAddress" />
 
 		</view>
 		<view class="celBox bb">
 			<text class="c666">我的线上经营场所</text>
-			 <input  class="inputBox" placeholder="请输入" />
+			 <input  class="inputBox" placeholder="请输入" :value="userData.ShopURL" />
 		</view>
 		<view class="celBox bb">
 			<text>自我介绍（采用企业介绍的方式撰写自我介绍），不少于150字哦：</text> 
 		</view> 
-		<textarea class="textarea" placeholder="请输入"></textarea>
+		<textarea class="textarea" placeholder="请输入" :value="userData.SelfDesc" ></textarea>
 		 <view class="btn-row">
 		 	<button class="primaryBtn" @tap="bindLogin">保存</button>
 		 </view>
@@ -27,7 +27,7 @@
 
 	export default {
 		computed: {
-			...mapState(['hasLogin', 'forcedLogin'])
+			...mapState(['hasLogin', 'userData'])
 		},
 		methods: {
 			...mapMutations(['logout']),

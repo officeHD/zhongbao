@@ -2,7 +2,7 @@
 	<view class="wrapper">
 		<view class="celBox bb">
 			<text>本人正面免冠照片</text>
-			<view class="rightRow">
+			<view class="rightRow" @tap="testUp">
 				<image v-if="userData.SelfPic" class="avator" :src="userData.SelfPic" mode="aspectFill"></image>
 				<text v-if="!userData.SelfPic">暂无</text>
 				<image class="arrowImg" src="../../static/img/arrow.png" mode="widthFix"></image>
@@ -10,7 +10,7 @@
 		</view>
 		<view class="celBox bb ">
 			<text>姓名</text>
-			<navigator class="rightRow" url="/pages/user/uploadIdcard">
+			<navigator class="rightRow" url="/pages/user/userName">
 				<text class="c666" v-if="userData.Name">{{userData.Name}}</text>
 				<image v-if="!userData.Name" class="cammer" src="../../static/img/cammer.png" mode="widthFix"></image>
 				<image class="arrowImg" src="../../static/img/arrow.png" mode="widthFix"></image>
@@ -22,7 +22,7 @@
 		</view>
 		<view class="celBox bb">
 			<text>身份证有效期</text>
-			<text class="c666">{{userData.Name||'暂无'}}</text>
+			<text class="c666">{{userData.DueDate||'暂无'}}</text>
 		</view>
 		<view class="celBox bb">
 			<text>手机号码</text>
@@ -95,7 +95,7 @@
 		mapState,
 		mapMutations
 	} from 'vuex'
-
+	import rup from '@/common/request/request-upFiles.js';
 	export default {
 		data() {
 			return {
@@ -123,7 +123,56 @@
 				} else {
 					this.$api.msg(res.data.message);
 				}
+			},
+			async maker_SelfPic(url){
+				var res = await this.$req.ajax({
+					path: '/wxapi/member/maker_SelfPic',
+					title: '正在加载',
+					data: {
+						token: this.token,
+						url:url
+				
+					}
+				});
+				if (res.data.code == 200) {
+					this.getUserData()
+				
+				} else {
+					this.$api.msg(res.data.message);
+				}
+			},
+			async testUp(index) {
+				let that=this;
+				try {
+					const res = await rup.selectFiles({
+						type: 2,
+						maximum: 1,
+						upload: {
+							path: 'http://c_inventory.i2f2f.com/wxapi/member/Uplode',
+							files: ['file'],
+							title: '正在上传',
+							extra: {
+								token: this.token
+							}
+						}
+					})
+			
+					// let imageArr=
+					if (res.upload && res.upload.length > 0) {
+						res.upload.forEach(item => {
+							let returnData = JSON.parse(item);
+							console.log(returnData)
+							if (returnData.code == 200) {
+								that.maker_SelfPic(returnData.data.url)
+							}
+			
+						})
+					}
+				} catch (e) {
+					console.log(e)
+				}
 			}
+			
 		}
 	}
 </script>
