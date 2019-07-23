@@ -1,6 +1,6 @@
 <template>
 	<view class="wrapper">
-		<view class="lstItem" v-for="(item,index) in comList" :key="index">
+		<view  v-if="comList.length>0" class="lstItem" v-for="(item,index) in comList" :key="index">
 			<view class="itemContent">
 				<view class="c000 item">外包企业：{{item.EnterpriseName}}</view>
 				<view class="item">外包岗位：{{item.Position.PositionName}}</view>
@@ -11,7 +11,10 @@
 				<button class="defaultBtn" @tap="liulan">浏览</button>
 			</view>
 		</view>
-			
+		<view class="nodata" v-if="comList.length==0">
+			<image class="nodataImg" src="../../static/img/nodata.png" mode="widthFix"></image>
+			<text>暂无数据</text>
+		</view>
 		<view class="fixBtn">
 			<navigator url="/pages/company/addcompany" class="primaryBtn" >添加新关联企业</navigator>
 		</view>
@@ -82,7 +85,20 @@
 		border-top: 1px solid #e6e6e6;
 		background-color: #FFFFFF;
 	}
-
+	.nodata{
+		display: flex;
+		flex-direction: column;
+		padding-top: 100rpx;
+		justify-content: center;
+		align-items: center;
+		text-align: center;
+		font-size: 30rpx;;
+		color: #666666;
+	}
+	.nodataImg{
+		width: 148rpx;
+		
+	}
 	.primaryBtn {
 		background-color: #007AFF;
 		color: #FFFFFF;

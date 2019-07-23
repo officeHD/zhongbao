@@ -2,11 +2,11 @@
 	<view class="wrapper"> 
 		<view class="celBox bb">
 			<text class="c666">我的线下经营场所</text>
-			<text class="inputBox">{{userData.RunAddress}}</text>
+			<text class="inputBox">{{userData.RunAddress||"暂无"}}</text>
 		</view>
 		<view class="celBox bb">
 			<text class="c666">我的线上经营场所</text>
-			<text class="inputBox">{{userData.ShopURL}}</text>
+			<text class="inputBox">{{userData.ShopURL||"暂无"}}</text>
 		</view>
 		<view class="celBox bb">
 			<text>自我介绍（采用企业介绍的方式撰写自我介绍），不少于150字哦：</text> 
