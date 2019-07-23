@@ -11,7 +11,7 @@
 		<view class="celBox bb">
 			<text>自我介绍（采用企业介绍的方式撰写自我介绍），不少于150字哦：</text> 
 		</view> 
-		<textarea class="textarea" placeholder="请输入" :value="userData.SelfDesc" ></textarea>
+		<textarea class="textarea" placeholder="请输入" :value="userData.SelfDesc" @input="changedec"></textarea>
 		 <view class="btn-row">
 		 	<button class="primaryBtn" @tap="bindLogin">保存</button>
 		 </view>
@@ -26,11 +26,34 @@
 
 	export default {
 		computed: {
-			...mapState(['hasLogin', 'userData'])
+			...mapState(['token', 'userData'])
 		},
 		methods: {
 			...mapMutations(['logout']),
-
+			changedec(e){
+				this.userData.SelfDesc=e.detail.value
+			},
+			async bindLogin(){
+				let res = await this.$req.ajax({
+					path: '/wxapi/member/maker_SelfDesc',
+					title: '正在加载',
+					data: {
+						introduce:this.userData.SelfDesc,
+						token: this.token,
+					}
+				});
+				
+				if (res.data.code == 200) {
+					 this.$api.msg("保存成功");
+					 uni.navigateBack({
+					 	
+					 })
+				
+				} else {
+					this.$api.msg(res.data.message)
+				
+				}
+			}
 		}
 	}
 </script>

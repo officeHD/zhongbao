@@ -115,7 +115,7 @@
 						type: 2,
 						maximum: 1,
 						upload: {
-							path: 'http://c_inventory.i2f2f.com/wxapi/member/Uplode',
+							path: 'http://c_inventory.i2f2f.com/member/Uplode',
 							files: ['file'],
 							title: '正在上传',
 							extra: {

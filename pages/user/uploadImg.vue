@@ -67,7 +67,7 @@
 						type: 2,
 						maximum: 1,
 						upload: {
-							path: 'http://c_inventory.i2f2f.com/wxapi/member/Uplode',
+							path: 'https://www.appi2b2b.comwxapi/member/Uplode',
 							files: ['file'],
 							title: '正在上传',
 							extra: {
