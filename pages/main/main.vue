@@ -2,7 +2,7 @@
 	<view>
 		<view class="content">
 			<image class="logoImg" src="../../static/img/logo2.png" mode="widthFix"></image>
-			<view class="userSection">
+			<!-- <view class="userSection">
 				<view class="userName"> 张三</view>
 				<view class="cellList">
 					<text class="cellleft">最近服务的企业</text>
@@ -16,7 +16,7 @@
 					<text class="cellleft">总外包服务收入</text>
 					<text class="cellright">只用奥术大师多</text>
 				</view>
-			</view>
+			</view> -->
 			<view class="sectionTab">
 				<navigator url="/pages/user/user" class="sectionItem" >
 					<image class="itemIcon" src="../../static/img/sec1.png" mode="widthFix"></image>

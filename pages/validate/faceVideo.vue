@@ -66,6 +66,9 @@
 				if (res.data.code == 200) {
 					// console.log(res.data.data)
 					this.$api.msg("保存成功");
+					uni.redirectTo({
+						url:"/pages/validate/success"
+					})
 					 
 				} else {
 					this.$api.msg(res.data.message);

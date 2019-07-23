@@ -13,7 +13,8 @@
 				<view class="boxItem">
 					<view class="boxtitle">身份证人像面上传<text class="redt">(必填)</text></view>
 					<view @click="testUp('IDCardPicBack')">
-						<image v-if="userData.IDCardPicBack" :src="'http://c_inventory.i2f2f.com'+userData.IDCardPicBack" class="boxImg" mode="widthFix"></image>
+						<image v-if="userData.IDCardPicBack" :src="'http://c_inventory.i2f2f.com'+userData.IDCardPicBack" class="boxImg"
+						 mode="widthFix"></image>
 						<image v-else="" class="boxImg" src="../../static/img/idFront.png" mode="widthFix"></image>
 					</view>
 				</view>
@@ -79,35 +80,36 @@
 			}
 		},
 		methods: {
+			...mapMutations(['setUserData']),
 			inputChange(e) {
 				const key = e.currentTarget.dataset.key;
 				this.userData[key] = e.detail.value;
+				
 			},
 			// 编辑创客姓名身份证
 			toRegister() {
-				this.maker_idcard(this.userData.IDCardPic,'front');
-				this.maker_idcard(this.userData.IDCardPicBack,'back');
+				this.maker_idcard(this.userData.IDCardPic, 'front');
+				this.maker_idcard(this.userData.IDCardPicBack, 'back');
 			},
 			// 上传身份证
-			 
-			
-			async maker_idcard(surl,side){
+
+
+			async maker_idcard(surl, side) {
 				var res = await this.$req.ajax({
 					path: '/wxapi/member/maker_idcard',
 					title: '正在加载',
 					data: {
-						surl:surl,
+						surl: surl,
 						side: side,
 						token: this.token,
 					}
 				});
-				if (res.data.code == 200) {
-				} else {
+				if (res.data.code == 200) {} else {
 					this.$api.msg(res.data.message);
 				}
 			},
 			async testUp(imgtype) {
-				let that=this;
+				let that = this;
 				try {
 					const res = await rup.selectFiles({
 						type: 2,
@@ -128,7 +130,16 @@
 							let returnData = JSON.parse(item);
 							console.log(returnData)
 							if (returnData.code == 200) {
-								this[imgtype] = returnData.data.url; 
+								this.userData[imgtype] = returnData.data.url;
+								if (imgtype == "IDCardPic") {
+									this.setUserData({
+										IDCardPic:returnData.data.url
+									})
+								} else {
+									this.setUserData({
+										IDCardPicBack:returnData.data.url
+									})
+								} 
 							}
 
 						})

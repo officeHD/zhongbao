@@ -4,7 +4,7 @@
 		<view class="result">
 			人脸扫描验证通过，恭喜你已经完成人脸识别验证
 		</view>
-		<button class="primaryBtn">完成</button>
+		<navigator url="/pages/validate/faceVideo" class="primaryBtn">完成</navigator>
 	</view>
 </template>
 
@@ -39,5 +39,7 @@
 		margin-left: 100rpx;
 		margin-right: 100rpx;
 		margin-top: 130rpx;
+		text-align: center;
+		border-radius: 10rpx;
 	}
 </style>
