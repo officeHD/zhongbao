@@ -5,16 +5,15 @@
 			<view class="imgBox">
 				<view class="boxItem">
 					<view class="boxtitle">身份证国徽面扫描 <text class="redt">(必填)</text></view>
-					<view @click="testUp('IDCardPic')">
-						<image v-if="userData.IDCardPic" :src="'http://c_inventory.i2f2f.com'+userData.IDCardPic" class="boxImg" mode="widthFix"></image>
+					<view @click="testUp('IDCardPicBack')">
+						<image v-if="userData.IDCardPicBack" :src="userData.IDCardPicBack" class="boxImg" mode="widthFix"></image>
 						<image v-else="" class="boxImg" src="../../static/img/idBack.png" mode="widthFix"></image>
 					</view>
 				</view>
 				<view class="boxItem">
 					<view class="boxtitle">身份证人像面上传<text class="redt">(必填)</text></view>
-					<view @click="testUp('IDCardPicBack')">
-						<image v-if="userData.IDCardPicBack" :src="'http://c_inventory.i2f2f.com'+userData.IDCardPicBack" class="boxImg"
-						 mode="widthFix"></image>
+					<view @click="testUp('IDCardPic')">
+						<image v-if="userData.IDCardPic" :src=" userData.IDCardPic" class="boxImg" mode="widthFix"></image>
 						<image v-else="" class="boxImg" src="../../static/img/idFront.png" mode="widthFix"></image>
 					</view>
 				</view>
@@ -23,23 +22,21 @@
 		<view class="celBox bb">
 			<text class="leftcell"> 姓名</text>
 			<view class="rightRow">
-				<input placeholder="请输入" :value="userData.Name" data-key="Name" @input="inputChange" />
+				{{userData.Name}}
 			</view>
 		</view>
 		<view class="celBox bb">
 			<text class="leftcell"> 身份证号</text>
 			<view class="rightRow">
-				<input placeholder="请输入" :value="userData.IDCardNo" data-key="userData.IDCardNo" @input="inputChange" />
+			{{userData.IDCardNo}}
 			</view>
 		</view>
-		<!-- <view class="celBox bb">
+		<view class="celBox bb">
 			<text class="leftcell"> 身份证有效期</text>
 			<view class="rightRow">
-				<picker mode="date" :value="date" :start="startDate" :end="endDate" @change="bindDateChange">
-					<view class="uni-input">{{date}}</view>
-				</picker>
+				 {{userData.DueDate}}
 			</view>
-		</view> -->
+		</view>
 		<view class="btn-row">
 			<button class="primaryBtn" @tap="toRegister">立即保存</button>
 		</view>
@@ -66,6 +63,8 @@
 				time: '12:01',
 				front: "",
 				back: "",
+				IDCardPic: "",
+				IDCardPicBack: "",
 				idcard: "",
 				name: "",
 			}
@@ -81,15 +80,31 @@
 		},
 		methods: {
 			...mapMutations(['setUserData']),
+			async getUserData() {
+				var res = await this.$req.ajax({
+					path: '/wxapi/member/Maker',
+					title: '',
+					data: {
+						token: this.token
+			
+					}
+				});
+				if (res.data.code == 200) {
+					this.setUserData(res.data.data)
+			
+				} else {
+					this.$api.msg(res.data.message);
+				}
+			},
 			inputChange(e) {
 				const key = e.currentTarget.dataset.key;
 				this.userData[key] = e.detail.value;
-				
+
 			},
 			// 编辑创客姓名身份证
 			toRegister() {
-				this.maker_idcard(this.userData.IDCardPic, 'front');
-				this.maker_idcard(this.userData.IDCardPicBack, 'back');
+				this.maker_idcard(this.IDCardPic, 'front');
+				this.maker_idcard(this.IDCardPicBack, 'back');
 			},
 			// 上传身份证
 
@@ -97,14 +112,17 @@
 			async maker_idcard(surl, side) {
 				var res = await this.$req.ajax({
 					path: '/wxapi/member/maker_idcard',
-					title: '正在加载',
+					title: '正在验证',
 					data: {
-						surl: surl,
+						url: surl,
 						side: side,
 						token: this.token,
 					}
 				});
-				if (res.data.code == 200) {} else {
+				if (res.data.code == 200) {
+					this.getUserData()
+					this.$api.msg(res.data.message);
+				} else {
 					this.$api.msg(res.data.message);
 				}
 			},
@@ -115,7 +133,7 @@
 						type: 2,
 						maximum: 1,
 						upload: {
-							path: 'http://c_inventory.i2f2f.com/member/Uplode',
+							path: 'https://www.appi2b2b.com/wxapi/member/Uplode',
 							files: ['file'],
 							title: '正在上传',
 							extra: {
@@ -130,16 +148,18 @@
 							let returnData = JSON.parse(item);
 							console.log(returnData)
 							if (returnData.code == 200) {
-								this.userData[imgtype] = returnData.data.url;
+								let imgUrl = returnData.data.url;
 								if (imgtype == "IDCardPic") {
 									this.setUserData({
-										IDCardPic:returnData.data.url
+										IDCardPic: returnData.data.path
 									})
+									this.maker_idcard(imgUrl, 'front');
 								} else {
 									this.setUserData({
-										IDCardPicBack:returnData.data.url
+										IDCardPicBack: returnData.data.path
 									})
-								} 
+									this.maker_idcard(imgUrl, 'back');
+								}
 							}
 
 						})

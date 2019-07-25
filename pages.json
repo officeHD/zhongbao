@@ -102,7 +102,9 @@
 
 		, {
 			"path": "pages/businessPlace/businessPlace",
-			"style": {}
+			"style": {
+				"navigationBarTitleText": "我的经营场所"
+			}
 		}
 	],
 

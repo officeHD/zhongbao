@@ -1,20 +1,20 @@
 <template>
-	<view class="wrapper"> 
+	<view class="wrapper">
 		<view class="celBox bb">
-			<text class="c666">我的线下经营场所</text>
+			<text class="c333">我的线下经营场所</text>
 			<text class="inputBox">{{userData.RunAddress||"暂无"}}</text>
 		</view>
 		<view class="celBox bb">
-			<text class="c666">我的线上经营场所</text>
-			<text class="inputBox">{{userData.ShopURL||"暂无"}}</text>
+			<text class="c333">我的线上经营场所</text>
+			<text class="cblue">{{userData.ShopURL||"暂无"}}</text>
 		</view>
 		<view class="celBox bb">
-			<text>自我介绍（采用企业介绍的方式撰写自我介绍），不少于150字哦：</text> 
-		</view> 
+			<text class="color33">自我介绍（采用企业介绍的方式撰写自我介绍），不少于150字哦：</text>
+		</view>
 		<textarea class="textarea" placeholder="请输入" :value="userData.SelfDesc" @input="changedec"></textarea>
-		 <view class="btn-row">
-		 	<button class="primaryBtn" @tap="bindLogin">保存</button>
-		 </view>
+		<view class="btn-row">
+			<button class="primaryBtn" @tap="bindLogin">保存</button>
+		</view>
 	</view>
 </template>
 
@@ -30,28 +30,25 @@
 		},
 		methods: {
 			...mapMutations(['logout']),
-			changedec(e){
-				this.userData.SelfDesc=e.detail.value
+			changedec(e) {
+				this.userData.SelfDesc = e.detail.value
 			},
-			async bindLogin(){
+			async bindLogin() {
 				let res = await this.$req.ajax({
 					path: '/wxapi/member/maker_SelfDesc',
 					title: '正在加载',
 					data: {
-						introduce:this.userData.SelfDesc,
+						introduce: this.userData.SelfDesc,
 						token: this.token,
 					}
 				});
-				
+
 				if (res.data.code == 200) {
-					 this.$api.msg("保存成功");
-					 uni.navigateBack({
-					 	
-					 })
-				
+					this.$api.msg("保存成功");
+					 
 				} else {
 					this.$api.msg(res.data.message)
-				
+
 				}
 			}
 		}
@@ -66,7 +63,8 @@
 		padding-bottom: 20px;
 		;
 	}
-	.textarea{
+
+	.textarea {
 		background-color: #FFFFFF;
 		width: 100%;
 		height: 300rpx;
@@ -74,7 +72,8 @@
 		font-size: 28rpx;
 		box-sizing: border-box;
 	}
-.primaryBtn {
+
+	.primaryBtn {
 		background-color: #007AFF;
 		color: #FFFFFF;
 		height: 100rpx;
@@ -82,9 +81,12 @@
 		margin-left: 10rpx;
 		margin-right: 10rpx;
 	}
-.inputBox{
-	flex: 1;
-}
+
+	.inputBox {
+		flex: 1;
+		color: #888888;
+	}
+
 	.celBox {
 		display: flex;
 		align-items: center;
@@ -103,10 +105,14 @@
 	.mt20 {
 		margin-top: 20rpx;
 	}
- 
-	.c666 {
-		color: #000;
+
+	.c333 {
+		color: #333333;
 		width: 260rpx;
+	}
+
+	.color33 {
+		color: #333333;
 	}
 
 	.tips {
@@ -118,6 +124,7 @@
 	}
 
 	.cblue {
+		flex: 1;
 		color: #1666F3;
 	}
 

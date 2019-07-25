@@ -1,40 +1,40 @@
 <template>
 	<view class="wrapper">
 		<view class="celBox bb">
-			<text>本人正面免冠照片</text>
+			<text class="c333">本人正面免冠照片</text>
 			<view class="rightRow" @tap="testUp">
 				<image v-if="userData.SelfPic" class="avator" :src="userData.SelfPic" mode="aspectFill"></image>
-				<text v-if="!userData.SelfPic">暂无</text>
+				<text class="c888" v-if="!userData.SelfPic">暂无</text>
 				<image class="arrowImg" src="../../static/img/arrow.png" mode="widthFix"></image>
 			</view>
 		</view>
 		<view class="celBox bb ">
-			<text>姓名</text>
+			<text class="c333">姓名</text>
 			<navigator class="rightRow" url="/pages/user/userName">
-				<text class="c666" v-if="userData.Name">{{userData.Name}}</text>
-				<image v-if="!userData.Name" class="cammer" src="../../static/img/cammer.png" mode="widthFix"></image>
+				<text class="c888" >{{userData.Name||""}}</text>
+				<!-- <image v-if="!userData.Name" class="cammer" src="../../static/img/cammer.png" mode="widthFix"></image> -->
 				<image class="arrowImg" src="../../static/img/arrow.png" mode="widthFix"></image>
 			</navigator>
 		</view>
 		<view class="celBox bb">
-			<text>身份证号码</text>
-			<text class="c666">{{userData.IDCardNo||'暂无'}}</text>
+			<text class="c333">身份证号码</text>
+			<text class="c888">{{userData.IDCardNo||'暂无'}}</text>
 		</view>
 		<view class="celBox bb">
-			<text>身份证有效期</text>
-			<text class="c666">{{userData.DueDate||'暂无'}}</text>
+			<text class="c333">身份证有效期</text>
+			<text class="c888">{{userData.DueDate||'暂无'}}</text>
 		</view>
 		<view class="celBox bb">
-			<text>手机号码</text>
+			<text class="c333">手机号码</text>
 			<navigator class="rightRow" url="/pages/user/changePhone">
-				<text class="c666">{{userData.PhoneNumber}}</text>
+				<text class="c888">{{userData.PhoneNumber}}</text>
 				<text class="changePhone">更换</text>
 				<image class="arrowImg" src="../../static/img/arrow.png" mode="widthFix"></image>
 
 			</navigator>
 		</view>
 		<view class="celBox bb">
-			<text>验证状态</text>
+			<text class="c333">验证状态</text>
 			<view class="rightRow">
 				<text class=" changePhone">{{userData.StatusVerify||'未验证'}}</text>
 				<image class="arrowImg" src="../../static/img/arrow.png" mode="widthFix"></image>
@@ -42,46 +42,46 @@
 			</view>
 		</view>
 		<view class="celBox ">
-			<text>验证时间</text>
-			<text class="c666">{{userData.DateVerify||'无'}}</text>
+			<text class="c333">验证时间</text>
+			<text class="c888">{{userData.DateVerify||'无'}}</text>
 		</view>
 		<view class="celBox mt20 bb">
-			<text>银行卡号</text>
+			<text class="c333">银行卡号</text>
 			<navigator class="rightRow" url="/pages/bankcard/bankcard">
 
-				<text class="c666">{{userData.BankCardNo||'无'}}</text>
+				<text class="c888">{{userData.BankCardNo||'无'}}</text>
 				<image class="arrowImg" src="../../static/img/arrow.png" mode="widthFix"></image>
 
 			</navigator>
 		</view>
 		<view class="celBox bb">
-			<text>开户银行</text>
-			<text class="c666">{{userData.BankName||'无'}}</text>
+			<text class="c333">开户银行</text>
+			<text class="c888">{{userData.BankName||'无'}}</text>
 		</view>
 		<view class="celBox ">
-			<text>开户支行</text>
-			<text class="c666">{{userData.SubBankName||'无'}}</text>
+			<text class="c333">开户支行</text>
+			<text class="c888">{{userData.SubBankName||'无'}}</text>
 		</view>
 		<view class="celBox mt20 bb">
-			<text>本人身份证正反面</text>
+			<text class="c333">本人身份证正反面</text>
 			<navigator class="rightRow" url="/pages/user/uploadIdcard">
 				<image v-if=" userData.IDCardPic||userData.IDCardPicBack" class="demoImg" src="../../static/img/frontDemo.png"
 				 mode="widthFix"></image>
 				<image v-if=" userData.IDCardPic ||userData.IDCardPicBack" class="demoImg" src="../../static/img/backDemo.png"
 				 mode="widthFix"></image>
-				<text v-if="!userData.IDCardPic&&!userData.IDCardPicBack" class="c666">暂无</text>
+				<text v-if="!userData.IDCardPic&&!userData.IDCardPicBack" class="c888">暂无</text>
 			</navigator>
 		</view>
 		<view class="celBox mb20 bb">
 			<view class="">
-				<text>身份证正面+反面合一复印件</text>
-				<view class="f24 c999 tips">
+				<text class="c333">身份证正面+反面合一复印件</text>
+				<view class="f24 c888 tips">
 					办理个体户时需要，身份证正反面都复印到一张A4纸的一面
 				</view>
 			</view>
 
 			<navigator class="rightRow" url="/pages/user/uploadImg">
-				<text class="c666" v-if="!userData.IDCardCopy">暂无</text>
+				<text class="c888" v-if="!userData.IDCardCopy">暂无</text>
 				<image class="demoImg" v-if="userData.IDCardCopy" src="../../static/img/copyde.png" mode="widthFix"></image>
 				<image class="arrowImg" src="../../static/img/arrow.png" mode="widthFix"></image>
 			</navigator>
@@ -107,11 +107,11 @@
 			this.getUserData();
 		},
 		methods: {
-			...mapMutations(['setUserData']),
+			...mapMutations(['setUserData']), 
 			async getUserData() {
 				var res = await this.$req.ajax({
 					path: '/wxapi/member/Maker',
-					title: '正在加载',
+					title: '',
 					data: {
 						token: this.token
 
@@ -148,7 +148,7 @@
 						type: 2,
 						maximum: 1,
 						upload: {
-							path: 'https://www.appi2b2b.comwxapi/member/Uplode',
+							path: 'https://www.appi2b2b.com/wxapi/member/Uplode',
 							files: ['file'],
 							title: '正在上传',
 							extra: {
@@ -211,9 +211,11 @@
 	.f24 {
 		font-size: 24rpx;
 	}
-
-	.c999 {
-		color: #999999;
+	.c333{
+		color: #333333;
+	}
+	.c888 {
+		color: #888888;
 	}
 
 	.arrowImg {

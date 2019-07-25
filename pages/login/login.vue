@@ -1,55 +1,60 @@
 <template>
-	<view class="content">
-		<image class="logoImg" src="../../static/img/LOGO.png"></image>
+	<view class="content"   :class="[loginwith]">
+		<image class="logoImg"   src="../../static/img/LOGO.png"></image>
 		<text class="welcome">欢迎您!</text>
 		<view class="target">
 			<text class="leftLine"></text>
 			<text>科技&数据赋能创客(自由职业者)轻松做老板</text>
 			<text class="rightLine"></text>
 		</view>
-		<view class="sectionBar">
-			<text class="loginTab " :class="{'active': pageType=='login'}" @click="pageType='login'">登录</text>
-			<text class="registerTab" :class="{'active': pageType!=='login'}" @click="pageType='register',loginType='phone'">注册</text>
-		</view>
-		<view class="loginWm" v-if="loginType!=='account'">
-			<view class="inputBox">
-				<input class="inputItem" type="text" maxlength="11" :value="mobile" data-key="mobile" @input="inputChange"
-				 placeholder="请输入手机号" placeholder-style="color:#D6D6FF" />
+		
+		<view v-if="loginwith=='account'">
+			<view class="sectionBar">
+				<text class="loginTab " :class="{'active': pageType=='login'}" @click="pageType='login'">登录</text>
+				<text class="registerTab" :class="{'active': pageType!=='login'}" @click="pageType='register',loginType='phone'">注册</text>
 			</view>
-			<view class="inputBox">
-				<input class="inputItem" type="text" maxlength="6" :value="vaild" data-key="vaild" @input="inputChange" placeholder="请输入验证码"
-				 placeholder-style="color:#D6D6FF" />
-				<text class="cendMsm" @click="checking" v-if="state===false">发送验证码</text>
-				<text class="cendMsm zai-time" v-if="state===true">倒计时{{ currentTime }}s</text>
+			<view class="loginWm" v-if="loginType!=='account'">
+				<view class="inputBox">
+					<input class="inputItem" type="text" maxlength="11" :value="mobile" data-key="mobile" @input="inputChange"
+					 placeholder="请输入手机号" placeholder-style="color:#D6D6FF" />
+				</view>
+				<view class="inputBox">
+					<input class="inputItem" type="text" maxlength="6" :value="vaild" data-key="vaild" @input="inputChange"
+					 placeholder="请输入验证码" placeholder-style="color:#D6D6FF" />
+					<text class="cendMsm" @click="checking" v-if="state===false">发送验证码</text>
+					<text class="cendMsm zai-time" v-if="state===true">倒计时{{ currentTime }}s</text>
+				</view>
+				<view class="inputBox" v-if="pageType=='register'">
+					<input class="inputItem" type="text" :value="password" data-key="password" @input="inputChange" placeholder="密码至少为6位长度的数字或字母组合"
+					 placeholder-style="color:#D6D6FF" />
+				</view>
 			</view>
-			<view class="inputBox" v-if="pageType=='register'">
-				<input class="inputItem" type="text" :value="password" data-key="password" @input="inputChange" placeholder="密码至少为6位长度的数字或字母组合"
-				 placeholder-style="color:#D6D6FF" />
+			<view class="loginWm" v-if="pageType=='login'&&loginType=='account'">
+				<view class="inputBox">
+					<image class="yonghuIcon" src="../../static/img/yonghu.png"></image>
+					<text class="lineBorder"></text>
+					<input class="inputItem" type="text" :value="account" data-key="account" @input="inputChange" placeholder="请输入账号"
+					 placeholder-style="color:#D6D6FF" />
+				</view>
+				<view class="inputBox">
+					<image class="passwordIcon" src="../../static/img/password.png"></image>
+					<text class="lineBorder"></text>
+					<input class="inputItem" type="text" :value="password" data-key="password" @input="inputChange" placeholder="请输入密码"
+					 placeholder-style="color:#D6D6FF" />
+				</view>
 			</view>
-		</view>
-		<view class="loginWm" v-if="pageType=='login'&&loginType=='account'">
-			<view class="inputBox">
-				<image class="yonghuIcon" src="../../static/img/yonghu.png"></image>
-				<text class="lineBorder"></text>
-				<input class="inputItem" type="text" :value="account" data-key="account" @input="inputChange" placeholder="请输入账号"
-				 placeholder-style="color:#D6D6FF" />
+			<view v-if="pageType=='login'&&loginType=='account'" class="loginType" @click="loginType='phone'">验证码登录</view>
+			<view v-if="pageType=='login'&&loginType=='phone'" class="loginType" @click="loginType='account'">账号密码登录</view>
+			<view class="btn-row" v-if="pageType=='login'">
+				<button v-if="loginType=='phone'" class="primaryBtn" @tap="toLogin">快速登录</button>
+				<button v-if="loginType=='account'" class="primaryBtn" @tap="toLoginPw">快速登录</button>
 			</view>
-			<view class="inputBox">
-				<image class="passwordIcon" src="../../static/img/password.png"></image>
-				<text class="lineBorder"></text>
-				<input class="inputItem" type="text" :value="password" data-key="password" @input="inputChange" placeholder="请输入密码"
-				 placeholder-style="color:#D6D6FF" />
+			<view class="btn-row" v-if="pageType=='register'">
+				<button class="primaryBtn" @tap="toRegister">立即注册</button>
 			</view>
+
 		</view>
-		<text v-if="pageType=='login'&&loginType=='account'" class="loginType" @click="loginType='phone'">验证码登录</text>
-		<text v-if="pageType=='login'&&loginType=='phone'" class="loginType" @click="loginType='account'">账号密码登录</text>
-		<view class="btn-row" v-if="pageType=='login'">
-			<button v-if="loginType=='phone'" class="primaryBtn" @tap="toLogin">快速登录</button>
-			<button v-if="loginType=='account'" class="primaryBtn" @tap="toLoginPw">快速登录</button>
-		</view>
-		<view class="btn-row" v-if="pageType=='register'">
-			<button class="primaryBtn" @tap="toRegister">立即注册</button>
-		</view>
+
 	</view>
 </template>
 
@@ -67,6 +72,7 @@
 		},
 		data() {
 			return {
+				loginwith: "wechat",
 				loginType: 'phone',
 				pageType: "login",
 				state: false, //是否开启倒计时
@@ -90,7 +96,7 @@
 			});
 		},
 
-		computed: mapState(['openId','token']),
+		computed: mapState(['openId', 'token']),
 
 		methods: {
 			...mapMutations(['login', 'setOpenId']),
@@ -99,15 +105,15 @@
 				this[key] = e.detail.value;
 			},
 			//绑定微信
-			async bondWechat(){
+			async bondWechat() {
 				var res = await this.$req.ajax({
 					path: '/wxapi/member/maker_wechat',
-					title: '正在加载',
+					 
 					data: {
 						WeChatID: this.openId,
 						WeChatNickname: "",
-						token:this.token
-				
+						token: this.token
+
 					}
 				});
 				if (res.data.code == 200) {
@@ -122,7 +128,7 @@
 			async loginWithWe(code) {
 				var res = await this.$req.ajax({
 					path: '/wxapi/login/WeChat',
-					title: '正在加载',
+					title: '登录...',
 					data: {
 						WeChatID: code,
 						verify: "zhongbao"
@@ -135,7 +141,8 @@
 						url: "/pages/main/main"
 					})
 				} else {
-					this.$api.msg(res.data.message);
+					// this.$api.msg(res.data.message);
+					this.loginwith = "account"
 				}
 			},
 			async getOpenId(code) {
@@ -238,15 +245,15 @@
 					this.currentTime = this.totalTime;
 				}
 			},
-			async toLoginPw(){
-				 
+			async toLoginPw() {
+
 				let res = await this.$req.ajax({
 					path: '/wxapi/login/Loginpwd',
 					title: '正在加载',
 					data: {
 						account: this.account,
 						LoginPWD: this.password,
-				
+
 					}
 				});
 				if (res.data.code == 200) {
@@ -259,7 +266,7 @@
 
 				} else {
 					this.$api.msg(res.data.message)
-				
+
 				}
 			},
 			async toLogin() {
@@ -285,7 +292,7 @@
 				if (result.data.code === 200) {
 					this.login(result.data.data.token);
 
-					this.bondWechat() 
+					this.bondWechat()
 					// uni.navigateTo({
 					// 	url: "/pages/main/main"
 					// });
@@ -303,6 +310,7 @@
 	.content {
 		background: linear-gradient(to bottom, #1666F3, #7F7AFF);
 		padding-top: 100upx;
+		 
 	}
 
 	.logoImg {
@@ -311,7 +319,13 @@
 		display: block;
 		margin: 30upx auto;
 	}
-
+	.wechat{
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		padding-top: 0;
+	}
 	.welcome {
 		font-size: 50rpx;
 		color: #FFFFFF;

@@ -18,35 +18,38 @@
 				</view>
 			</view> -->
 			<view class="sectionTab">
-				<navigator url="/pages/user/user" class="sectionItem" >
+				<navigator url="/pages/user/user" class="sectionItem">
 					<image class="itemIcon" src="../../static/img/sec1.png" mode="widthFix"></image>
 					<text class="itemtitle">我的基本信息</text>
-				</navigator >
-				<navigator url="/pages/validate/validate" class="sectionItem" >
+				</navigator>
+				<navigator url="/pages/validate/validate" class="sectionItem">
 					<image class="itemIcon" src="../../static/img/sec2.png" mode="widthFix"></image>
 					<text class="itemtitle">二郎神验证</text>
 				</navigator>
-				
-				<navigator url="/pages/businessPlace/businessPlace" class="sectionItem" >
+
+				<navigator url="/pages/businessPlace/businessPlace" class="sectionItem">
 					<image class="itemIcon" src="../../static/img/sec3.png" mode="widthFix"></image>
 					<text class="itemtitle">我的经营场所</text>
 				</navigator>
-				<view class="sectionItem">
+				<!-- <view class="sectionItem "  @click="toastTip">
 					<image class="itemIcon" src="../../static/img/sec4.png" mode="widthFix"></image>
 					<text class="itemtitle">我的外包合同</text>
-				</view>
-				<navigator url="/pages/company/company" class="sectionItem" >
+					<view class="gray"></view>
+				</view> -->
+				<navigator url="/pages/company/company" class="sectionItem">
 					<image class="itemIcon" src="../../static/img/sec5.png" mode="widthFix"></image>
 					<text class="itemtitle">我服务过的企业</text>
 				</navigator>
-				<view class="sectionItem">
+				<!-- <view class="sectionItem  " @click="toastTip">
 					<image class="itemIcon" src="../../static/img/sec6.png" mode="widthFix"></image>
 					<text class="itemtitle">我的业务交付支付确认函</text>
+					<view class="gray"></view>
 				</view>
-				<view class="sectionItem">
+				<view class="sectionItem"  @click="toastTip">
 					<image class="itemIcon" src="../../static/img/sec7.png" mode="widthFix"></image>
 					<text class="itemtitle">我的完税证明</text>
-				</view>
+					<view class="gray"></view>
+				</view> -->
 			</view>
 		</view>
 		<image class="banner" src="../../static/img/banner.png" mode="widthFix"></image>
@@ -61,11 +64,11 @@
 		mapState,
 		mapMutations
 	} from 'vuex'
-	
+
 	export default {
 		data() {
 			return {
-	
+
 			}
 		},
 		computed: mapState(['token', 'userData']),
@@ -77,19 +80,22 @@
 			async getUserData() {
 				var res = await this.$req.ajax({
 					path: '/wxapi/member/Maker',
-					title: '正在加载',
 					data: {
 						token: this.token
-	
+
 					}
 				});
 				if (res.data.code == 200) {
 					this.setUserData(res.data.data)
-	
+
 				} else {
 					this.$api.msg(res.data.message);
 				}
+			},
+			toastTip(){
+				this.$api.msg("暂未开通");
 			}
+			
 		}
 	}
 </script>
@@ -98,10 +104,15 @@
 	.content {
 		background-color: #FFFFFF;
 		padding: 30rpx;
+		position: relative;
+		min-height: 100vh;
 	}
 
 	.logoImg {
 		width: 298rpx;
+		height:43rpx ;
+		display: block;
+		margin: 10px auto;
 	}
 
 	.userSection {
@@ -124,7 +135,6 @@
 		font-size: 24rpx;
 		display: flex;
 		margin-top: 15rpx;
-		;
 		color: #6F6F6F;
 	}
 
@@ -155,19 +165,29 @@
 		justify-content: center;
 		background-color: #F6F7FC;
 		margin-bottom: 20rpx;
-		;
 
 		color: #000000;
+		position: relative;
+		overflow: hidden;
+	}
+
+	.gray {
+		width: 100%;
+		height: 100%;
+		position: absolute;
+		left: 0 ;
+		top: 0;
+		background-color: rgba(0,0,0,.3);
 	}
 
 	.itemIcon {
 		width: 100rpx;
-
+		height: 100rpx;
 	}
 
 	.itemtitle {
 		padding-top: 20rpx;
-		font-size: 30rpx;
+		font-size: 29rpx;
 		font-weight: 600;
 	}
 
@@ -175,5 +195,8 @@
 		display: block;
 		margin-top: 50rpx;
 		width: 100%;
+		position: absolute;
+		left: 0;
+		bottom: 0;
 	}
 </style>

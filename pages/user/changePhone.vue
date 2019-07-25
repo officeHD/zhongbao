@@ -5,12 +5,12 @@
 		<view class="loginWm">
 			<view class="inputBox">
 				<view class="title">原手机号码</view>
-				<input class="inputItem" type="text" maxlength="11" :value="account" data-key="account" @input="inputChange"
+				<input class="inputItem" type="number" maxlength="11" :value="account" data-key="account" @input="inputChange"
 				 placeholder="请输入手机号" placeholder-style="color:#999" />
 			</view>
 			<view class="inputBox">
 				<view class="title">新手机号码</view>
-				<input class="inputItem" type="text" maxlength="11" :value="mobile" data-key="mobile" @input="inputChange"
+				<input class="inputItem" type="number" maxlength="11" :value="mobile" data-key="mobile" @input="inputChange"
 				 placeholder="请输入新手机号" placeholder-style="color:#999" />
 				<text class="cendMsm" @click="checking" v-if="state===false">发送验证码</text>
 				<text class="defaultBtn" v-if="state===true">倒计时{{ currentTime }}s</text>
@@ -77,6 +77,10 @@
 					this.$api.msg('请输入正确的手机号码');
 					return;
 				}
+				if(this.account==this.mobile){
+					this.$api.msg('手机号相同，请重新输入');
+					return;
+				}
 				let res = await this.$req.ajax({
 					path: '/wxapi/member/maker_mobile',
 					title: '正在加载',
@@ -89,9 +93,10 @@
 					}
 				});
 				if (res.data.code == 200) {
-					 uni.navigateBack({
-					 	
-					 })
+					this.$api.msg("修改成功")
+					 setTimeout(function() {
+					 	uni.navigateBack({})
+					 },1000)
 				} else {
 					this.$api.msg(res.data.message)
 
@@ -176,6 +181,7 @@
 		width: 180rpx;
 		text-align: left;
 		padding-left: 20rpx;
+		font-size: 28rpx;
 
 	}
 

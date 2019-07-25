@@ -23,7 +23,7 @@ Vue.config.productionTip = false
 
 
 
-req.defaultReq.url = 'http://c_inventory.i2f2f.com/' //设置公共url部分
+req.defaultReq.url = 'https://www.appi2b2b.com/' //设置公共url部分
 req.defaultReq.type = "POST"; //设置公共请求类型
 Vue.prototype.$req = req;
 Vue.prototype.$store = store

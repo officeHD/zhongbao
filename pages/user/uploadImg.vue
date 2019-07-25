@@ -6,7 +6,7 @@
 				<view class="boxItem">
 					<view class="boxtitle">身份证正面+反面合一复印件 </view>
 					<view @click="testUp(index)">
-						<image v-if="userData.IDCardCopy" class="boxImg" :src="'http://c_inventory.i2f2f.com'+userData.IDCardCopy" mode="widthFix"></image>
+						<image v-if="userData.IDCardCopy" class="boxImg" :src="userData.IDCardCopy" mode="widthFix"></image>
 						<image v-else class="boxImg" src="../../static/img/idcopy.png" mode="widthFix"></image>
 					</view>
 				</view>
@@ -39,6 +39,7 @@
 			...mapState(['token', 'userData'])
 		},
 		methods: {
+			
 			async toRegister() {
 
 
@@ -47,16 +48,16 @@
 					title: '保存中',
 					data: {
 						url: this.idImg,
-						token: this.token
-
+						token: this.token 
 					}
 				});
 				if (res.data.code == 200) {
 					// console.log(res.data.data)
 					this.$api.msg("保存成功");
-					uni.navigateBack({
-
-					})
+					setTimeout(function() {
+						uni.navigateBack({})
+					},1000)
+					
 				} else {
 					this.$api.msg(res.data.message);
 				}
@@ -67,7 +68,7 @@
 						type: 2,
 						maximum: 1,
 						upload: {
-							path: 'https://www.appi2b2b.comwxapi/member/Uplode',
+							path: 'https://www.appi2b2b.com/wxapi/member/Uplode',
 							files: ['file'],
 							title: '正在上传',
 							extra: {
@@ -82,7 +83,9 @@
 							let returnData = JSON.parse(item);
 							console.log(returnData)
 							if (returnData.code == 200) {
-								this.userData.IDCardCopy = returnData.data.url;
+								this.$api.msg("上传成功");
+								this.userData.IDCardCopy = returnData.data.path;
+								this.idImg = returnData.data.path; 	
 							}
 
 						})

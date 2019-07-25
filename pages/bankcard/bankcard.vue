@@ -3,22 +3,22 @@
 
 		<view class="celBox bb">
 			<text class="c666 leftcell">户名</text>
-			 <text>{{userData.Name}}</text>
+			<text>{{userData.Name}}</text>
 		</view>
 		<view class="celBox bb">
 			<text class="c666 leftcell">银行卡号</text>
-			<input class="inputItem" type="text" :value="userData.BankCardNo" data-key="BankCardNo" @input="inputChange" placeholder="请输入银行卡号"
-			 placeholder-style="color:#999" />
+			<input class="inputItem" type="number" maxlength="22" :value="userData.BankCardNo||''" data-key="BankCardNo" @input="inputChange"
+			 placeholder="请输入银行卡号" placeholder-style="color:#999" />
 		</view>
 		<view class="celBox bb">
 			<text class="c666 leftcell">开户银行</text>
-			<input class="inputItem" type="text" :value="userData.BankName" data-key="BankName" @input="inputChange" placeholder="请输入开户银行"
-			 placeholder-style="color:#999" />
+			<input class="inputItem" type="text" :value="userData.BankName||''" data-key="BankName" @input="inputChange"
+			 placeholder="请输入开户银行" placeholder-style="color:#999" />
 		</view>
 		<view class="celBox bb">
 			<text class="c666 leftcell">开户支行</text>
-			<input class="inputItem" type="text" :value="userData.SubBankName" data-key="SubBankName" @input="inputChange" placeholder="请输入开户支行"
-			 placeholder-style="color:#999" />
+			<input class="inputItem" type="text" :value="userData.SubBankName||''" data-key="SubBankName" @input="inputChange"
+			 placeholder="请输入开户支行" placeholder-style="color:#999" />
 		</view>
 		<text class="tips">必须填写本人银行卡</text>
 
@@ -36,11 +36,11 @@
 
 	export default {
 		computed: {
-			...mapState(['token', 'forcedLogin','userData'])
+			...mapState(['token', 'forcedLogin', 'userData'])
 		},
 		data() {
 			return {
-				 
+
 			}
 		},
 		methods: {
@@ -61,9 +61,10 @@
 					}
 				});
 				if (result.data.code === 200) {
-					 uni.navigateBack({
-					 	
-					 })
+					this.$api.msg("保存成功");
+					setTimeout(function() {
+						uni.navigateBack({})
+					},800)
 				} else {
 					this.$api.msg(result.data.message);
 					this.logining = false;
@@ -99,6 +100,10 @@
 
 	.leftcell {
 		width: 180rpx;
+	}
+
+	.inputItem {
+		flex: 1;
 	}
 
 	.bb {

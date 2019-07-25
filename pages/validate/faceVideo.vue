@@ -5,10 +5,10 @@
 		<view class="videoBorder">
 			<view class="videoContent">
 				<!-- <view class="topTips">没有检测到人脸</view> -->
-				<camera  device-position="front"  flash="off"  binderror="error"  style="width: 100%; height: 100%;"></camera>
+				<camera class="videoCa"  device-position="front"  flash="off"  binderror="error"></camera>
 			</view>
 		</view>
-		<button class="primaryBtn"   @click="takePhoto"> 拍照 </button>
+		<button class="primaryBtn" @click="takePhoto"> 拍照 </button>
 	</view>
 </template>
 
@@ -39,42 +39,48 @@
 				}) //调用相机结束
 			},
 			async uploadFile(path) {
-				const res = await this.$req.ajaxFile({ 
-					path: 'http://c_inventory.i2f2f.com/wxapi/member/Uplode',
+				const res = await this.$req.ajaxFile({
+					path: 'https://www.appi2b2b.com/wxapi/member/Uplode',
 					filePath: path,
 					fileName: 'file',
-					extra: { 
-						token: this.token 
+					extra: {
+						token: this.token
 					}
 
 				})
-				let data=JSON.parse(res.data);
-				if(data.code==200){
+				let data = JSON.parse(res.data);
+				if (data.code == 200) {
 					this.validImg(data.data.url)
 				}
 			},
-			async validImg(url){
+			async validImg(url) {
 				var res = await this.$req.ajax({
 					path: '/wxapi/member/maker_PicVerify',
 					title: '保存中',
 					data: {
 						url: url,
 						token: this.token
-				
+
 					}
 				});
 				if (res.data.code == 200) {
 					// console.log(res.data.data)
 					this.$api.msg("保存成功");
-					uni.redirectTo({
-						url:"/pages/validate/success"
-					})
-					 
+					setTimeout(function() {
+						uni.redirectTo({
+							url: "/pages/validate/success"
+						})
+					}, 1000);
 				} else {
 					this.$api.msg(res.data.message);
+					setTimeout(function() {
+						uni.navigateBack({})
+					}, 1000);
+
+
 				}
-				
-				
+
+
 			}
 		},
 
@@ -112,6 +118,12 @@
 		overflow: hidden;
 	}
 
+	.videoCa {
+		border-radius: 450rpx;
+		width: 100%;
+		height: 100%;
+	}
+
 	.topTips {
 		width: 100%;
 		height: 150rpx;
@@ -125,7 +137,7 @@
 		justify-content: center;
 
 	}
-	
+
 	.primaryBtn {
 		background-color: #1666F3;
 		color: #FFFFFF;
@@ -136,5 +148,4 @@
 		margin-top: 130rpx;
 		text-align: center;
 	}
-	
 </style>

@@ -1,9 +1,9 @@
 <template>
 	<view class="wrapper">
 		<navigator url="/pages/validate/faceVaildate" class="btnBox c000">人脸识别验证</navigator>
-		<button  class="btnBox">人脸识别验证</button>
-		<button class="btnBox">人脸识别验证</button>
-		<button class="btnBox">人脸识别验证</button>
+		<button  class="btnBox">手机号实名认证</button>
+		<button class="btnBox">银行卡3要素验证</button>
+		<button class="btnBox">社保授权查询</button>
 	</view>
 </template>
 

@@ -1,6 +1,5 @@
 <template>
 	<view class="wrapper">
-		 
 		<view class="celBox bb">
 			<text class="leftcell"> 姓名</text>
 			<view class="rightRow">
@@ -10,20 +9,18 @@
 		<view class="celBox bb">
 			<text class="leftcell"> 身份证号</text>
 			<view class="rightRow">
-				<input placeholder="请输入" :value="userData.IDCardNo" data-key="userData.IDCardNo" @input="inputChange" />
+				<input placeholder="请输入" maxlength="18" type="idcard" :value="userData.IDCardNo" data-key="userData.IDCardNo" @input="inputChange" />
 			</view>
 		</view>
-		<view class="celBox bb">
+		<!-- <view class="celBox bb">
 			<text class="leftcell"> 身份证有效期</text>
 			<view class="rightRow">
-				<picker mode="userData.DueDate" :value="userData.DueDate" :start="startDate" :end="endDate" @change="bindDateChange">
-					<view class="uni-input">{{date}}</view>
-				</picker>
+				<text>{{userData.DueDate||"未验证"}}</text>
 			</view>
-		</view>
-		<view class="btn-row">
+		</view> -->
+		<!-- <view class="btn-row">
 			<button class="primaryBtn" @tap="toRegister">立即保存</button>
-		</view>
+		</view> -->
 	</view>
 </template>
 
@@ -77,39 +74,38 @@
 					}
 				});
 				if (res.data.code == 200) {
-					 uni.navigateBack({
-					 	
-					 })
+					uni.navigateBack({
+
+					})
 				} else {
 					this.$api.msg(res.data.message);
 				}
 			},
 			// 上传身份证
-			 
-			
-			async maker_idcard(surl,side){
+
+
+			async maker_idcard(surl, side) {
 				var res = await this.$req.ajax({
 					path: '/wxapi/member/maker_idcard',
 					title: '正在加载',
 					data: {
-						surl:surl,
+						surl: surl,
 						side: side,
 						token: this.token,
 					}
 				});
-				if (res.data.code == 200) {
-				} else {
+				if (res.data.code == 200) {} else {
 					this.$api.msg(res.data.message);
 				}
 			},
 			async testUp(imgtype) {
-				let that=this;
+				let that = this;
 				try {
 					const res = await rup.selectFiles({
 						type: 2,
 						maximum: 1,
 						upload: {
-							path: 'https://www.appi2b2b.comwxapi/member/Uplode',
+							path: 'https://www.appi2b2b.com/wxapi/member/Uplode',
 							files: ['file'],
 							title: '正在上传',
 							extra: {
@@ -124,7 +120,7 @@
 							let returnData = JSON.parse(item);
 							console.log(returnData)
 							if (returnData.code == 200) {
-								this[imgtype] = returnData.data.url; 
+								this[imgtype] = returnData.data.url;
 							}
 
 						})
@@ -181,9 +177,18 @@
 		height: 100rpx;
 		line-height: 100rpx;
 	}
+	.rightRow{
+		color: #888888;
+		flex: 1;
+	}
+	.rightRow input{
+		width: 100%;
+		height: 100%;
+	}
 
 	.leftcell {
 		width: 200rpx;
+		color: #333333;
 	}
 
 	.bb {
