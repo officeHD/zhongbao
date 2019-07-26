@@ -67,9 +67,7 @@
 
 	export default {
 		data() {
-			return {
-
-			}
+			return {}
 		},
 		computed: mapState(['token', 'userData']),
 		onShow() {
@@ -82,7 +80,6 @@
 					path: '/wxapi/member/Maker',
 					data: {
 						token: this.token
-
 					}
 				});
 				if (res.data.code == 200) {
