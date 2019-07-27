@@ -1,0 +1,136 @@
+[33mcommit ed0c14caf8dc5785d79b6b506512fcd36dc03fad[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m)[m
+Author: officeHD <haungdongoffice@gmail.com>
+Date:   Wed Jul 24 16:36:19 2019 +0800
+
+    更改请求域名
+
+[33mcommit 81142bdd0992371b8e1b1482fb38a7ed8b31b620[m
+Author: officeHD <haungdongoffice@gmail.com>
+Date:   Tue Jul 23 10:40:56 2019 +0800
+
+    Signed-off-by: officeHD <haungdongoffice@gmail.com>
+
+[33mcommit 78027dabc0425e52131b7f265309c4b638b4452d[m
+Author: officeHd <haungdongoffice@gmail.com>
+Date:   Tue Jul 23 07:40:43 2019 +0800
+
+    Signed-off-by: officeHd <haungdongoffice@gmail.com>
+
+[33mcommit fc934b8858282ee610261a70b308d11f1526a886[m
+Author: officeHd <haungdongoffice@gmail.com>
+Date:   Mon Jul 22 23:10:05 2019 +0800
+
+    Signed-off-by: officeHd <haungdongoffice@gmail.com>
+
+[33mcommit 2efbe21b5e424c88a1b547347ed117c81f31d02a[m
+Author: officeHd <haungdongoffice@gmail.com>
+Date:   Sun Jul 21 05:26:03 2019 +0800
+
+    页面逻辑
+
+[33mcommit d508f5d98f95246aa53ab1df6356a9162e70f478[m
+Author: officeHd <haungdongoffice@gmail.com>
+Date:   Sun Jul 21 05:17:46 2019 +0800
+
+    Merge branch 'master' of https://github.com/officeHD/zhongba
+    
+    Signed-off-by: officeHd <haungdongoffice@gmail.com>
+
+[33mcommit ec2b90fcd5c1750c3e38d8ac9d0c7dc9c42a163f[m
+Merge: bb2d8c3 bf24bc9
+Author: officeHd <haungdongoffice@gmail.com>
+Date:   Sun Jul 21 05:16:53 2019 +0800
+
+    upload
+
+[33mcommit bb2d8c3f7db0ae3b2d054e8984f06e91ae495374[m
+Author: officeHd <haungdongoffice@gmail.com>
+Date:   Sun Jul 21 04:50:08 2019 +0800
+
+    登录逻辑修改
+    
+    Signed-off-by: officeHd <haungdongoffice@gmail.com>
+
+[33mcommit 1a17a8bd6862f237ad2d0b52de6af56ec8a9ca83[m
+Author: officeHd <haungdongoffice@gmail.com>
+Date:   Sun Jul 21 04:47:05 2019 +0800
+
+    Signed-off-by: officeHd <haungdongoffice@gmail.com>
+
+[33mcommit 0670b3e46e77fee3d6a49f7fef5eae0253c72966[m
+Author: officeHd <haungdongoffice@gmail.com>
+Date:   Sun Jul 21 04:42:59 2019 +0800
+
+    Signed-off-by: officeHd <haungdongoffice@gmail.com>
+
+[33mcommit bf24bc946d64b4dfe53f4ec2ffa314d24098debc[m
+Author: officeHD <haungdongoffice@gmail.com>
+Date:   Fri Jul 19 14:49:46 2019 +0800
+
+    Signed-off-by: officeHD <haungdongoffice@gmail.com>
+
+[33mcommit 0006bbe54b05319c172758e52d5545719e845bed[m
+Author: officeHD <haungdongoffice@gmail.com>
+Date:   Fri Jul 19 09:18:00 2019 +0800
+
+    Signed-off-by: officeHD <haungdongoffice@gmail.com>
+
+[33mcommit 11a12459be88cc60b09308505640047d6151e955[m
+Author: officeHD <haungdongoffice@gmail.com>
+Date:   Fri Jul 19 09:16:29 2019 +0800
+
+    Signed-off-by: officeHD <haungdongoffice@gmail.com>
+
+[33mcommit 5e3e8f917815565557ac764596b36dfa905ae6e8[m
+Author: officeHd <haungdongoffice@gmail.com>
+Date:   Fri Jul 19 08:01:04 2019 +0800
+
+    Signed-off-by: officeHd <haungdongoffice@gmail.com>
+
+[33mcommit b55e7c06dd17d923d8de793df5096c720679b717[m
+Author: officeHd <haungdongoffice@gmail.com>
+Date:   Fri Jul 19 07:33:49 2019 +0800
+
+    Signed-off-by: officeHd <haungdongoffice@gmail.com>
+
+[33mcommit 50c1397baf0f9de418d8d9148d1ad73e06f0c2e2[m
+Author: officeHd <haungdongoffice@gmail.com>
+Date:   Thu Jul 18 22:12:00 2019 +0800
+
+    Signed-off-by: officeHd <haungdongoffice@gmail.com>
+
+[33mcommit 918af5d604a9408597c97cd668126b2c07e1d0c0[m
+Author: officeHd <haungdongoffice@gmail.com>
+Date:   Thu Jul 18 06:34:19 2019 +0800
+
+    Signed-off-by: officeHd <haungdongoffice@gmail.com>
+
+[33mcommit 18e246d4a6abf879ff5a9da8625ecad84a5c1e07[m
+Author: officeHd <haungdongoffice@gmail.com>
+Date:   Thu Jul 18 05:39:56 2019 +0800
+
+    Signed-off-by: officeHd <haungdongoffice@gmail.com>
+
+[33mcommit 88aba86f4dd4b3174b9a75ea9faaa85174c21985[m
+Author: officeHd <haungdongoffice@gmail.com>
+Date:   Wed Jul 17 00:26:14 2019 +0800
+
+    Signed-off-by: officeHd <haungdongoffice@gmail.com>
+
+[33mcommit 23fd8775e7a4c90e1f89bbc1efa5663c5f1fc304[m
+Author: officeHD <haungdongoffice@gmail.com>
+Date:   Tue Jul 16 09:04:04 2019 +0800
+
+    页面添加
+
+[33mcommit 4733b6f37b5a4a27dacad5b8bea367ecde71bd95[m
+Author: officeHd <haungdongoffice@gmail.com>
+Date:   Tue Jul 16 07:40:19 2019 +0800
+
+    页面结构
+
+[33mcommit c2c25a4fa82de4fca85360854b7187d7cb180fb1[m
+Author: officeHd <haungdongoffice@gmail.com>
+Date:   Mon Jul 15 23:10:50 2019 +0800
+
+    first

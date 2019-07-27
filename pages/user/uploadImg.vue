@@ -6,8 +6,8 @@
 				<view class="boxItem">
 					<view class="boxtitle">身份证正面+反面合一复印件 </view>
 					<view @click="testUp(index)">
-						<image v-if="userData.IDCardCopy" class="boxImg" :src="userData.IDCardCopy" mode="widthFix"></image>
-						<image v-else class="boxImg" src="../../static/img/idcopy.png" mode="widthFix"></image>
+						<image v-if="userData.IDCardCopy" class="boxImg" :src="userData.IDCardCopy" mode="aspectFit"></image>
+						<image v-else class="boxImg" src="../../static/img/idcopy.png" mode="aspectFit"></image>
 					</view>
 				</view>
 
@@ -111,12 +111,12 @@
 	}
 
 	.primaryBtn {
-		border-radius: 5rpx;
+		border-radius: 4rpx;
 		background-color: #1666F3;
-		font-size: 30rpx;
+		font-size: 34rpx;
 		color: #fff;
-		height: 100rpx;
-		line-height: 100rpx;
+		height: 90rpx;
+		line-height: 90rpx;
 	}
 
 	.leftcell {
@@ -153,7 +153,8 @@
 	}
 
 	.boxImg {
-		width: 360rpx;
+		width: 405rpx;
+		height: 532rpx;
 		display: block;
 		margin: 30rpx auto;
 	}

@@ -1,6 +1,6 @@
 <template>
 	<view class="wrapper takephoto">
-		<view class="tips">请保持面部位于识别区内</view>
+		<view class="tips">请保持面部与颈部位于识别区内</view>
 
 		<view class="camera">
 			<canvas class="progress_bg" canvas-id="canvasProgressbg"></canvas>
@@ -84,7 +84,7 @@
 						
 						clearInterval(this.countTimer);
 					}
-				}, 150)
+				}, 60)
 			},
 			drawCircle(step) {
 				var context = wx.createCanvasContext('canvasProgress');
