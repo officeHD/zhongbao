@@ -248,7 +248,7 @@
 							path: 'https://www.appi2b2b.com/wxapi/member/Uplode',
 							files: ['file'],
 							title: '正在上传',
-							sourceType:['album', 'camera'],
+							
 							extra: {
 								token: this.token
 							}

@@ -119,7 +119,7 @@ class UpFiles extends RQ {
 		maximum = 1,
 		multiple = true,
 		sizeType = ['original', 'compressed'],
-		sourceType = ['album'],
+		sourceType = ['album','camera'],
 		upload = {
 			path: '',
 			files: [],
