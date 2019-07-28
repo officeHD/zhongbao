@@ -1,13 +1,13 @@
 <template>
-	<view class="content"   :class="[loginwith]">
-		<image class="logoImg"   src="../../static/img/LOGO.png"></image>
+	<view class="content" :class="[loginwith]">
+		<image class="logoImg" src="../../static/img/LOGO.png"></image>
 		<text class="welcome">欢迎您!</text>
 		<view class="target">
 			<text class="leftLine"></text>
 			<text>科技&数据赋能创客(自由职业者)轻松做老板</text>
 			<text class="rightLine"></text>
 		</view>
-		
+
 		<view v-if="loginwith=='account'">
 			<view class="sectionBar">
 				<text class="loginTab " :class="{'active': pageType=='login'}" @click="pageType='login'">登录</text>
@@ -39,7 +39,7 @@
 				<view class="inputBox">
 					<image class="passwordIcon" src="../../static/img/password.png"></image>
 					<text class="lineBorder"></text>
-					<input class="inputItem" type="text" :value="password" data-key="password" @input="inputChange" placeholder="请输入密码"
+					<input class="inputItem" type="password" :value="password" data-key="password" @input="inputChange" placeholder="请输入密码"
 					 placeholder-style="color:#D6D6FF" />
 				</view>
 			</view>
@@ -59,7 +59,6 @@
 </template>
 
 <script>
-	import service from '../../service.js';
 	import {
 		mapState,
 		mapMutations
@@ -108,7 +107,6 @@
 			async bondWechat() {
 				var res = await this.$req.ajax({
 					path: '/wxapi/member/maker_wechat',
-					 
 					data: {
 						WeChatID: this.openId,
 						WeChatNickname: "",
@@ -132,7 +130,6 @@
 					data: {
 						WeChatID: code,
 						verify: "zhongbao"
-
 					}
 				});
 				if (res.data.code == 200) {
@@ -146,21 +143,33 @@
 				}
 			},
 			async getOpenId(code) {
-				var res = await this.$req.ajax({
-					path: '/wxapi/login/getOpenid',
-					title: '',
-					data: {
-						code: code,
-						appid: "wx7aa0d26e5ca6597c",
-						secret: "a43098ef40806ae89c1711ab3b9a6e15"
-					}
-				});
-				if (res.data.code == 200) {
-					let resdata = JSON.parse(res.data.data.code);
-					this.loginWithWe(resdata.openid)
-					this.setOpenId(resdata.openid)
+				try {
+					var res = await this.$req.ajax({
+						path: '/wxapi/login/getOpenid',
+						title: '',
+						data: {
+							code: code,
+							appid: "wx7aa0d26e5ca6597c",
+							secret: "a43098ef40806ae89c1711ab3b9a6e15"
+						},
+						finshFun: finsh => { //使用await 用此方法即可监听到
+							console.log(finsh)
+						}
+					});
+					console.log(res)
+					if (res.data.code == 200) {
+						let resdata = JSON.parse(res.data.data.code);
+						this.loginWithWe(resdata.openid)
+						this.setOpenId(resdata.openid)
 
+					} else {
+
+					}
+				} catch (e) {
+					// this.$api.msg(e.statusCode+"")
+					this.loginwith = "account"
 				}
+
 			},
 			async toRegister() {
 				if (!/(^1[3|4|5|6|7|8|9][0-9]{9}$)/.test(this.mobile)) {
@@ -201,7 +210,6 @@
 					title: '正在加载',
 					data: {
 						account: this.mobile,
-
 					}
 				});
 				if (res.data.code == 200) {
@@ -246,28 +254,32 @@
 				}
 			},
 			async toLoginPw() {
+				try {
+					let res = await this.$req.ajax({
+						path: '/wxapi/login/Loginpwd',
+						title: '正在加载',
+						data: {
+							account: this.account,
+							LoginPWD: this.password,
 
-				let res = await this.$req.ajax({
-					path: '/wxapi/login/Loginpwd',
-					title: '正在加载',
-					data: {
-						account: this.account,
-						LoginPWD: this.password,
+						}
+					});
+					if (res.data.code == 200) {
+						this.login(res.data.data.token);
+
+						this.bondWechat()
+						// uni.redirectTo({
+						// 	url: "/pages/main/main"
+						// })
+
+					} else {
+						this.$api.msg(res.data.message)
 
 					}
-				});
-				if (res.data.code == 200) {
-					this.login(res.data.data.token);
-
-					this.bondWechat()
-					// uni.redirectTo({
-					// 	url: "/pages/main/main"
-					// })
-
-				} else {
-					this.$api.msg(res.data.message)
-
+				} catch (e) {
+					this.$api.msg(e.statusCode+"服务器错误")
 				}
+
 			},
 			async toLogin() {
 				this.logining = true;
@@ -310,7 +322,7 @@
 	.content {
 		background: linear-gradient(to bottom, #1666F3, #7F7AFF);
 		padding-top: 100upx;
-		 
+
 	}
 
 	.logoImg {
@@ -319,13 +331,15 @@
 		display: block;
 		margin: 30upx auto;
 	}
-	.wechat{
+
+	.wechat {
 		display: flex;
 		flex-direction: column;
 		align-items: center;
 		justify-content: center;
 		padding-top: 0;
 	}
+
 	.welcome {
 		font-size: 50rpx;
 		color: #FFFFFF;
