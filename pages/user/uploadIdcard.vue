@@ -232,8 +232,25 @@
 					}
 				});
 				if (res.data.code == 200) {
-					this.getUserData()
+					// this.getUserData()
 					this.$api.msg(res.data.message);
+					if (res.data.data) {
+						if (res.data.data.Name) {
+							this.setUserData({
+								Name: res.data.data.Name
+							})
+						}
+						if (res.data.data.IDCardNo) {
+							this.setUserData({
+								IDCardNo: res.data.data.IDCardNo
+							})
+						}
+						if (res.data.data.words_result) {
+							this.setUserData({
+								DueDate: res.data.data.DueDate
+							})
+						}
+					}
 				} else {
 					this.$api.msg(res.data.message);
 				}
@@ -248,7 +265,7 @@
 							path: 'https://www.appi2b2b.com/wxapi/member/Uplode',
 							files: ['file'],
 							title: '正在上传',
-							
+
 							extra: {
 								token: this.token
 							}
