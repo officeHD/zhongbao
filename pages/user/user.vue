@@ -18,7 +18,7 @@
 		</view>
 		<view class="celBox bb">
 			<text class="c333">身份证号码</text>
-			<text class="c888 pr32">{{userData.IDCardNo.replace(userData.IDCardNo.substring(2,14), "************")||'暂无'}}</text>
+			<text class="c888 pr32">{{userData.IDCardNo?userData.IDCardNo.replace(userData.IDCardNo.substring(2,14), "************"):'暂无'}}</text>
 		</view>
 		<view class="celBox bb">
 			<text class="c333">身份证有效期</text>
@@ -27,8 +27,8 @@
 		<view class="celBox bb">
 			<text class="c333">手机号码</text>
 			<navigator class="rightRow" url="/pages/user/changePhone">
-				<text class="c888">{{userData.PhoneNumber.replace(userData.PhoneNumber.substring(3,9), "******")}}</text>
-				<text class="changePhone">更换</text>
+				<text class="c888">{{userData.PhoneNumber?userData.PhoneNumber.replace(userData.PhoneNumber.substring(3,9), "******"):"暂无"}}</text>
+				<text class="changePhone" v-if="userData.PhoneNumber">更换</text>
 				<image class="arrowImg" src="../../static/img/arrow.png" mode="widthFix"></image>
 
 			</navigator>
@@ -51,7 +51,7 @@
 			<text class="c333">银行卡号</text>
 			<navigator class="rightRow" url="/pages/bankcard/bankcard">
 
-				<text class="c888">{{userData.BankCardNo.replace(/\s/g,'').replace(/(\d{4})\d+(\d{4})$/, "$1 **** **** $2")||'无'}}</text>
+				<text class="c888">{{userData.BankCardNo?userData.BankCardNo.replace(/\s/g,'').replace(/(\d{4})\d+(\d{4})$/, "$1 **** **** $2"):'无'}}</text>
 				<image class="arrowImg" src="../../static/img/arrow.png" mode="widthFix"></image>
 
 			</navigator>
